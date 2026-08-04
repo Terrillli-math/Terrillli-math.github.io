@@ -4,10 +4,9 @@ title: Home
 
 # Terrill Li
 
-Welcome to my mathematics website.
-
-I am an undergraduate student in Pure Mathematics at the University of Sydney, Since Semester 2, 2026.
-
-My primary interests are Probability Theory and Analysis.
-
 Welcome to my mathematical learning portfolio.
+
+I am an undergraduate student in Pure Mathematics at the University of Sydney, since Semester 2, 2026.
+
+I am just a beginner in Mathematics. My primary interests are Probability Theory and Analysis.
+
