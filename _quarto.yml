@@ -43,7 +43,6 @@ format:
 
     link-external-newwindow: true
 
-    css: styles.css
 
 execute:
   freeze: auto
