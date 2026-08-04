@@ -1,0 +1,9 @@
+website:
+  title: "Terrill Li"
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
