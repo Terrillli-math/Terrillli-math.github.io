@@ -1,9 +1,51 @@
+project:
+  type: website
+  output-dir: docs
+
 website:
-  title: "Terrill Li"
+  title: "Terrillli-Math"
+  description: "Personal website of Terrill."
+  favicon: assets/favicon.ico
 
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
-        text: About
+      - text: Home
+        href: index.qmd
+
+      - text: About
+        href: about.qmd
+
+
+    right:
+      - icon: github
+        href: https://github.com/Terrillli-math
+
+
+      - icon: envelope
+        href: lyumenex7799@gmail.com
+
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+
+    toc: true
+    toc-depth: 3
+
+    code-copy: true
+    code-overflow: wrap
+
+    smooth-scroll: true
+
+    anchor-sections: true
+
+    link-external-newwindow: true
+
+    css: styles.css
+
+execute:
+  freeze: auto
+
+editor: visual
