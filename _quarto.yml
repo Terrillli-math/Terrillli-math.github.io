@@ -4,6 +4,10 @@ project:
 website:
   title: "Terrillli-Math"
 
+  site-url: https://terrillli-math.github.io
+
+  reader-mode: true
+
   navbar:
     left:
       - text: Home
@@ -16,8 +20,6 @@ website:
     right:
       - icon: github
         href: https://github.com/Terrillli-math
-
-
 
 format:
   html:
