@@ -24,7 +24,7 @@ Beyond mathematics itself, I am also interested in how artificial intelligence i
 
 I believe that the widespread use of AI has fundamentally changed the way we learn. Rather than reducing the importance of mathematics, AI makes a deep understanding of first principles even more essential. Strong theoretical foundations enable us to critically evaluate AI-generated explanations, understand their assumptions, recognize potential errors, and apply them effectively instead of accepting them uncritically.
 
-# Current focus
+# Current Focus
 
 ## Current Courses
 
