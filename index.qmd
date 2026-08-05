@@ -8,5 +8,4 @@ Welcome to my mathematical learning portfolio.
 
 I am an undergraduate student in Pure Mathematics at the University of Sydney, since Semester 2, 2026.
 
-I am just a beginner in Mathematics. My primary interests are Probability Theory and Analysis.
-
+I am just a beginner in Mathematics. My primary interests are Probability and Analysis.
