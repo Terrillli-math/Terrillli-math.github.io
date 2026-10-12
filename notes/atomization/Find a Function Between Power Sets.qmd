@@ -1,0 +1,42 @@
+---
+title: "Functions Between Power Sets"
+categories: ["atomization"]
+---
+
+Given a function $f:X\to Y$, there are two natural ways to obtain functions between the power sets of $X$ and $Y$.
+
+## Direct image
+
+The *direct-image map* sends each subset $A\subseteq X$ to its image:
+$$
+f_*:\mathcal{P}(X)\to\mathcal{P}(Y),\qquad f_*(A)=f[A]=\{f(a):a\in A\}.
+$$
+This construction works for every function $f$. It preserves unions:
+$$
+f[A\cup B]=f[A]\cup f[B].
+$$
+In general, direct image does not preserve intersections. We only know that $f[A\cap B]\subseteq f[A]\cap f[B]$. If $f$ is injective, equality holds for every pair $A,B$. Direct image may not preserve complements either. If $f$ is bijective, then $f[X\setminus A]=Y\setminus f[A]$.
+
+## Inverse image
+
+The *inverse-image map* sends each subset $B\subseteq Y$ to its preimage:
+$$
+f^{-1}:\mathcal{P}(Y)\to\mathcal{P}(X),\qquad f^{-1}[B]=\{x\in X:f(x)\in B\}.
+$$
+It exists even when $f$ has no inverse function. Unlike direct image, inverse image preserves unions, intersections, and complements:
+$$
+f^{-1}[Y\setminus B]=X\setminus f^{-1}[B].
+$$
+The two operations are not generally inverses. For $A\subseteq X$ and $B\subseteq Y$,
+$$
+f[f^{-1}[B]]=B\cap f[X]\subseteq B,
+\qquad
+A\subseteq f^{-1}[f[A]].
+$$
+The first expression equals $B$ for every $B$ exactly when $f$ is surjective. The second inclusion is an equality for every $A$ exactly when $f$ is injective. So the two power-set maps are inverses when $f$ is bijective.
+
+::: {.callout-note}
+## Example: $\mathcal{P}(\mathbb{N})$ and $\mathcal{P}(\mathbb{Z})$
+
+Any bijection $f:\mathbb{N}\to\mathbb{Z}$ induces a bijection $f_*:\mathcal{P}(\mathbb{N})\to\mathcal{P}(\mathbb{Z})$, with inverse given by the inverse-image map.
+:::

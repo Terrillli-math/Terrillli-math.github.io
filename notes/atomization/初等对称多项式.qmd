@@ -1,0 +1,24 @@
+---
+title: "Elementary Symmetric Polynomials"
+categories: ["atomization"]
+---
+
+The *elementary symmetric polynomials* use $n$ variables $X_1,\ldots,X_n$. Choose $k$ different variables, multiply them, and add the products from every choice. For $1\leq k\leq n$,
+$$
+E_k(X_1,\ldots,X_n)
+=\sum_{1\leq i_1<\cdots<i_k\leq n}X_{i_1}\cdots X_{i_k}.
+$$
+In particular,
+$$
+E_1=\sum_{i=1}^n X_i,\qquad
+E_2=\sum_{1\leq i<j\leq n}X_iX_j,\qquad
+E_n=X_1\cdots X_n.
+$$
+
+::: {.callout-tip}
+## Combinatorial interpretation
+
+Choose $k$ distinct variables from the $n$ available, multiply them, and add the products obtained from all such choices.
+:::
+
+This idea also explains two special cases. If $k>n$, there are no valid choices. The sum is empty, so $E_k=0$. If $k=0$, there is one *empty product*. By definition, it equals $1$, so $E_0=1$.

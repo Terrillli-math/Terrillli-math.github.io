@@ -1,0 +1,9 @@
+---
+title: "Projects"
+---
+
+## A mathematics website
+
+This website is my first ongoing project. I turn private study notes into clear pages and check the mathematics as I go. I plan to revise them as I learn more. The site uses Quarto and is intended for GitHub Pages.
+
+More projects will appear here when there is work to share.

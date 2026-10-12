@@ -1,0 +1,15 @@
+---
+title: "05 Functions & Sequences"
+categories: ["math1964"]
+---
+
+## Functions
+
+Let $X$ and $Y$ be sets. Then $f$ is called a *function* from $X$ to $Y$, written $f:X \to Y$, if it assigns to *each* $x \in X$ a *unique* element $y \in Y$.
+We write $y = f(x)$, and sometimes abbreviate this to $x \mapsto y$.
+
+More formally, we can think of a function as a *subset* of a *Cartesian product*:
+A function $f:X\to Y$ can be seen as a set $\Gamma\subseteq X\times Y$. For each $x\in X$, there must be exactly one $y\in Y$ with $(x,y)\in\Gamma$. We call that value $f(x)$.
+$$
+	\Gamma = \{ (x,y) : x \in X \land f(x) = y \} = \{ (x, f(x)) : x \in X \}\subseteq X \times Y.
+$$

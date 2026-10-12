@@ -1,0 +1,51 @@
+---
+title: "03 Cardinality and Power Sets"
+categories: ["math1964"]
+---
+
+## 3.1 Cardinality
+
+The *cardinality* $|S|$ of a finite set is its number of distinct elements. We can also compare infinite sets. Two sets have the same cardinality if there is a bijection between them. Some infinite sets are larger than others: for example, $|\mathbb{N}|<|\mathbb{R}|$.
+
+The *continuum hypothesis* says there is no set $S$ with $|\mathbb{N}|<|S|<|\mathbb{R}|$. We write $|\mathbb{N}|=\aleph_0$ and $|\mathbb{R}|=2^{\aleph_0}$. If the hypothesis holds, then $|\mathbb{R}|=\aleph_1$. The usual ZFC axioms do not decide whether it holds, provided those axioms are consistent.
+
+::: {.callout-note}
+## How can we show $|A|=|B|$?
+
+Find a bijection $f:A\to B$. For example, $\mathbb{N}=\{0,1,2,\ldots\}$ and $\mathbb{Z}$ have the same cardinality. One bijection is
+$$
+f(n)=\begin{cases}
+0,&n=0,\\
+(n+1)/2,&n\text{ odd},\\
+-n/2,&n>0\text{ even}.
+\end{cases}
+$$
+It lists the integers in the order $0,1,-1,2,-2,\ldots$.
+:::
+
+## 3.2 Power sets
+
+The *power set* of $S$ is the set of all its subsets:
+$$
+\mathcal{P}(S)=\{X:X\subseteq S\}.
+$$
+Both $\varnothing$ and $S$ belong to $\mathcal{P}(S)$. If $|S|=n$ is finite, then $|\mathcal{P}(S)|=2^n$.
+
+::: {.callout-tip}
+## Elements and subsets are different
+
+For $A=\{a,b,c\}$, we have $a\in A$, $\{a\}\subseteq A$, and $\{a\}\in\mathcal{P}(A)$. But $\{a\}\notin A$.
+:::
+
+### Comparing $\mathcal{P}(\mathbb{N})$ and $\mathcal{P}(\mathbb{Z})$
+
+Let $f:\mathbb{N}\to\mathbb{Z}$ be the bijection above. It induces
+$$
+F:\mathcal{P}(\mathbb{N})\to\mathcal{P}(\mathbb{Z}),
+\qquad F(S)=\{f(n):n\in S\}.
+$$
+For instance, $F(\{0,2,4\})=\{0,-1,-2\}$. Because $f$ is a bijection, $F$ is one too. So $|\mathcal{P}(\mathbb{N})|=|\mathcal{P}(\mathbb{Z})|$. The same idea works for any bijection $A\to B$.
+
+### Comparing $\mathcal{P}(\mathbb{N})$ and $\mathbb{R}$
+
+Each subset $S$ of $\mathbb{N}$ gives an infinite sequence of zeros and ones. The $n$th term is $1$ when $n\in S$, and $0$ otherwise. This gives $|\mathcal{P}(\mathbb{N})|=2^{\aleph_0}$. We still need another argument to show that this equals $|\mathbb{R}|$. That proof is in progress.

@@ -1,0 +1,90 @@
+:root {
+  --site-ink: #203047;
+  --site-accent: #2d6174;
+  --site-soft: #f2f6f5;
+}
+
+body {
+  color: var(--site-ink);
+  line-height: 1.7;
+}
+
+h1, h2, h3, .navbar-title {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.018em;
+}
+
+.navbar {
+  border-bottom: 1px solid rgba(32, 48, 71, 0.12);
+}
+
+.hero {
+  background: linear-gradient(135deg, #eef5f2, #f8faf9);
+  border: 1px solid #dfe9e5;
+  border-radius: 1rem;
+  margin: 1.5rem 0 3rem;
+  padding: clamp(2rem, 6vw, 4.5rem);
+}
+
+body:has(.hero) #title-block-header {
+  display: none;
+}
+
+.hero h1 {
+  font-size: clamp(2.7rem, 6vw, 4.5rem);
+  margin-bottom: 0.8rem;
+}
+
+.hero p {
+  font-size: 1.14rem;
+  max-width: 42rem;
+}
+
+.hero .btn {
+  margin: 0.6rem 0.55rem 0 0;
+}
+
+.btn-primary {
+  background-color: var(--site-accent);
+  border-color: var(--site-accent);
+}
+
+.grid h3 {
+  color: var(--site-accent);
+}
+
+blockquote, .blockquote {
+  border-left: 3px solid var(--site-accent);
+  background: var(--site-soft);
+  padding: 0.7rem 1rem;
+}
+
+.math.display {
+  overflow-x: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.quarto-dark {
+    color: #e5edf1;
+  }
+  body.quarto-dark .hero {
+    background: #243845;
+    border-color: #36505d;
+  }
+  body.quarto-dark .grid h3 {
+    color: #9acbd2;
+  }
+  body.quarto-dark blockquote, body.quarto-dark .blockquote {
+    background: #263b46;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding: 1.6rem;
+  }
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+}

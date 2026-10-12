@@ -1,0 +1,21 @@
+---
+title: "04 Cartesian Products"
+categories: ["math1964"]
+---
+
+## Cartesian Products
+
+For sets, order does not matter: $\{ a,b \} = \{ b,a \}$.
+We write $(a,b)$ for an *ordered* pair. Here *order and repetition do matter*:
+$(a,b) = (c,d)$ iff $a=c$ and $b=d$.
+
+The *Cartesian product* $A \times B$ of sets $A$ and $B$ is
+$$
+	A \times B := \{ (a, b): a \in A \land b\in B \}.
+$$
+
+If $A = \varnothing$ or $B = \varnothing$, then $A \times B = \varnothing$.
+
+$A \times B = B \times A \iff A=B$ or $A = \varnothing$ or $B = \varnothing$.
+
+For sets of any cardinality, $|X \times Y|=|X|\cdot|Y|$ (cardinal multiplication). In particular, if either factor is empty, the Cartesian product is empty.

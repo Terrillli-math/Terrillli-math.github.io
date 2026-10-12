@@ -1,48 +1,17 @@
 ---
-title: About
+title: "About"
 ---
 
-# Introduction
+I am Terrill Li, an undergraduate student in the Bachelor of Mathematical Sciences at the University of Sydney. I began in Semester 2, 2026.
 
-Hello, and welcome.
+This website records what I am learning in mathematics. I share course notes, short proofs, questions, and projects. Some pages are still in progress. I hope to make my thinking clear and improve it over time.
 
-My name is Terrill Li, and I am an undergraduate student in the Bachelor of Mathematical Sciences program at the University of Sydney, commencing in Semester 2, 2026.
+## Interests
 
-# About This Website
+I am especially interested in analysis, probability, stochastic processes, and the foundations of mathematics. As I study further, these interests may change or become more focused.
 
-I created this website to document my mathematical journey. Here I share reading notes, proof diaries, essays, projects, and reflections as I continue learning. Rather than presenting polished conclusions alone, I hope this website records the gradual development of my understanding over time.
+I am also interested in how artificial intelligence affects learning and research. Clear definitions and basic ideas help me use new tools well. They also help me spot gaps in an explanation.
 
-# Academic Interests
+## Current study
 
-I am currently interested in pure mathematics, particularly probability, stochastic processes, analysis, and the foundational ideas that underpin modern mathematics. As I progress through my studies, I hope to develop a deeper understanding of rigorous mathematical reasoning and eventually contribute to mathematical research.
-
-# Broader Interests
-
-Beyond mathematics itself, I am also interested in how artificial intelligence is reshaping learning, research, and knowledge-based professions. Rather than viewing AI as a replacement for deep understanding, I believe its rapid development makes strong theoretical foundations even more valuable. A solid understanding of first principles enables us to critically evaluate AI-generated explanations, recognize their assumptions and limitations, and use AI as a tool for learning rather than a substitute for thinking.
-
-# Learning Philosophy
-
-I believe that the widespread use of AI has fundamentally changed the way we learn. Rather than reducing the importance of mathematics, AI makes a deep understanding of first principles even more essential. Strong theoretical foundations enable us to critically evaluate AI-generated explanations, understand their assumptions, recognize potential errors, and apply them effectively instead of accepting them uncritically.
-
-# Current Focus
-
-## Current Courses
-
-- Calculus & Multivariable Differential Calculus
-- Linear Algebra
-- Mathematical Statistics
-- Discrete Mathematics
-
-## Planned Reading
-
-- *Discrete Mathematics and Its Applications* - Kenneth H. Rosen
-- *Analysis* - Rober Godement
-- *Analysis* - Herbert Amann
-- *Linear Algebra with Applications* - Steven J. Leon
-- *Methods of Algebra (Chinese edition)* - Li, Wenwei
-- *A First Course in Probability* - Sheldon M. Ross
-- *Basic Topology* - M. A. Armstrong
-
-## Current Projects
-
-- Building a Quarto Mathematics Website
+My current coursework includes calculus, linear algebra, mathematical statistics, and discrete mathematics. The [notes](notes/index.qmd) section will grow alongside these courses.

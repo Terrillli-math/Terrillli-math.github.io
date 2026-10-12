@@ -1,0 +1,60 @@
+---
+title: "Polynomials"
+categories: ["appendix"]
+---
+
+## 1. Definitions
+
+A *polynomial* in one variable has the form
+$$
+p(x)=a_0+a_1x+\cdots+a_nx^n,
+$$
+where the coefficients are real or complex numbers. If $a_n\neq0$, its *degree* is $n$; if $a_n=1$, it is *monic*. A number $x_0$ is a *root* or *zero* of $p$ when $p(x_0)=0$.
+
+If a real-coefficient polynomial has a complex root $z$, then its conjugate $\overline z$ is also a root, because $p(\overline z)=\overline{p(z)}$.
+
+## 2. Factor and remainder theorems
+
+For any complex number $x_0$, polynomial division gives
+$$
+p(x)=q(x)(x-x_0)+p(x_0)
+$$
+for some polynomial $q$. Thus $x_0$ is a root exactly when $x-x_0$ is a factor of $p$.
+
+Consequences include:
+
+1. A nonzero degree-$n$ polynomial has at most $n$ distinct roots.
+2. If a degree-$n$ polynomial has $n$ roots $x_1,\ldots,x_n$, counted with multiplicity, then
+   $$
+   p(x)=a_n\prod_{j=1}^{n}(x-x_j).
+   $$
+3. A root $x_0$ has *multiplicity* $m$ if $p(x)=(x-x_0)^m q(x)$ with $q(x_0)\neq0$.
+
+## 3. Factorisation
+
+The *fundamental theorem of algebra* says that every nonconstant complex polynomial has a complex root. We can apply the factor theorem again and again. In this way, a degree-$n$ polynomial splits into $n$ complex linear factors, counting repeated roots.
+
+For a polynomial with real coefficients, nonreal roots occur in conjugate pairs. Each pair $a\pm bi$, with $b\neq0$, produces a real quadratic factor:
+$$
+(x-(a+bi))(x-(a-bi))=x^2-2ax+(a^2+b^2).
+$$
+Consequently, every real polynomial is a product of real linear factors and irreducible real quadratic factors. For real $x$, the quadratic above is also $|x-(a+bi)|^2=(x-a)^2+b^2$.
+
+## 4. Sums and products of roots
+
+Let
+$$
+P(x)=a_0x^n+a_1x^{n-1}+\cdots+a_n,
+\qquad a_0\neq0,
+$$
+and let $r_1,\ldots,r_n$ be its complex roots, counted with multiplicity. *Vieta's formulas* state that
+$$
+E_k(r_1,\ldots,r_n)=(-1)^k\frac{a_k}{a_0},
+\qquad 1\leq k\leq n,
+$$
+where $E_k$ is the $k$th [elementary symmetric polynomial](<../atomization/初等对称多项式.qmd>). In particular,
+$$
+r_1+\cdots+r_n=-\frac{a_1}{a_0},
+\qquad
+r_1\cdots r_n=(-1)^n\frac{a_n}{a_0}.
+$$

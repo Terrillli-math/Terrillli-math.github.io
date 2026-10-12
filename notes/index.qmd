@@ -1,0 +1,10 @@
+---
+title: "Notes"
+toc: false
+---
+
+A selection of my course notes and shorter mathematical explorations.
+
+- [Appendix](<appendix/index.qmd>)
+- [Short Explorations](<atomization/index.qmd>)
+- [MATH1964: Discrete Mathematics](<math1964/index.qmd>)

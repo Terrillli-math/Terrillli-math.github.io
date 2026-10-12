@@ -1,0 +1,8 @@
+---
+title: "Appendix"
+toc: false
+---
+
+Working notes; some pages still need mathematical review.
+
+- [Polynomials](<Polynomials.qmd>)

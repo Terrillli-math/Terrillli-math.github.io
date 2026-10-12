@@ -1,0 +1,25 @@
+---
+title: "Square Roots of Complex Numbers"
+categories: ["atomization"]
+---
+
+To solve $z^2=a+bi$, where $a,b\in\mathbb{R}$, write $z=x+yi$ with $x,y\in\mathbb{R}$. Comparing real and imaginary parts gives
+$$
+x^2-y^2=a,\qquad 2xy=b.
+$$
+Also,
+$$
+(x^2+y^2)^2=(x^2-y^2)^2+(2xy)^2=a^2+b^2.
+$$
+Let $r=\sqrt{a^2+b^2}=|a+bi|$. Since $x^2+y^2\geq0$, we have $x^2+y^2=r$. Adding and subtracting the equations yields
+$$
+x^2=\frac{r+a}{2},\qquad y^2=\frac{r-a}{2}.
+$$
+
+If $b\neq0$, both square roots below are positive. The condition $2xy=b$ determines their relative signs, so the two solutions are
+$$
+\boxed{z=\pm\left(\sqrt{\frac{r+a}{2}}+
+i\operatorname{sgn}(b)\sqrt{\frac{r-a}{2}}\right)}.
+$$
+
+If $b=0$, handle the real number separately: for $a>0$ the roots are $\pm\sqrt a$; for $a<0$ they are $\pm i\sqrt{-a}$; and for $a=0$ the only root is $0$.

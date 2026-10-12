@@ -1,2 +1,7 @@
 /.quarto/
 **/*.quarto_ipynb
+/_site/
+/_freeze/
+/*_files/
+/.sync-pending/
+.DS_Store

@@ -1,0 +1,12 @@
+---
+title: "MATH1964: Discrete Mathematics"
+toc: false
+---
+
+Working notes; some pages still need mathematical review.
+
+- [01 Introduction](<01 Introduction.qmd>)
+- [02 Basic Set Theory](<02 Basic Set Theory.qmd>)
+- [03 Cardinality and Power Sets](<03 Cardinality & Power Sets.qmd>)
+- [04 Cartesian Products](<04 Cartesian Products.qmd>)
+- [05 Functions & Sequences](<05 Functions & Sequences.qmd>)

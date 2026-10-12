@@ -1,0 +1,46 @@
+---
+title: "Cantor's Theorem"
+categories: ["atomization"]
+---
+
+::: {.callout-note}
+## Cantor's theorem
+
+For every set $A$, its power set $\mathcal{P}(A)$ has strictly greater cardinality: $|A|<|\mathcal{P}(A)|$.
+:::
+
+For finite sets, this follows from $|\mathcal{P}(A)|=2^{|A|}>|A|$. Cantor's theorem also applies to infinite sets, where counting elements one by one is not possible.
+
+::: {.callout-tip}
+## Functions and cardinality
+
+- $|A|\leq|B|$ means that there is an injection $A\to B$.
+- $|A|\geq|B|$ means that there is a surjection $A\to B$ (assuming the axiom of choice when stated in full generality).
+- $|A|=|B|$ means that there is a bijection $A\to B$.
+:::
+
+### Step 1: Construct an injection
+
+Define $i:A\to\mathcal{P}(A)$ by $i(a)=\{a\}$. Distinct elements have distinct singleton sets, so $i$ is injective. Thus $|A|\leq|\mathcal{P}(A)|$.
+
+For example, if $A=\{1,2,3\}$, this map sends $1,2,3$ to $\{1\},\{2\},\{3\}$ respectively.
+
+### Step 2: Show that no function is surjective
+
+Let $f:A\to\mathcal{P}(A)$ be any function. Consider its *diagonal set*
+$$
+S=\{a\in A:a\notin f(a)\}.
+$$
+Since $S\subseteq A$, it belongs to $\mathcal{P}(A)$. Suppose, for a contradiction, that $f$ is surjective. Then some $s\in A$ satisfies $f(s)=S$. But the definition of $S$ gives
+$$
+s\in S\quad\Longleftrightarrow\quad s\notin f(s)=S,
+$$
+which is impossible. Therefore $f$ is not surjective, and $|A|<|\mathcal{P}(A)|$.
+
+::: {.callout-tip}
+## A connection with Russell's paradox
+
+Both arguments use a question about membership. In Cantor's proof, $S$ is a subset of a fixed set $A$. We get a contradiction if we assume that $S$ is in the image of $f$. Russell's paradox is different. It shows why we cannot form an unrestricted set of all sets that are not members of themselves.
+:::
+
+Applying the theorem repeatedly shows that there is no largest cardinality.

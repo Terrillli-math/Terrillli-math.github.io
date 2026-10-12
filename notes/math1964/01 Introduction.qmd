@@ -1,0 +1,36 @@
+---
+title: "01 Introduction"
+categories: ["math1964"]
+---
+
+These notes give an overview of discrete mathematics and why it matters.
+
+## Textbooks
+
+- Discrete Mathematics and Its Applications by Kenneth H. Rosen
+- generatingfunctionology by Herbert Wilf
+
+## Overview and Motivation
+
+### What Is Discrete Mathematics?
+
+- The study of structures that are discrete (and not continuous).
+- Examples: integers $\mathbb{Z}$, graphs, and statements in logic.
+- Non-examples: real numbers $\mathbb{R}$ and smooth curves.
+
+### Key Areas
+
+- Set Theory
+- Logic and Proofs
+- Elementary Number Theory
+- Graph Theory
+- Combinatorics
+- Algorithms and Complexity
+- Discrete Probability
+- $\cdots$
+
+### Why Study Discrete Mathematics?
+
+- Foundation for Computer Science (algorithms, data structures).
+- Problem-Solving: develops logical reasoning and critical thinking.
+- Broad applications: useful in cryptography, network optimization, decision-making, and more.

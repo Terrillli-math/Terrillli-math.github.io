@@ -1,0 +1,16 @@
+# Paths are relative to the local Obsidian Vault.
+# This file selects candidates for review; it does not authorize publication.
+version: 1
+source_folders:
+  - path: Appendix
+    destination: notes/appendix
+  - path: Atomization
+    destination: notes/atomization
+  - path: Usyd/MATH1964/MATH1964 Notes
+    destination: notes/math1964
+include_extensions:
+  - .md
+  - .qmd
+review:
+  include_new_files: true
+  require_approval_before_publish: true

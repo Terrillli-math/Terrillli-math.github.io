@@ -1,0 +1,144 @@
+---
+title: "02 Basic Set Theory"
+categories: ["math1964"]
+---
+
+## 2.1 Set Theory
+
+### 2.1.1 Sets and Elements
+
+Georg Cantor developed set theory in the late nineteenth century.
+
+Together with logic, set theory provides a common language for mathematics.
+
+A *set* $S$ is a collection of objects, which are called the *elements* of $S$.
+- If $x$ is in $S$, we write
+$$
+x \in S;
+$$
+- If not, we write
+$$
+x \notin S.
+$$
+We can list the elements of $S$ with curly braces:
+$$
+S = \{x_1, x_2, x_3, \cdots\}
+$$
+
+::: {.callout-note}
+## Example
+
+$$
+S = \{1, 2, 3, 4, 5\}
+$$
+
+
+$$
+3 \in S, \text{ but } 6 \notin S.
+$$
+
+
+This is a *finite* set.
+
+$$
+\mathbb{N} = \{0, 1, 2, 3, \cdots\}
+$$
+
+
+$$
+2 \in \mathbb{N}, \text{ but } -17 \notin \mathbb{N} \text{ and } \pi \notin \mathbb{N}.
+$$
+
+This is an *infinite* (but still *discrete*) set.
+:::
+
+
+### 2.1.2 When Are Two Sets Equal?
+
+Two sets are *equal* if they contain the *same elements*:
+$$
+	S = T \Longleftrightarrow (\forall x, x \in S \leftrightarrow x \in T).
+$$
+Order does not matter:
+$$
+	\{1, 2, 5, 9\} = \{2, 9, 1, 5\}
+$$
+Repetition is ignored:
+$$
+	\{1, 2, 5\} = \{1, 2, 2, 5\} = \{2, 2, 1, 5, 5, 1, 2, 1\}
+$$
+What matters is whether one set contains an element that the other does not:
+	$\{1, 4, 5\} \neq \{1, 4, 4\}$, since $5$ is in the first set but not the second.
+	$\mathbb{N} \neq \mathbb{Z}$, since $-1 \in \mathbb{Z}$, but $-1 \notin \mathbb{N}$.
+
+### 2.1.3 Some Facts About Sets
+
+The **empty set**, written $\varnothing$, contains no elements at all:
+$$
+	\varnothing = \{  \} \Longleftrightarrow (\forall x : x \notin \varnothing).
+$$
+
+A one-element set $\{x\}$ is not the same as the element $x$. For example, $1\neq\{1\}$.
+
+## 2.2 Russell's Paradox
+
+::: {.callout-note}
+## The set of all sets *is not a set*.
+
+Suppose there were a set $V$ containing every set. Define $B=\{x\in V:x\notin x\}$. Since $B$ would be a set in $V$, we could ask whether $B\in B$. The definition gives $B\in B\Longleftrightarrow B\notin B$, a contradiction.
+
+We can still speak informally about the *class* of all sets. In ZFC, this is shorthand for a condition on sets, not a set of its own. Some other foundations, such as NBG, treat classes explicitly.
+:::
+
+
+## 2.3 Axiomatic Set Theory (ZF+C)
+
+::: {.callout-note}
+## von Neumann Natural Numbers
+
+We can use the empty set $\varnothing$ as a starting point.
+From here we can build other sets:
+$\{ \varnothing \} = \{ \{  \} \}$,
+$\{ \varnothing, \{ \varnothing \} \} = \{ \{  \}, \{ \{  \} \} \}$,
+$\{ \varnothing, \{ \varnothing \}, \{ \varnothing, \{ \varnothing \} \} \}$,
+$\dots$ and so on.
+We can give these sets names:
+$0 = \varnothing$,
+$1 = \{ \varnothing \} = \{ 0 \}$,
+$2 = \{ \varnothing, \{ \varnothing \} \} = \{ 0, 1 \}$,
+$3 = \{ \varnothing, \{ \varnothing \}, \{ \varnothing, \{ \varnothing \} \} \} = \{ 0, 1, 2 \}$,
+$\dots$
+In this way we can, beginning with *just the empty set*, construct the natural numbers:
+
+$$
+n = \{ m \in \mathbb{N} : m < n \}.
+$$
+
+Here each natural number is represented by the set of all smaller natural numbers.
+
+:::
+
+
+Set theory uses axioms to control which collections count as sets. The empty set is a starting point. Other axioms let us form new sets in carefully stated ways.
+
+### 2.3.1 Axiom of Extensionality
+
+$$
+	(\forall x)(\forall y) [\forall z (z \in x \Leftrightarrow z \in y) \Rightarrow x = y].
+$$
+In words, two sets with exactly the same elements are equal.
+
+### 2.3.2 Axiom of Regularity/Foundation
+
+$$
+	\forall x [(\exists a (a \in x)) \Rightarrow \exists y (y \in x \land \lnot \exists z (z \in y \land z \in x))].
+$$
+or in modern notation:
+$$
+	\forall x (x \neq \varnothing \Rightarrow \exists y (y \in x \land y \cap x = \varnothing)).
+$$
+In words, every nonempty set $x$ contains an element $y$ that is disjoint from $x$.
+
+### 2.3.3 Axiom Schema of Replacement
+
+*Note in progress.* The precise statement and examples are yet to be added.

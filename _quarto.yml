@@ -1,42 +1,47 @@
 project:
   type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - about.qmd
+    - projects.qmd
+    - notes/**/*.qmd
 
 website:
-  title: "Terrillli-Math"
-
+  title: "Terrill Li"
+  site-url: https://terrillli-math.github.io
+  description: "Mathematics notes and a record of learning."
+  search: true
   navbar:
     left:
       - text: Home
         href: index.qmd
-
+      - text: Notes
+        href: notes/index.qmd
       - text: About
         href: about.qmd
-
-
+      - text: Projects
+        href: projects.qmd
     right:
       - icon: github
         href: https://github.com/Terrillli-math
+        aria-label: GitHub
+  page-footer:
+    left: "© Terrill Li"
+    right: "Built with Quarto"
 
 format:
   html:
     theme:
       light: cosmo
       dark: darkly
-
+    css: styles.css
     toc: true
     toc-depth: 3
-
     code-copy: true
     code-overflow: wrap
-
     smooth-scroll: true
-
-    anchor-sections: true
-
     link-external-newwindow: true
-
 
 execute:
   freeze: auto
-
-editor: visual

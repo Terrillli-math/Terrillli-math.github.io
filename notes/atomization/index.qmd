@@ -1,0 +1,12 @@
+---
+title: "Short Explorations"
+toc: false
+---
+
+Working notes; some pages still need mathematical review.
+
+- [Cantor's Theorem](<Cantor's Theorem.qmd>)
+- [Functions Between Power Sets](<Find a Function Between Power Sets.qmd>)
+- [Elementary Symmetric Polynomials](<初等对称多项式.qmd>)
+- [Square Roots of Complex Numbers](<复数开方.qmd>)
+- [Density of Rational and Irrational Numbers](<有理数和无理数的稠密性.qmd>)
