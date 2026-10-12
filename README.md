@@ -1,26 +1,17 @@
 # Terrill Li — Mathematics Website
 
-This is a Quarto website intended for GitHub Pages. Its editable source lives here, separately from the Obsidian vault at `~/Desktop/Mathematics`.
+I am an undergraduate mathematics student at the University of Sydney. This repository contains the source for my [personal website](https://terrillli-math.github.io/).
 
-The three selected source folders are declared in `publish-map.yml`. The sync script reads them without modifying the vault. Existing website pages retain their English editorial changes; new or changed source notes are staged in `.sync-pending/` for review rather than placed directly on the site.
+The site is a record of what I am learning. It includes [course notes](https://terrillli-math.github.io/notes/math1964/), [short explorations](https://terrillli-math.github.io/notes/atomization/), and [background topics](https://terrillli-math.github.io/notes/appendix/). These are working notes. I revise them as my understanding grows, and I mark proofs that are still in progress.
 
-To inspect source changes locally:
+## How the site is made
 
-```sh
-python3 scripts/sync_notes.py --vault "$HOME/Desktop/Mathematics"
-```
+The pages are written in [Quarto](https://quarto.org/) and published with GitHub Pages. The `.qmd` files in `notes/` are edited versions for the website. They may differ from my private study notes in wording, layout, or mathematical corrections.
 
-To refresh the pending copies and navigation indexes:
+To build the site locally, install Quarto and run:
 
 ```sh
-python3 scripts/sync_notes.py --vault "$HOME/Desktop/Mathematics" --sync
+quarto render
 ```
 
-Translate and review a staged QMD before copying it into `notes/`. After accepting a source revision, record its hash with `--acknowledge 'folder/name.md'` using its vault-relative path. The website copy may intentionally differ from the original. Build and preview with:
-
-```sh
-/Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto render
-python3 -m http.server 8765 --bind 127.0.0.1 --directory _site
-```
-
-The GitHub Actions workflow deploys whenever `main` is pushed. Publication therefore requires explicit approval before any push.
+Quarto creates the website in `_site/`. The source pages, not the generated output, are kept in this repository.
