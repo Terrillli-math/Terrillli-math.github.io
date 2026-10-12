@@ -1,4 +1,4 @@
-# Terrill Li — mathematics website
+# Terrill Li — Mathematics Website
 
 This is a Quarto website intended for GitHub Pages. Its editable source lives here, separately from the Obsidian vault at `~/Desktop/Mathematics`.
 
