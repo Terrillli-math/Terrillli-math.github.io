@@ -42,7 +42,7 @@ These are working notes. I expect to revisit them as my understanding improves.
 
 ## Start reading
 
-- [MATH1964: discrete mathematics](notes/math1964/index.qmd)
+- [MATH1964: Discrete Mathematics for Computation (Adv)](notes/math1964/index.qmd)
 - [Atomization: short mathematical notes](notes/atomization/index.qmd)
 - [Appendix: background topics](notes/appendix/index.qmd)
 

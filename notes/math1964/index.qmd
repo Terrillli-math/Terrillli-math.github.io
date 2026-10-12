@@ -1,5 +1,5 @@
 ---
-title: "MATH1964: Discrete Mathematics"
+title: "MATH1964: Discrete Mathematics for Computation (Adv)"
 toc: false
 ---
 
