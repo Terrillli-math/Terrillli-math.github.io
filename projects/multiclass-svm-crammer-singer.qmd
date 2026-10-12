@@ -1,0 +1,269 @@
+---
+title: "Multiclass SVM: The Crammer-Singer Approach"
+date: 2026-10-12
+description: "A direct multiclass model based on margins, kernels, and joint optimisation."
+categories: ["machine learning", "support vector machines", "optimisation"]
+---
+
+This note explains the main ideas behind multiclass support vector machines. It focuses on how the margin, the dual form, kernels, and the training method connect. The technical details are checked against the original paper by Crammer and Singer.
+
+## 1. The problem
+
+A binary support vector machine separates two classes. Many real problems have more than two classes. For example, a news article may belong to *sports*, *technology*, or *business*.
+
+There are two standard ways to reuse binary SVMs (Baeldung, 2025):
+
+- **One-versus-rest (OVR):** train one classifier for each class against all other classes.
+- **One-versus-one (OVO):** train one classifier for every pair of classes.
+
+These methods reduce a multiclass problem to several binary problems. The Crammer-Singer method takes a different route. It learns all class weight vectors in one optimisation problem (Crammer & Singer, 2001).
+
+This difference is important. In OVR and OVO, the binary classifiers are trained separately. In Crammer-Singer, the classes compete inside the same loss function. The model therefore learns the relative gaps between class scores directly.
+
+## 2. Class scores and prediction
+
+Suppose there are $K$ classes. Each class $k$ has a weight vector $w_k$. For an input vector $x$, its score for class $k$ is
+
+$$
+s_k(x) = w_k^\top x.
+$$
+
+The predicted class is the class with the largest score:
+
+$$
+\hat y = \operatorname*{arg\,max}_{k \in \{1,\ldots,K\}} w_k^\top x.
+$$
+
+The scores are relative decision values. They are not probabilities. A score of $2.8$ does not give a probability. A separate calibration method is needed for that.
+
+## 3. The multiclass margin
+
+For a training example $(x_i,y_i)$, the correct class has score $w_{y_i}^\top x_i$. The strongest wrong class has score
+
+$$
+\max_{k \ne y_i} w_k^\top x_i.
+$$
+
+The multiclass margin is therefore
+
+$$
+m_i
+= w_{y_i}^\top x_i
+- \max_{k \ne y_i} w_k^\top x_i.
+$$
+
+The model aims for $m_i \ge 1$. This condition says more than “the correct class wins.” It says that the correct class should win by a safe gap.
+
+This leads to a useful distinction:
+
+- If $m_i < 0$, the example is misclassified.
+- If $0 \le m_i < 1$, the prediction is correct but not confident enough under the SVM margin rule.
+- If $m_i \ge 1$, the example satisfies the desired margin.
+
+The hinge loss for one example is
+
+$$
+\ell_i
+= \max\!\left(0,\,1-m_i\right)
+= \max\!\left(0,\,1 + \max_{k \ne y_i} w_k^\top x_i - w_{y_i}^\top x_i\right).
+$$
+
+Only the strongest wrong class determines this loss. The loss asks one direct question: how far is the correct class from its most serious rival?
+
+## 4. A small example
+
+Assume the true class is *technology*.
+
+| Class | Case 1 score | Case 2 score |
+|---|---:|---:|
+| Sports | 1.2 | 1.2 |
+| Technology | 2.0 | 2.8 |
+| Business | 1.6 | 1.6 |
+
+In Case 1, the model predicts *technology*. The margin is
+
+$$
+2.0 - 1.6 = 0.4.
+$$
+
+The prediction is correct, but the margin is below $1$. Its hinge loss is
+
+$$
+\max(0,1-0.4)=0.6.
+$$
+
+In Case 2, the margin is
+
+$$
+2.8 - 1.6 = 1.2.
+$$
+
+The loss is now zero. This example shows why accuracy alone is not enough during training. Both predictions are correct, but the second decision has a larger safety gap.
+
+## 5. The primal optimisation problem
+
+A common form of the Crammer-Singer primal problem is
+
+$$
+\min_{W,\,\xi}
+\quad
+\frac{1}{2}\sum_{k=1}^{K}\lVert w_k\rVert^2
++ C\sum_{i=1}^{n}\xi_i
+$$
+
+subject to
+
+$$
+w_{y_i}^\top x_i - w_k^\top x_i
+\ge 1-\xi_i,
+\qquad k \ne y_i,
+$$
+
+and
+
+$$
+\xi_i \ge 0.
+$$
+
+The two parts of the objective have different roles:
+
+- $\frac12\sum_k\lVert w_k\rVert^2$ controls model complexity. Smaller weights usually give a smoother decision rule.
+- $C\sum_i\xi_i$ penalises margin violations.
+
+The parameter $C$ sets the trade-off. A large $C$ places more pressure on the model to fit the training data. A small $C$ allows more violations in exchange for stronger regularisation.
+
+At the optimum, the slack variable for example $i$ equals its hinge loss:
+
+$$
+\xi_i
+= \max\!\left(0,\,1-m_i\right).
+$$
+
+This gives a simple interpretation. There is one slack value for each example because the strongest rival already summarises all wrong classes.
+
+The original paper places a parameter $\beta$ in front of the regularisation term. This note uses the more familiar $C$ form. The two forms are equivalent after rescaling the objective. The symbols differ, but the trade-off is the same (Crammer & Singer, 2001).
+
+## 6. Why the problem is convex
+
+The regularisation term is a sum of squared norms. It is convex. The slack penalty is linear. Each margin constraint is also linear in the unknown weights and slack variables.
+
+Therefore, the full primal problem is convex. Any local optimum is a global optimum. This does not mean that training is automatically cheap. It means that the optimisation landscape has no bad local minima.
+
+## 7. From the primal to the dual
+
+The paper writes all class vectors as the rows of a matrix $M$. It then introduces non-negative Lagrange multipliers $\eta_{i,r}$ for the margin constraints. The stationarity conditions give two important relations:
+
+$$
+\sum_{r=1}^{K}\eta_{i,r}=1
+$$
+
+for every training example $i$, and
+
+$$
+M_r
+= \frac{1}{\beta}
+\sum_{i=1}^{n}
+\bigl(\delta_{y_i,r}-\eta_{i,r}\bigr)x_i.
+$$
+
+Here $\delta_{y_i,r}$ is $1$ when $y_i=r$ and $0$ otherwise.
+
+The second equation gives the main structural insight. Each class vector is a weighted combination of training examples. The data points do not disappear after optimisation. They determine the final decision rule through the dual coefficients.
+
+The first equation says that the multiplier vector for each example lies on a simplex. Its components sum to one. This creates a probability-like geometry, but the multipliers are optimisation variables. They are not predicted class probabilities.
+
+## 8. Support patterns
+
+In a binary SVM, the important training examples are called support vectors. Crammer and Singer use the related idea of a **support pattern**.
+
+An example becomes a support pattern when its dual coefficients affect the learned class vectors. These examples usually lie on a margin boundary or violate a margin constraint. Easy examples that sit well inside the correct region often have no active contribution.
+
+This gives another way to read the model. Training is driven mainly by ambiguous or difficult examples. Those examples reveal where the class boundaries need support.
+
+## 9. Kernelisation
+
+The dual form depends on inner products between training examples. We can replace an inner product $x_i^\top x_j$ with a kernel function
+
+$$
+K(x_i,x_j)=\langle \phi(x_i),\phi(x_j)\rangle.
+$$
+
+The prediction rule then has the form
+
+$$
+\hat y
+= \operatorname*{arg\,max}_{r}
+\sum_{i=1}^{n}\tau_{i,r}K(x,x_i),
+$$
+
+where $\tau_{i,r}$ are transformed dual coefficients.
+
+The kernel trick does not simply “reduce the dimension.” It avoids writing the feature map $\phi(x)$ explicitly. This can make a high-dimensional or even infinite-dimensional feature space usable. It also allows nonlinear decision boundaries in the original input space.
+
+Kernel methods can still be expensive. Prediction may require kernel evaluations against many support patterns. Training also becomes harder as the number of examples grows.
+
+## 10. Why decomposition is needed
+
+The direct dual problem has about $nK$ variables. A naive quadratic-programming method may need to work with a matrix of size roughly $(nK)\times(nK)$. This quickly becomes impractical.
+
+Crammer and Singer therefore use a decomposition method. The idea is:
+
+1. Keep most dual variables fixed.
+2. Select one training example.
+3. Update only that example's block of $K$ variables.
+4. Repeat until the Karush-Kuhn-Tucker conditions are satisfied within a tolerance.
+
+The selected example is not arbitrary. The algorithm looks for a large KKT violation. A large violation marks a part of the solution that is far from optimal (Crammer & Singer, 2001).
+
+The method turns one large problem into many small updates. Each step is easier to handle. Together, the steps approach the solution of the original convex problem.
+
+## 11. Comparison with reduction methods
+
+| Method | Number of models | Main strength | Main limitation |
+|---|---:|---|---|
+| One-versus-rest | $K$ | Simple and easy to parallelise | Scores from separate classifiers may not be directly comparable |
+| One-versus-one | $K(K-1)/2$ | Each classifier solves a smaller two-class problem | The number of classifiers grows with the square of $K$ |
+| Crammer-Singer | One joint model with $K$ weight vectors | Learns class competition directly | Joint optimisation can be more demanding |
+
+The direct method is elegant, but it is not always the best choice. OVR is often a strong baseline. OVO may work well when pairwise boundaries are easy to learn. The final choice depends on validation results and computing cost. It also depends on the structure of the data.
+
+## 12. Main insights
+
+### 12.1 Correct is not the same as confident
+
+A correct prediction can still have positive loss. The correct class must beat every wrong class by at least the required margin.
+
+### 12.2 The loss couples all classes
+
+The correct class is compared with its strongest rival. If the strongest rival changes, the active constraint also changes. This is the central multiclass feature of the method.
+
+### 12.3 One example can support several class boundaries
+
+An ambiguous example can influence more than one class vector through its dual coefficients. This is richer than treating each binary classifier as a separate problem.
+
+### 12.4 Regularisation prevents score inflation
+
+Without a penalty on the weights, the model could increase score gaps by scaling the weight vectors. The norm penalty makes large weights costly. It forces the model to balance margin size with model complexity.
+
+### 12.5 The strongest competitor carries useful information
+
+The model does not treat all wrong classes equally. It focuses on the class that is most confusing for each example. This makes the loss easy to explain. It also connects the loss to the shape of the decision boundary.
+
+## 13. How the ideas fit together
+
+The main ideas follow a natural chain:
+
+1. Introduce the multiclass problem and the standard reduction methods.
+2. Define class scores, prediction, and the multiclass margin.
+3. Build the primal objective from regularisation and slack penalties.
+4. Use convex duality to express the solution through training examples.
+5. Apply kernels for nonlinear classification.
+6. Use decomposition and KKT-guided updates to make training practical.
+
+The middle of the chain is the key. The margin definition explains the primal constraints. The primal constraints lead to the dual variables. The dual variables make kernels possible. The size of the dual then motivates decomposition.
+
+## References
+
+Baeldung. (2025, February 28). *Multiclass classification using support vector machines*. [https://www.baeldung.com/cs/svm-multiclass-classification](https://www.baeldung.com/cs/svm-multiclass-classification)
+
+Crammer, K., & Singer, Y. (2001). On the algorithmic implementation of multiclass kernel-based vector machines. *Journal of Machine Learning Research, 2*, 265–292. [https://jmlr.csail.mit.edu/papers/volume2/crammer01a/crammer01a.pdf](https://jmlr.csail.mit.edu/papers/volume2/crammer01a/crammer01a.pdf)

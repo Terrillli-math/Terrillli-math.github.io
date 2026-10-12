@@ -5,6 +5,7 @@ project:
     - index.qmd
     - about.qmd
     - projects.qmd
+    - projects/**/*.qmd
     - notes/**/*.qmd
 
 website:

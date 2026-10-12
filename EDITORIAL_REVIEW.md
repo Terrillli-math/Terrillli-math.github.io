@@ -12,5 +12,6 @@ These edits apply only to the Quarto site. The original Obsidian notes remain un
 | Cardinality and Power Sets | Corrected the bijection from $\mathbb N$ to $\mathbb Z$; stated $|\mathbb R|=\aleph_1$ only under the continuum hypothesis; marked the final proof as in progress. |
 | Cartesian Products | Replaced the misleading restriction to infinite sets with the general cardinal product statement. |
 | Polynomials | Corrected the root-factor product from $n+1$ factors to $n$ and repaired malformed Vieta formatting. |
+| Multiclass SVM | Clarified that class scores are not probabilities. Also clarified that the kernel trick avoids an explicit feature map; it does not automatically reduce computing cost. |
 
 The shorter edits are English translation, grammar, and formatting. This log is kept so later changes to the source notes can be compared with the website version.
