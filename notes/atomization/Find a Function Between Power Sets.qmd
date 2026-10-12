@@ -5,7 +5,7 @@ categories: ["atomization"]
 
 Given a function $f:X\to Y$, there are two natural ways to obtain functions between the power sets of $X$ and $Y$.
 
-## Direct image
+## Direct Image
 
 The *direct-image map* sends each subset $A\subseteq X$ to its image:
 $$
@@ -17,7 +17,7 @@ f[A\cup B]=f[A]\cup f[B].
 $$
 In general, direct image does not preserve intersections. We only know that $f[A\cap B]\subseteq f[A]\cap f[B]$. If $f$ is injective, equality holds for every pair $A,B$. Direct image may not preserve complements either. If $f$ is bijective, then $f[X\setminus A]=Y\setminus f[A]$.
 
-## Inverse image
+## Inverse Image
 
 The *inverse-image map* sends each subset $B\subseteq Y$ to its preimage:
 $$

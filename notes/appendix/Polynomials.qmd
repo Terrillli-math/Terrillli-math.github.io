@@ -13,7 +13,7 @@ where the coefficients are real or complex numbers. If $a_n\neq0$, its *degree* 
 
 If a real-coefficient polynomial has a complex root $z$, then its conjugate $\overline z$ is also a root, because $p(\overline z)=\overline{p(z)}$.
 
-## 2. Factor and remainder theorems
+## 2. Factor and Remainder Theorems
 
 For any complex number $x_0$, polynomial division gives
 $$
@@ -40,7 +40,7 @@ $$
 $$
 Consequently, every real polynomial is a product of real linear factors and irreducible real quadratic factors. For real $x$, the quadratic above is also $|x-(a+bi)|^2=(x-a)^2+b^2$.
 
-## 4. Sums and products of roots
+## 4. Sums and Products of Roots
 
 Let
 $$

@@ -83,7 +83,7 @@ A one-element set $\{x\}$ is not the same as the element $x$. For example, $1\ne
 ## 2.2 Russell's Paradox
 
 ::: {.callout-note}
-## The set of all sets *is not a set*.
+## The Set of All Sets *Is Not a Set*.
 
 Suppose there were a set $V$ containing every set. Define $B=\{x\in V:x\notin x\}$. Since $B$ would be a set in $V$, we could ask whether $B\in B$. The definition gives $B\in B\Longleftrightarrow B\notin B$, a contradiction.
 

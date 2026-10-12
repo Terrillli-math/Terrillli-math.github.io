@@ -12,6 +12,6 @@ I am especially interested in analysis, probability, stochastic processes, and t
 
 I am also interested in how artificial intelligence affects learning and research. Clear definitions and basic ideas help me use new tools well. They also help me spot gaps in an explanation.
 
-## Current study
+## Current Study
 
 My current coursework includes calculus, linear algebra, mathematical statistics, and discrete mathematics. The [notes](notes/index.qmd) section will grow alongside these courses.

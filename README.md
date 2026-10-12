@@ -4,7 +4,7 @@ I am an undergraduate mathematics student at the University of Sydney. This repo
 
 The site is a record of what I am learning. It includes [course notes](https://terrillli-math.github.io/notes/math1964/), [short explorations](https://terrillli-math.github.io/notes/atomization/), and [background topics](https://terrillli-math.github.io/notes/appendix/). These are working notes. I revise them as my understanding grows, and I mark proofs that are still in progress.
 
-## How the site is made
+## How the Site Is Made
 
 The pages are written in [Quarto](https://quarto.org/) and published with GitHub Pages. The `.qmd` files in `notes/` are edited versions for the website. They may differ from my private study notes in wording, layout, or mathematical corrections.
 

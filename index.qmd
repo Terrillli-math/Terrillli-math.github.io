@@ -12,38 +12,38 @@ Mathematics student at the University of Sydney.
 
 I use this site to record what I am learning: definitions, proofs, questions, and the connections that become clearer with time.
 
-[Explore the notes](notes/index.qmd){.btn .btn-primary} [About me](about.qmd){.btn .btn-outline-secondary}
+[Explore the Notes](notes/index.qmd){.btn .btn-primary} [About Me](about.qmd){.btn .btn-outline-secondary}
 
 :::
 
-## What you will find here
+## What You Will Find Here
 
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-4}
-### Course notes
+### Course Notes
 
 Notes from my undergraduate mathematics courses, currently including discrete mathematics.
 :::
 
 ::: {.g-col-12 .g-col-md-4}
-### Short explorations
+### Short Explorations
 
 Self-contained ideas and proofs that I want to understand more deeply.
 :::
 
 ::: {.g-col-12 .g-col-md-4}
-### A learning record
+### A Learning Record
 
 These are working notes. I expect to revisit them as my understanding improves.
 :::
 
 :::
 
-## Start reading
+## Start Reading
 
 - [MATH1964: Discrete Mathematics for Computation (Adv)](notes/math1964/index.qmd)
-- [Atomization: short mathematical notes](notes/atomization/index.qmd)
-- [Appendix: background topics](notes/appendix/index.qmd)
+- [Atomization: Short Mathematical Notes](notes/atomization/index.qmd)
+- [Appendix: Background Topics](notes/appendix/index.qmd)
 
 The notes preserve my own learning process. If you spot a mathematical mistake or a broken link, please let me know through [GitHub](https://github.com/Terrillli-math).

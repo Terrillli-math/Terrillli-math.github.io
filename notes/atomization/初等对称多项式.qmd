@@ -16,7 +16,7 @@ E_n=X_1\cdots X_n.
 $$
 
 ::: {.callout-tip}
-## Combinatorial interpretation
+## Combinatorial Interpretation
 
 Choose $k$ distinct variables from the $n$ available, multiply them, and add the products obtained from all such choices.
 :::

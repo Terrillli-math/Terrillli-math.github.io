@@ -9,7 +9,7 @@ categories: ["atomization"]
 Given real numbers $a<b$, prove that the interval $(a,b)$ contains both a rational number and an irrational number. You may use the fact that $\sqrt2$ is irrational.
 :::
 
-## Rational numbers are dense
+## Rational Numbers Are Dense
 
 The Archimedean property lets us choose a positive integer $n$ with $n(b-a)>1$. The interval $(na,nb)$ is then longer than $1$, so it contains an integer $m$. Divide $na<m<nb$ by $n$ to get
 $$
@@ -17,7 +17,7 @@ a<\frac mn<b.
 $$
 Thus $r=m/n$ is a rational number in $(a,b)$.
 
-## Irrational numbers are dense
+## Irrational Numbers Are Dense
 
 Choose the rational $r$ above. Because $b-r>0$, we can take a sufficiently large positive integer $N$ such that $\sqrt2/N<b-r$. Set
 $$

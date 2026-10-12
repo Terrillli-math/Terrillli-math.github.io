@@ -7,7 +7,7 @@ categories: ["machine learning", "support vector machines", "optimisation"]
 
 This note explains the main ideas behind multiclass support vector machines. It focuses on how the margin, the dual form, kernels, and the training method connect. The technical details are checked against the original paper by Crammer and Singer.
 
-## 1. The problem
+## 1. The Problem
 
 A binary support vector machine separates two classes. Many real problems have more than two classes. For example, a news article may belong to *sports*, *technology*, or *business*.
 
@@ -20,7 +20,7 @@ These methods reduce a multiclass problem to several binary problems. The Cramme
 
 This difference is important. In OVR and OVO, the binary classifiers are trained separately. In Crammer-Singer, the classes compete inside the same loss function. The model therefore learns the relative gaps between class scores directly.
 
-## 2. Class scores and prediction
+## 2. Class Scores and Prediction
 
 Suppose there are $K$ classes. Each class $k$ has a weight vector $w_k$. For an input vector $x$, its score for class $k$ is
 
@@ -36,7 +36,7 @@ $$
 
 The scores are relative decision values. They are not probabilities. A score of $2.8$ does not give a probability. A separate calibration method is needed for that.
 
-## 3. The multiclass margin
+## 3. The Multiclass Margin
 
 For a training example $(x_i,y_i)$, the correct class has score $w_{y_i}^\top x_i$. The strongest wrong class has score
 
@@ -70,7 +70,7 @@ $$
 
 Only the strongest wrong class determines this loss. The loss asks one direct question: how far is the correct class from its most serious rival?
 
-## 4. A small example
+## 4. A Small Example
 
 Assume the true class is *technology*.
 
@@ -100,7 +100,7 @@ $$
 
 The loss is now zero. This example shows why accuracy alone is not enough during training. Both predictions are correct, but the second decision has a larger safety gap.
 
-## 5. The primal optimisation problem
+## 5. The Primal Optimisation Problem
 
 A common form of the Crammer-Singer primal problem is
 
@@ -143,13 +143,13 @@ This gives a simple interpretation. There is one slack value for each example be
 
 The original paper places a parameter $\beta$ in front of the regularisation term. This note uses the more familiar $C$ form. The two forms are equivalent after rescaling the objective. The symbols differ, but the trade-off is the same (Crammer & Singer, 2001).
 
-## 6. Why the problem is convex
+## 6. Why the Problem Is Convex
 
 The regularisation term is a sum of squared norms. It is convex. The slack penalty is linear. Each margin constraint is also linear in the unknown weights and slack variables.
 
 Therefore, the full primal problem is convex. Any local optimum is a global optimum. This does not mean that training is automatically cheap. It means that the optimisation landscape has no bad local minima.
 
-## 7. From the primal to the dual
+## 7. From the Primal to the Dual
 
 The paper writes all class vectors as the rows of a matrix $M$. It then introduces non-negative Lagrange multipliers $\eta_{i,r}$ for the margin constraints. The stationarity conditions give two important relations:
 
@@ -172,7 +172,7 @@ The second equation gives the main structural insight. Each class vector is a we
 
 The first equation says that the multiplier vector for each example lies on a simplex. Its components sum to one. This creates a probability-like geometry, but the multipliers are optimisation variables. They are not predicted class probabilities.
 
-## 8. Support patterns
+## 8. Support Patterns
 
 In a binary SVM, the important training examples are called support vectors. Crammer and Singer use the related idea of a **support pattern**.
 
@@ -202,7 +202,7 @@ The kernel trick does not simply “reduce the dimension.” It avoids writing t
 
 Kernel methods can still be expensive. Prediction may require kernel evaluations against many support patterns. Training also becomes harder as the number of examples grows.
 
-## 10. Why decomposition is needed
+## 10. Why Decomposition Is Needed
 
 The direct dual problem has about $nK$ variables. A naive quadratic-programming method may need to work with a matrix of size roughly $(nK)\times(nK)$. This quickly becomes impractical.
 
@@ -217,7 +217,7 @@ The selected example is not arbitrary. The algorithm looks for a large KKT viola
 
 The method turns one large problem into many small updates. Each step is easier to handle. Together, the steps approach the solution of the original convex problem.
 
-## 11. Comparison with reduction methods
+## 11. Comparison with Reduction Methods
 
 | Method | Number of models | Main strength | Main limitation |
 |---|---:|---|---|
@@ -227,29 +227,29 @@ The method turns one large problem into many small updates. Each step is easier 
 
 The direct method is elegant, but it is not always the best choice. OVR is often a strong baseline. OVO may work well when pairwise boundaries are easy to learn. The final choice depends on validation results and computing cost. It also depends on the structure of the data.
 
-## 12. Main insights
+## 12. Main Insights
 
-### 12.1 Correct is not the same as confident
+### 12.1 Correct Is Not the Same as Confident
 
 A correct prediction can still have positive loss. The correct class must beat every wrong class by at least the required margin.
 
-### 12.2 The loss couples all classes
+### 12.2 The Loss Couples All Classes
 
 The correct class is compared with its strongest rival. If the strongest rival changes, the active constraint also changes. This is the central multiclass feature of the method.
 
-### 12.3 One example can support several class boundaries
+### 12.3 One Example Can Support Several Class Boundaries
 
 An ambiguous example can influence more than one class vector through its dual coefficients. This is richer than treating each binary classifier as a separate problem.
 
-### 12.4 Regularisation prevents score inflation
+### 12.4 Regularisation Prevents Score Inflation
 
 Without a penalty on the weights, the model could increase score gaps by scaling the weight vectors. The norm penalty makes large weights costly. It forces the model to balance margin size with model complexity.
 
-### 12.5 The strongest competitor carries useful information
+### 12.5 The Strongest Competitor Carries Useful Information
 
 The model does not treat all wrong classes equally. It focuses on the class that is most confusing for each example. This makes the loss easy to explain. It also connects the loss to the shape of the decision boundary.
 
-## 13. How the ideas fit together
+## 13. How the Ideas Fit Together
 
 The main ideas follow a natural chain:
 

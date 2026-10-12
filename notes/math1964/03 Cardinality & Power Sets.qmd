@@ -10,7 +10,7 @@ The *cardinality* $|S|$ of a finite set is its number of distinct elements. We c
 The *continuum hypothesis* says there is no set $S$ with $|\mathbb{N}|<|S|<|\mathbb{R}|$. We write $|\mathbb{N}|=\aleph_0$ and $|\mathbb{R}|=2^{\aleph_0}$. If the hypothesis holds, then $|\mathbb{R}|=\aleph_1$. The usual ZFC axioms do not decide whether it holds, provided those axioms are consistent.
 
 ::: {.callout-note}
-## How can we show $|A|=|B|$?
+## How Can We Show $|A|=|B|$?
 
 Find a bijection $f:A\to B$. For example, $\mathbb{N}=\{0,1,2,\ldots\}$ and $\mathbb{Z}$ have the same cardinality. One bijection is
 $$
@@ -23,7 +23,7 @@ $$
 It lists the integers in the order $0,1,-1,2,-2,\ldots$.
 :::
 
-## 3.2 Power sets
+## 3.2 Power Sets
 
 The *power set* of $S$ is the set of all its subsets:
 $$
@@ -32,7 +32,7 @@ $$
 Both $\varnothing$ and $S$ belong to $\mathcal{P}(S)$. If $|S|=n$ is finite, then $|\mathcal{P}(S)|=2^n$.
 
 ::: {.callout-tip}
-## Elements and subsets are different
+## Elements and Subsets Are Different
 
 For $A=\{a,b,c\}$, we have $a\in A$, $\{a\}\subseteq A$, and $\{a\}\in\mathcal{P}(A)$. But $\{a\}\notin A$.
 :::
