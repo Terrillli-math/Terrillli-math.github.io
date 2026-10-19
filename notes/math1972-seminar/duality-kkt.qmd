@@ -10,7 +10,7 @@ A constraint changes which directions we may move. At a boundary, the gradient o
 
 The Lagrangian brings the objective and the constraints into one expression. It leads to a second problem, called the **dual problem**. This problem searches for the strongest lower bound of a particular form.
 
-This note develops the seminar's one-variable example before applying the same ideas to an active constraint (Ying, n.d.). The connection to SVMs appears in [Linear SVMs and Margins](linear-svm.qmd).
+This note compares inactive and active constraints through two one-variable problems. The worked examples were constructed for these notes. The connection to SVMs appears in [Linear SVMs and Margins](linear-svm.qmd).
 
 ## Start With the Primal Problem
 
@@ -150,7 +150,7 @@ If $f_i(x^*)<0$, the constraint has spare room. Complementary slackness forces $
 
 If $\lambda_i^*>0$, then $f_i(x^*)=0$. The point lies on that constraint's boundary. We call such a constraint **active**.
 
-The reverse need not hold. An active constraint can have a zero multiplier. For example, minimise $x^2/2$ subject to $x\geq0$. At the optimum $x=0$, the constraint is active, but the multiplier is $0$.
+The reverse need not hold. An active constraint can have a zero multiplier. For example, minimise $(x-3)^2/2$ subject to $x\geq3$. At the optimum $x=3$, the constraint is active. Stationarity gives $x-3-\lambda=0$, so the multiplier is $0$.
 
 ### When Are the Conditions Enough?
 
@@ -170,37 +170,37 @@ To guarantee that every attained optimum has suitable KKT multipliers, we need a
 
 ## Example 1: A Constraint With Spare Room
 
-The seminar considers
+First, consider
 
 $$
-\min_x\frac{x^2}{2}
-\qquad\text{subject to }2x+5\geq0.
+\min_x\frac{(x-3)^2}{2}
+\qquad\text{subject to }x\geq1.
 $$
 
-The feasible set is $x\geq-5/2$. The unconstrained minimiser $x=0$ is already feasible. We therefore expect the constraint to have zero multiplier.
+The objective measures squared distance from $3$. Its unconstrained minimiser $x=3$ is feasible. The lower bound leaves spare room, so we expect its multiplier to be zero.
 
 ### Form the Dual
 
-Write $f_1(x)=-2x-5\leq0$. Then
+Write $f_1(x)=1-x\leq0$. Then
 
 $$
-L(x,\lambda)=\frac{x^2}{2}+\lambda(-2x-5),
+L(x,\lambda)=\frac{(x-3)^2}{2}+\lambda(1-x),
 \qquad\lambda\geq0.
 $$
 
-For fixed $\lambda$, stationarity in $x$ gives $x-2\lambda=0$. Thus $x=2\lambda$, and
+For fixed $\lambda$, stationarity in $x$ gives $x-3-\lambda=0$. Thus $x=3+\lambda$, and
 
 $$
 g(\lambda)
-=\frac{(2\lambda)^2}{2}-2\lambda(2\lambda)-5\lambda
-=-2\lambda^2-5\lambda.
+=\frac{\lambda^2}{2}+\lambda\bigl(1-(3+\lambda)\bigr)
+=-2\lambda-\frac{\lambda^2}{2}.
 $$
 
-For $\lambda\geq0$, this is largest at $\lambda^*=0$. Its value is $0$. The primal point $x^*=0$ also has cost $0$. The gap is zero.
+For $\lambda\geq0$, this is largest at $\lambda^*=0$. Its value is $0$. The primal point $x^*=3$ also has cost $0$. The gap is zero.
 
 ### Read the KKT Conditions
 
-At $x^*=0$, the inequality value is $-5<0$. Complementary slackness requires $\lambda^*=0$. Stationarity then becomes $x^*=0$.
+At $x^*=3$, the inequality value is $1-3=-2<0$. Complementary slackness requires $\lambda^*=0$. Stationarity then becomes $x^*=3$.
 
 The constraint limits the feasible set, but it does not affect this optimum. The multiplier records that fact.
 
@@ -209,44 +209,53 @@ The constraint limits the feasible set, but it does not affect this optimum. The
 Now change the constraint:
 
 $$
-\min_x\frac{x^2}{2}
-\qquad\text{subject to }x\geq1.
+\min_x\frac{(x-3)^2}{2}
+\qquad\text{subject to }x\geq5.
 $$
 
-The unconstrained minimiser is no longer allowed. The smallest feasible cost occurs at the boundary $x^*=1$.
+The unconstrained minimiser $x=3$ is no longer allowed. The nearest feasible point is the boundary $x^*=5$.
 
-Write $1-x\leq0$. The Lagrangian is
-
-$$
-L(x,\lambda)=\frac{x^2}{2}+\lambda(1-x).
-$$
-
-Stationarity in $x$ gives $x=\lambda$. Substitution yields
+Write $5-x\leq0$. The Lagrangian is
 
 $$
-g(\lambda)=\lambda-\frac{\lambda^2}{2},
+L(x,\lambda)=\frac{(x-3)^2}{2}+\lambda(5-x).
+$$
+
+Stationarity in $x$ again gives $x=3+\lambda$. Substitution yields
+
+$$
+g(\lambda)=2\lambda-\frac{\lambda^2}{2},
 \qquad\lambda\geq0.
 $$
 
-This concave quadratic is largest at $\lambda^*=1$. Its value is $1/2$, equal to the primal cost at $x^*=1$.
+This concave quadratic is largest at $\lambda^*=2$. Its value is $2$, equal to the primal cost $(5-3)^2/2=2$.
 
 The KKT conditions now read
 
 $$
-x^*\geq1,\qquad\lambda^*\geq0,\qquad
-\lambda^*(1-x^*)=0,\qquad x^*-\lambda^*=0.
+x^*\geq5,\qquad\lambda^*\geq0,\qquad
+\lambda^*(5-x^*)=0,\qquad x^*-3-\lambda^*=0.
 $$
 
-They give $x^*=\lambda^*=1$. The positive multiplier balances the objective's gradient at a boundary where a move towards $0$ is forbidden.
+They give $x^*=5$ and $\lambda^*=2$. The positive multiplier balances the objective's gradient at a boundary where a move towards $3$ is forbidden.
+
+We can also check the price analogy. Tighten the bound to $x\geq5+\varepsilon$, with $\varepsilon$ near $0$. The best cost becomes
+
+$$
+p^*(\varepsilon)=\frac{(2+\varepsilon)^2}{2}
+=2+2\varepsilon+\frac{\varepsilon^2}{2}.
+$$
+
+For a small change, the cost rises by about $2\varepsilon$. The multiplier $2$ gives this rate of change. In the first example, a small change to the bound $1$ leaves $x=3$ feasible. The best cost remains $0$, which agrees with its zero multiplier.
 
 ## What the Two Examples Show
 
-| Feature | $2x+5\geq0$ | $x\geq1$ |
+| Feature | $x\geq1$ | $x\geq5$ |
 |---|---|---|
-| Primal Optimum | $x^*=0$ | $x^*=1$ |
-| Optimal Cost | $0$ | $1/2$ |
+| Primal Optimum | $x^*=3$ | $x^*=5$ |
+| Optimal Cost | $0$ | $2$ |
 | Constraint Status | Inactive | Active |
-| Optimal Multiplier | $0$ | $1$ |
+| Optimal Multiplier | $0$ | $2$ |
 
 Both problems have a strictly feasible point, so Slater's condition applies. Both also have an attained primal optimum. KKT gives a complete description in these examples.
 
@@ -261,8 +270,6 @@ The dual also rewrites the classifier using inner products between data points. 
 The useful habit is the same in each problem: write the constraint signs carefully, form the Lagrangian, and check all four KKT conditions. Solving stationarity alone can produce an infeasible point or a multiplier with the wrong sign.
 
 ## References
-
-Ying, Y. (n.d.). *Basic mathematics for machine learning: Convex optimisation* [Lecture slides]. School of Mathematics and Statistics, University of Sydney.
 
 Boyd, S., & Vandenberghe, L. (2004). *Convex optimization*. Cambridge University Press. [Official book and free text](https://web.stanford.edu/~boyd/cvxbook/). Chapter 5 develops weak duality, strong duality, and KKT conditions.
 

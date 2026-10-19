@@ -6,7 +6,7 @@ toc: false
 
 These notes explore ideas from my MATH1972 seminars at the University of Sydney. They cover game theory, optimisation, machine learning, and networks.
 
-Each note develops the ideas behind the definitions. Short proofs explain why the main results work. Small examples show how to use them. The notes draw on the seminar materials, with sources listed on each page.
+Each note develops the ideas behind the definitions. Short proofs explain why the main results work. Small examples show how to use them. The notes draw on seminar material. The figures and worked numerical examples were created for these notes. External references are listed where they help explain an idea.
 
 ## Game Theory
 
@@ -29,7 +29,7 @@ For a related application, see the [Multiclass SVM project](../../projects/multi
 
 [**Introduction to Network Analysis**](network-analysis.qmd)
 
-Use one six-node graph to explore degree, density, clustering, and distance. Learn what each measure tells us and what it leaves out.
+Use one seven-node graph to explore degree, density, clustering, and distance. Learn what each measure tells us and what it leaves out.
 
 ---
 

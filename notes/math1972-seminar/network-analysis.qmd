@@ -10,7 +10,7 @@ A list of people tells us who belongs to a group. It does not tell us who knows 
 
 Network analysis studies a system through its objects and their connections. We represent the objects by **nodes**. We represent their connections by **edges**. The resulting mathematical object is a **graph**.
 
-This note develops the main ideas from the MATH1972 seminar material. It uses one small graph throughout. The aim is to understand what each measure tells us. It is just as useful to know what a measure leaves out.
+This note uses one small graph throughout. The graph and numerical examples in this note were constructed for these notes. The aim is to understand what each measure tells us. It is just as useful to know what a measure leaves out.
 
 ## One Graph, Several Representations
 
@@ -19,21 +19,23 @@ We use a **simple undirected graph**. An edge has no direction. There are no edg
 Let the node set be
 
 $$
-V=\{1,2,3,4,5,6\}.
+V=\{1,2,3,4,5,6,7\}.
 $$
 
 The edge set is
 
 $$
 \begin{aligned}
-E=\{&\{1,4\},\{1,5\},\{1,6\},\{2,3\},\\
-    &\{2,5\},\{3,4\},\{3,6\},\{5,6\}\}.
+E=\{&\{1,2\},\{2,3\},\{3,1\},\{3,4\},\\
+    &\{4,5\},\{5,6\},\{6,7\},\{7,4\}\}.
 \end{aligned}
 $$
 
-Each edge is an unordered pair. The pair $\{1,4\}$ is the same edge as $\{4,1\}$. We count it once.
+Each edge is an unordered pair. The pair $\{1,2\}$ is the same edge as $\{2,1\}$. We count it once.
 
-![A six-node undirected graph. Its eight edges are 1-4, 1-5, 1-6, 2-3, 2-5, 3-4, 3-6, and 5-6.](images/network-six-nodes.svg){#fig-six-node-network width=620 fig-align="center"}
+![An author-created seven-node graph. A triangle on nodes 1, 2, and 3 is joined by edge 3-4 to a four-cycle on nodes 4, 5, 6, and 7.](images/network-example.svg){#fig-example-network width=700 fig-align="center"}
+
+The graph has two simple parts: a triangle and a four-cycle. The edge $\{3,4\}$ joins them. It is a **bridge**: removing it splits the graph into two components.
 
 A drawing helps us see the connections. Its exact shape is not part of the graph. We can move a node without changing any edge. Two edges may also cross in a drawing without creating a new node.
 
@@ -45,12 +47,13 @@ The **adjacency matrix** records the same information in a table. Its entry $a_{
 
 $$
 A=\begin{pmatrix}
-0&0&0&1&1&1\\
-0&0&1&0&1&0\\
-0&1&0&1&0&1\\
-1&0&1&0&0&0\\
-1&1&0&0&0&1\\
-1&0&1&0&1&0
+0&1&1&0&0&0&0\\
+1&0&1&0&0&0&0\\
+1&1&0&1&0&0&0\\
+0&0&1&0&1&0&1\\
+0&0&0&1&0&1&0\\
+0&0&0&0&1&0&1\\
+0&0&0&1&0&1&0
 \end{pmatrix}.
 $$
 
@@ -66,13 +69,13 @@ $$
 k_i=\sum_{j=1}^{n}a_{ij}.
 $$
 
-Here $n=6$, and the degrees are
+Here $n=7$, and the degrees are
 
-| Node $i$ | 1 | 2 | 3 | 4 | 5 | 6 |
-|---|---:|---:|---:|---:|---:|---:|
-| Degree $k_i$ | 3 | 2 | 3 | 2 | 3 | 3 |
+| Node $i$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Degree $k_i$ | 2 | 2 | 3 | 3 | 2 | 2 | 2 |
 
-Node $1$ has three direct neighbors: $4$, $5$, and $6$. Its degree does not count a node reached through a longer route.
+Node $3$ has three direct neighbors: $1$, $2$, and $4$. Its degree does not count a node reached through a longer route.
 
 ### Why the Degrees Add to Twice the Edge Count
 
@@ -85,13 +88,13 @@ $$
 This is the **handshaking lemma**. In our graph,
 
 $$
-3+2+3+2+3+3=16=2\cdot8.
+2+2+3+3+2+2+2=16=2\cdot8.
 $$
 
 The average degree is thus
 
 $$
-\bar{k}=\frac{2m}{n}=\frac{16}{6}=\frac83.
+\bar{k}=\frac{2m}{n}=\frac{16}{7}.
 $$
 
 This gives a quick check on a calculation. A simple undirected graph cannot have an odd sum of degrees.
@@ -107,9 +110,9 @@ $$
 For this graph,
 
 $$
-p_2=\frac26=\frac13,
+p_2=\frac57,
 \qquad
-p_3=\frac46=\frac23.
+p_3=\frac27.
 $$
 
 All other probabilities are zero. These values add to one, as they should.
@@ -135,7 +138,7 @@ $$
 Our graph has
 
 $$
-\rho=\frac8{15}\approx0.533.
+\rho=\frac8{21}\approx0.381.
 $$
 
 Equivalently, $\rho=\bar{k}/(n-1)$. This is the average fraction of other nodes that a node is linked to.
@@ -157,24 +160,24 @@ The value lies between $0$ and $1$. It measures the density *inside the neighbor
 
 ### A Local Calculation
 
-The neighbors of node $1$ are $4$, $5$, and $6$. They have three possible pairs. Only $\{5,6\}$ is an edge.
+The neighbors of node $3$ are $1$, $2$, and $4$. They have three possible pairs. Only $\{1,2\}$ is an edge.
 
-![The same graph with node 1 in purple and its neighbors 4, 5, and 6 in blue. The edge 5-6 is orange. It is the only edge among the three neighbors of node 1.](images/network-neighborhood.svg){#fig-node-one-neighborhood width=620 fig-align="center"}
+![The author-created graph with node 3 in purple and its neighbors 1, 2, and 4 in blue. The orange edge 1-2 is the only edge among those three neighbors.](images/network-neighborhood.svg){#fig-node-three-neighborhood width=700 fig-align="center"}
 
 Therefore,
 
 $$
-k_1=3,\qquad L_1=1,\qquad C_1=\frac13.
+k_3=3,\qquad L_3=1,\qquad C_3=\frac13.
 $$
 
 The full list is
 
 $$
-(C_1,C_2,C_3,C_4,C_5,C_6)
-=\left(\frac13,0,0,0,\frac13,\frac13\right).
+(C_1,C_2,C_3,C_4,C_5,C_6,C_7)
+=\left(1,1,\frac13,0,0,0,0\right).
 $$
 
-Node $3$ also has degree $3$, but its clustering coefficient is $0$. Its neighbors are $2$, $4$, and $6$. None of those pairs is linked. Equal degrees can therefore hide very different local structures.
+Node $4$ also has degree $3$, but its clustering coefficient is $0$. Its neighbors are $3$, $5$, and $7$. None of those pairs is linked. Equal degrees can therefore hide very different local structures.
 
 For a node of degree $0$ or $1$, the formula divides by zero. We use the convention $C_i=0$ for such nodes in this note. Some software reports an undefined value instead. That choice also affects an average (igraph, n.d.).
 
@@ -184,7 +187,7 @@ The **average local clustering coefficient** gives every node equal weight:
 
 $$
 \bar C=\frac1n\sum_{i=1}^{n}C_i
-=\frac16.
+=\frac17\left(1+1+\frac13\right)=\frac13.
 $$
 
 There is another common graph measure called **global transitivity**. It uses connected triples. A connected triple has a chosen center and two distinct neighbors. It is closed when those neighbors also share an edge.
@@ -196,19 +199,19 @@ C_{\mathrm{global}}
 =\frac{3T}{\sum_i\binom{k_i}{2}}.
 $$
 
-Each triangle closes three triples, one at each of its nodes. Our graph has one triangle: $\{1,5,6\}$. It has
+Each triangle closes three triples, one at each of its nodes. Our graph has one triangle: $\{1,2,3\}$. It has
 
 $$
 \sum_i\binom{k_i}{2}
-=3+1+3+1+3+3=14
+=1+1+3+3+1+1+1=11
 $$
 
 connected triples. Hence,
 
 $$
-C_{\mathrm{global}}=\frac3{14}\approx0.214,
+C_{\mathrm{global}}=\frac3{11}\approx0.273,
 \qquad
-\bar C=\frac16\approx0.167.
+\bar C=\frac13\approx0.333.
 $$
 
 These measures ask different questions. The local average starts by choosing a node uniformly. Global transitivity starts by choosing a connected triple uniformly. Nodes with more neighbor pairs receive more weight in the second calculation. The igraph documentation treats these as distinct measures (igraph, n.d.).
@@ -230,18 +233,18 @@ The term for $\ell$ is $1$ exactly when we can travel from $i$ to $\ell$ and the
 In our graph,
 
 $$
-(A^2)_{13}=2.
+(A^2)_{46}=2.
 $$
 
-The two walks are $1\to4\to3$ and $1\to6\to3$. Both happen to be paths.
+The two walks are $4\to5\to6$ and $4\to7\to6$. Both happen to be paths.
 
 However,
 
 $$
-(A^2)_{11}=3.
+(A^2)_{11}=2.
 $$
 
-These walks are $1\to4\to1$, $1\to5\to1$, and $1\to6\to1$. They repeat node $1$, so they are not paths. This is a simple way to see why the general claim must use the word *walk*.
+These walks are $1\to2\to1$ and $1\to3\to1$. They repeat node $1$, so they are not paths. This is a simple way to see why the general claim must use the word *walk*.
 
 More generally, each multiplication adds one final edge. This gives the walk-counting rule for all positive integers $r$.
 
@@ -263,16 +266,17 @@ For our graph,
 
 $$
 D=\begin{pmatrix}
-0&2&2&1&1&1\\
-2&0&1&2&1&2\\
-2&1&0&1&2&1\\
-1&2&1&0&2&2\\
-1&1&2&2&0&1\\
-1&2&1&2&1&0
+0&1&1&2&3&4&3\\
+1&0&1&2&3&4&3\\
+1&1&0&1&2&3&2\\
+2&2&1&0&1&2&1\\
+3&3&2&1&0&1&2\\
+4&4&3&2&1&0&1\\
+3&3&2&1&2&1&0
 \end{pmatrix}.
 $$
 
-For example, nodes $1$ and $3$ are not adjacent. They have a path of length $2$, so $d_{13}=2$. Notice that the distance is one number even when several shortest paths exist.
+For example, $d_{16}=4$. Two shortest paths are $1\to3\to4\to5\to6$ and $1\to3\to4\to7\to6$. Every route from the triangle to the four-cycle must cross the bridge. Notice that the distance is one number even when several shortest paths exist.
 
 The **diameter** of a connected graph is its largest distance:
 
@@ -280,21 +284,21 @@ $$
 \operatorname{diam}(G)=\max_{i,j}d_{ij}.
 $$
 
-Here every pair of distinct nodes is at distance $1$ or $2$. Some pairs are not adjacent. Therefore, the diameter is exactly $2$.
+The largest entry in $D$ is $4$. Therefore, the diameter is $4$. The pair $(1,6)$ attains it, as does $(2,6)$.
 
 ### What If the Graph Is Disconnected?
 
 A graph is **connected** if every pair of nodes has a path between them. A **connected component** is a maximal connected part of the graph.
 
-Now add a seventh node without any edges.
+Now add an eighth node without any edges.
 
-![The six-node graph forms one connected component. A separate node labelled 7 has no edges and forms a second component.](images/network-isolated-node.svg){#fig-isolated-node width=620 fig-align="center"}
+![The author-created seven-node graph forms one connected component. A separate node labelled 8 has no edges and forms a second component.](images/network-isolated-node.svg){#fig-isolated-node width=700 fig-align="center"}
 
-There are two components: $\{1,2,3,4,5,6\}$ and $\{7\}$. The new node has degree $0$. No path joins it to the other six nodes.
+There are two components: $\{1,2,3,4,5,6,7\}$ and $\{8\}$. The new node has degree $0$. No path joins it to the other seven nodes.
 
-We write $d_{i7}=\infty$ for $i\neq7$. Under the maximum-distance definition, the diameter of the whole graph is then infinite. Some texts leave it undefined. Some software reports the largest *finite* distance instead, which is $2$ here. A reported diameter needs its convention.
+We write $d_{i8}=\infty$ for $i\neq8$. Under the maximum-distance definition, the diameter of the whole graph is then infinite. Some texts leave it undefined. Some software reports the largest *finite* distance instead, which is $4$ here. A reported diameter needs its convention.
 
-The extra node also changes several summaries. There are still eight edges, but there are now $\binom72=21$ possible pairs. Density falls to $8/21$. Under our zero convention, average local clustering falls to $1/7$. Global transitivity stays at $3/14$, since the isolated node adds no connected triples.
+The extra node also changes several summaries. There are still eight edges, but there are now $\binom82=28$ possible pairs. Density falls to $8/28=2/7$. Under our zero convention, average local clustering falls to $7/24$. Global transitivity stays at $3/11$, since the isolated node adds no connected triples.
 
 This example shows why the node set matters. Adding an isolated node leaves every old connection in place, but it changes the questions answered by several averages.
 
@@ -317,23 +321,25 @@ The practical lesson is to state the graph model first. Then choose a measure th
 
 ## A Short Check
 
-Suppose we remove edge $\{5,6\}$ from the original graph. What happens to the degree sum, density, and clustering?
+Suppose we remove the bridge $\{3,4\}$ from the original seven-node graph. What happens to connectivity, the degree sum, density, and clustering?
 
 ::: {.callout-note collapse="true" title="Work Through the Change"}
 
-The edge count falls from $8$ to $7$. Nodes $5$ and $6$ each lose one neighbor. The degree sum falls by $2$, from $16$ to $14$.
+The graph splits into a triangle on $\{1,2,3\}$ and a four-cycle on $\{4,5,6,7\}$. No path joins these components.
 
-The node count stays at $6$, so the density becomes $7/15$.
+The edge count falls from $8$ to $7$. Nodes $3$ and $4$ each lose one neighbor. The degree sum falls by $2$, from $16$ to $14$.
 
-The triangle $\{1,5,6\}$ disappears. There are no triangles left. Every local clustering coefficient is now zero, and global transitivity is zero.
+The node count stays at $7$, so the density becomes $7/21=1/3$.
 
-This change is small in the edge count, but large in the triangle count. Different measures can react very differently to the same edit.
+The triangle remains. Each of its three nodes now has local clustering $1$. The four-cycle nodes still have local clustering $0$. Thus, average local clustering rises from $1/3$ to $3/7$.
+
+Every node now has degree $2$. There are seven connected triples and one triangle, so global transitivity is also $3/7$.
+
+Both clustering measures rise, even though the graph has lost its only link between the two parts. Higher clustering does not by itself mean better connectivity.
 
 :::
 
 ## References
-
-*Introduction to network analysis*. (n.d.). [MATH1972 seminar material]. The University of Sydney.
 
 igraph. (n.d.). *Transitivity of a graph*. [https://r.igraph.org/reference/transitivity.html](https://r.igraph.org/reference/transitivity.html)
 

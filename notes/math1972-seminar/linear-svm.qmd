@@ -12,7 +12,7 @@ A support vector machine looks for a large gap between the classes. This gap is 
 
 This is a useful design rule. It is not a promise that the largest training margin always gives the best predictions. The data, the features, and the choice of regularisation still matter.
 
-These notes develop the binary SVM from the MATH1972 lectures by Ying (2026, n.d.). The main aim is to connect the geometry with the optimisation.
+The main aim of these notes is to connect the geometry with the optimisation. The numerical example below was constructed for these notes.
 
 ## Scores, Boundaries, and Distances
 
@@ -92,15 +92,17 @@ Hard-margin training needs separable data. If the two classes overlap, these con
 
 ### A One-Dimensional Example
 
-Take $x_1=-1$ with label $-1$ and $x_2=1$ with label $+1$. The constraints become
+Take $x_1=-3$ with label $-1$ and $x_2=5$ with label $+1$. The constraints become
 
 $$
-w-b\ge1,
+3w-b\ge1,
 \qquad
-w+b\ge1.
+5w+b\ge1.
 $$
 
-Adding them gives $w\ge1$. The smallest possible norm occurs at $w=1$ and $b=0$. The boundary is $x=0$, and the full margin width is $2$.
+Adding them gives $8w\ge2$, so $w\ge1/4$. The smallest possible norm occurs at $w=1/4$ and $b=-1/4$. The score is $(x-1)/4$, so the boundary is $x=1$.
+
+Each training point is four units from the boundary. The full margin width is $2/(1/4)=8$. This agrees with the distance between $-3$ and $5$.
 
 This example shows why the constraints are essential. Minimising the norm without them would simply give $w=0$.
 
@@ -164,7 +166,9 @@ $$
 b=y_i-w^\top x_i.
 $$
 
-In the two-point example, the dual constraint gives $\alpha_1=\alpha_2=a$. Its objective is $2a-2a^2$. The maximum occurs at $a=1/2$. Then $w=1$, which agrees with the geometric answer.
+In the two-point example, the dual constraint gives $\alpha_1=\alpha_2=a$. Then $w=8a$, and the dual objective is $2a-32a^2$. Its maximum occurs at $a=1/32$. This gives $w=1/4$, as before.
+
+Using the positive support vector, $b=1-5/4=-1/4$. Both the primal and dual objective values are $1/32$. The numerical answer therefore checks the geometry, stationarity, and strong duality together.
 
 ## Soft Margins and Imperfect Data
 
@@ -227,10 +231,6 @@ Only inner products appear. This observation leads directly to [feature maps and
 For the multiclass extension, see [the Crammer-Singer project](../../projects/multiclass-svm-crammer-singer.qmd). It applies the margin idea to several competing class scores.
 
 ## References
-
-Ying, Y. (2026). *Introduction: Math optimisation for machine learning* [MATH1972 lecture slides]. University of Sydney.
-
-Ying, Y. (n.d.). *Support vector machine and kernels* [MATH1972 lecture slides]. University of Sydney.
 
 scikit-learn developers. (n.d.). *Support vector machines*. [https://scikit-learn.org/stable/modules/svm.html](https://scikit-learn.org/stable/modules/svm.html)
 

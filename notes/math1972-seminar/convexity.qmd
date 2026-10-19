@@ -10,7 +10,7 @@ An optimisation problem asks us to choose the best allowed point. We need two th
 
 Convexity gives both parts a useful shape. A convex set contains every line segment between its points. A convex function never rises above the straight chord between two points on its graph. Together, these properties rule out a local minimum that is worse than a global one.
 
-This note follows Ying's seminar slides on convex optimisation (Ying, n.d.). The explanations and examples build on the definitions in those slides.
+The examples below connect the main definitions with simple optimisation problems. The worked examples were constructed for these notes.
 
 ## Convex Sets: Keep the Whole Segment
 
@@ -82,10 +82,10 @@ for all $x,y\in C$ and $0\leq t\leq1$.
 
 The left side measures the cost at an average of two points. The right side averages their costs. Convexity says that averaging the points cannot cost more than this average cost.
 
-For $f(x)=x^2$, expand the two sides:
+Take $f(x)=(x-2)^2+1$. Expand the difference between the two sides:
 
 $$
-(1-t)x^2+ty^2-\bigl((1-t)x+ty\bigr)^2
+(1-t)f(x)+tf(y)-f\bigl((1-t)x+ty\bigr)
 =t(1-t)(x-y)^2\geq0.
 $$
 
@@ -116,10 +116,10 @@ $$
 
 The right side is the tangent line or tangent plane at $x$. The inequality says that this local approximation lies below the whole graph.
 
-For $f(x)=x^2$, the tangent at $x=1$ is $1+2(y-1)=2y-1$. The gap is
+For $f(x)=(x-2)^2+1$, we have $f(3)=2$ and $f'(3)=2$. The tangent at $x=3$ is $2+2(y-3)=2y-4$. The gap is
 
 $$
-y^2-(2y-1)=(y-1)^2\geq0.
+\bigl((y-2)^2+1\bigr)-(2y-4)=(y-3)^2\geq0.
 $$
 
 The gradient is therefore more than a direction of steepest increase. For a convex function, it also defines a lower bound valid at every other point.
@@ -160,13 +160,13 @@ $$
 
 The condition says that the function bends upwards, or stays flat, along every line.
 
-For $f(x_1,x_2)=x_1^2$, the Hessian is
+For $f(x_1,x_2)=(x_1+2x_2)^2$, the Hessian is
 
 $$
-\begin{pmatrix}2&0\\0&0\end{pmatrix}.
+\begin{pmatrix}2&4\\4&8\end{pmatrix}.
 $$
 
-This function is convex. But it is flat in the $x_2$ direction. Every point $(0,x_2)$ is a minimiser. Positive semidefinite curvature can include flat directions.
+For $v=(v_1,v_2)$, its quadratic form is $2(v_1+2v_2)^2\geq0$. So the function is convex. But moving in the direction $(2,-1)$ leaves its value unchanged. Every point on the line $x_1+2x_2=0$ is a minimiser. Positive semidefinite curvature can include flat directions.
 
 ## Why Every Local Minimum Is Global
 
@@ -207,7 +207,7 @@ Two common forms are useful to recognise:
 
 The [linear SVM](linear-svm.qmd) is a convex QP. Its objective balances the size of a weight vector against errors in the margin conditions.
 
-The seminar also names semidefinite programming (SDP) and semi-infinite linear programming (SILP). An SDP can impose a positive semidefinite constraint on a matrix that depends affinely on the variables. An SILP has finitely many variables but potentially infinitely many linear constraints. These are useful extensions. Their algorithms lie beyond this introduction.
+Two further forms are semidefinite programming (SDP) and semi-infinite linear programming (SILP). An SDP can impose a positive semidefinite constraint on a matrix that depends affinely on the variables. An SILP has finitely many variables but potentially infinitely many linear constraints. These are useful extensions. Their algorithms lie beyond this introduction.
 
 ## A Worked Example: Ridge Regression
 
@@ -239,6 +239,31 @@ $$
 
 So the system has a unique solution. In theory we can write it with an inverse. In computation, we usually solve the system directly.
 
+For a small example, take one input feature and two observations:
+
+$$
+X=\begin{pmatrix}1\\3\end{pmatrix},
+\qquad
+y=\begin{pmatrix}2\\4\end{pmatrix},
+\qquad\gamma=2.
+$$
+
+There is no intercept in this model. We have $X^\top X=10$ and $X^\top y=14$. The equation becomes
+
+$$
+(10+2)w=14,
+\qquad w^*=\frac76.
+$$
+
+We can check this without matrix notation. The cost is
+
+$$
+F(w)=(2-w)^2+(4-3w)^2+2w^2
+=12w^2-28w+20.
+$$
+
+Its derivative is $24w-28$, which vanishes at $w=7/6$. Its second derivative is $24>0$. Without the penalty, the fitted weight would be $14/10=7/5$. The penalty moves it closer to zero.
+
 The penalty has two roles here. It discourages large weights. It also removes flat directions that may remain when the columns of $X$ are dependent. This example connects curvature, a zero-gradient condition, and uniqueness in one calculation.
 
 ## What to Keep in Mind
@@ -248,8 +273,6 @@ Convexity is a property of the full problem. A convex objective does not rescue 
 Before differentiating, check the domain and the constraints. Then ask whether the function is smooth. These small checks tell us which tools apply.
 
 ## References
-
-Ying, Y. (n.d.). *Basic mathematics for machine learning: Convex optimisation* [Lecture slides]. School of Mathematics and Statistics, University of Sydney.
 
 Boyd, S., & Vandenberghe, L. (2004). *Convex optimization*. Cambridge University Press. [Official book and free text](https://web.stanford.edu/~boyd/cvxbook/). Chapters 2-4 give further background.
 

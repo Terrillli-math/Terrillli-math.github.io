@@ -16,21 +16,21 @@ $$
 
 The score is linear in the new features. It may be nonlinear in the original inputs. This distinction is the main idea behind kernel methods.
 
-These notes build on Ying's SVM seminar slides (n.d.). The extra examples make the feature map and its inner product explicit.
+The numerical examples were constructed for these notes. They make the feature map and its inner product explicit.
 
 ## A Small Example Before the Kernel Trick
 
-Suppose $x$ is a real number. The outer points $-2$ and $2$ have label $+1$. The middle points $-1/2$ and $1/2$ have label $-1$.
+Suppose $x$ is a real number. Choose the outer points $-4$ and $3$ with label $+1$. Choose the middle points $-1$ and $2$ with label $-1$.
 
 No threshold on the number line separates both outer points from both inner points. A score $wx+b$ can change sign at most once.
 
-Now use $\phi(x)=x^2$. The positive examples map to $4$. The negative examples map to $1/4$. A threshold at $1$ separates them:
+Now use $\phi(x)=x^2$. The positive examples map to $16$ and $9$. The negative examples map to $1$ and $4$. A threshold at $6$ separates the two groups:
 
 $$
-f(x)=x^2-1.
+f(x)=x^2-6.
 $$
 
-The new feature measures distance from the origin, rather than left-versus-right position. The nonlinear boundary in the original space is $x=\pm1$.
+The new feature measures squared distance from the origin. The nonlinear boundary in the original space is $x=\pm\sqrt6$.
 
 This is a constructed separator. We have not claimed that these particular coefficients solve an SVM training problem. The example shows what a feature map makes possible.
 
@@ -73,16 +73,16 @@ $$
 
 The factor $\sqrt2$ is needed. Without it, the middle term would have coefficient one instead of two.
 
-For example, take $x=(1,2)$ and $z=(3,1)$. Directly,
+For example, take $x=(2,-1)$ and $z=(1,3)$. Directly,
 
 $$
-K(x,z)=(3+2)^2=25.
+K(x,z)=(2-3)^2=1.
 $$
 
 The feature vectors give the same answer:
 
 $$
-(1,2\sqrt2,4)\cdot(9,3\sqrt2,1)=9+12+4=25.
+(4,-2\sqrt2,1)\cdot(1,3\sqrt2,9)=4-12+9=1.
 $$
 
 This small calculation contains the whole trick. A short formula replaces a longer feature calculation. The benefit can be much larger when the feature vector has many coordinates.
@@ -187,8 +187,6 @@ It also does not make computation free. A dense Gram matrix has $n^2$ entries. P
 The useful change is in representation. We can choose richer features while keeping the same basic SVM optimisation structure.
 
 ## References
-
-Ying, Y. (n.d.). *Support vector machine and kernels* [MATH1972 lecture slides]. University of Sydney.
 
 scikit-learn developers. (n.d.). *Support vector machines*. [https://scikit-learn.org/stable/modules/svm.html](https://scikit-learn.org/stable/modules/svm.html)
 

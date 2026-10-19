@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 360" width="700" height="360" role="img" aria-labelledby="title desc">
+  <title id="title">A Triangle and a Four-Cycle</title>
+  <desc id="desc">An author-created graph on seven nodes. The edges are 1-2, 2-3, 3-1, 3-4, 4-5, 5-6, 6-7, and 7-4. Edge 3-4 is a bridge.</desc>
+  <rect width="700" height="360" rx="16" fill="#f8fafc"/>
+  <g fill="none" stroke="#64748b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M90 90L90 270L245 180Z"/>
+    <path d="M410 180L520 90L630 180L520 270Z"/>
+    <path d="M245 180L410 180" stroke="#b45309" stroke-width="4"/>
+  </g>
+  <text x="327" y="158" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#92400e">Bridge</text>
+  <g fill="#dbeafe" stroke="#1e40af" stroke-width="2.5">
+    <circle cx="90" cy="90" r="24"/><circle cx="90" cy="270" r="24"/>
+    <circle cx="245" cy="180" r="24"/><circle cx="410" cy="180" r="24"/>
+    <circle cx="520" cy="90" r="24"/><circle cx="630" cy="180" r="24"/>
+    <circle cx="520" cy="270" r="24"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="23" font-weight="600" text-anchor="middle" dominant-baseline="central" fill="#172554">
+    <text x="90" y="90">1</text><text x="90" y="270">2</text>
+    <text x="245" y="180">3</text><text x="410" y="180">4</text>
+    <text x="520" y="90">5</text><text x="630" y="180">6</text>
+    <text x="520" y="270">7</text>
+  </g>
+  <text x="350" y="334" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#475569">Author-Created Example</text>
+</svg>
