@@ -5,3 +5,4 @@
 /*_files/
 /.sync-pending/
 .DS_Store
+__pycache__/

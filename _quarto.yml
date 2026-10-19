@@ -13,6 +13,26 @@ website:
   site-url: https://terrillli-math.github.io
   description: "Mathematics notes and a record of learning."
   search: true
+  sidebar:
+    - id: math1972-seminar
+      title: "MATH1972 Seminar Notes"
+      style: docked
+      collapse-level: 2
+      contents:
+        - text: "Seminar Overview"
+          href: notes/math1972-seminar/index.qmd
+        - section: "Game Theory"
+          contents:
+            - notes/math1972-seminar/nim.qmd
+        - section: "Optimisation and Machine Learning"
+          contents:
+            - notes/math1972-seminar/convexity.qmd
+            - notes/math1972-seminar/duality-kkt.qmd
+            - notes/math1972-seminar/linear-svm.qmd
+            - notes/math1972-seminar/kernels.qmd
+        - section: "Network Analysis"
+          contents:
+            - notes/math1972-seminar/network-analysis.qmd
   navbar:
     left:
       - text: Home

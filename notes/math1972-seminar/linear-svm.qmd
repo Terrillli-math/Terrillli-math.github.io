@@ -1,0 +1,239 @@
+---
+title: "Linear SVMs and Margins"
+description: "How a geometric gap becomes a convex optimisation problem."
+categories: ["math1972", "machine learning", "optimisation"]
+---
+
+## Why One Separating Line Is Not Enough
+
+Suppose we want to separate two groups of points. We label them $+1$ and $-1$. Many lines may classify every training point correctly. The next question is how to choose among them.
+
+A support vector machine looks for a large gap between the classes. This gap is called the **margin**. It gives the boundary some room before a small change in a point changes its predicted class.
+
+This is a useful design rule. It is not a promise that the largest training margin always gives the best predictions. The data, the features, and the choice of regularisation still matter.
+
+These notes develop the binary SVM from the MATH1972 lectures by Ying (2026, n.d.). The main aim is to connect the geometry with the optimisation.
+
+## Scores, Boundaries, and Distances
+
+For an input $x\in\mathbb R^d$, define the score
+
+$$
+f(x)=w^\top x+b,
+$$
+
+where $w\ne0$. The decision boundary is the hyperplane $w^\top x+b=0$. Positive scores predict $+1$. Negative scores predict $-1$. A zero score is a tie.
+
+The vector $w$ points across the boundary at a right angle. Its direction matters for the boundary. Its length changes the scale of the scores.
+
+To see the distance formula, move from $x$ in the direction $w/\lVert w\rVert$. Write a point on this line as
+
+$$
+x-t\frac{w}{\lVert w\rVert}.
+$$
+
+It lies on the boundary when
+
+$$
+w^\top x+b-t\lVert w\rVert=0.
+$$
+
+Thus the signed distance to the boundary is
+
+$$
+\frac{w^\top x+b}{\lVert w\rVert}.
+$$
+
+The ordinary distance is its absolute value. A score alone is not a geometric distance. We must divide by $\lVert w\rVert$.
+
+## Why We Can Set the Score Margin to One
+
+Multiplying $w$ and $b$ by the same positive constant leaves all predicted signs unchanged. It also leaves the boundary unchanged. So a larger raw score does not, by itself, mean a better classifier.
+
+For strictly separable data, we can scale the parameters so that
+
+$$
+\min_i y_i(w^\top x_i+b)=1.
+$$
+
+This puts the nearest training points on the two supporting planes
+
+$$
+w^\top x+b=1
+\qquad\text{and}\qquad
+w^\top x+b=-1.
+$$
+
+Each plane is $1/\lVert w\rVert$ from the boundary. Their total separation is therefore
+
+$$
+\frac{2}{\lVert w\rVert}.
+$$
+
+Some books call the half-width the margin. Here, “margin width” means the full gap. Both conventions lead to the same optimisation problem.
+
+## The Hard-Margin Problem
+
+The training data are $(x_i,y_i)$ for $i=1,\ldots,n$. The hard-margin problem is
+
+$$
+\begin{aligned}
+\min_{w,b}\quad &\frac12\lVert w\rVert^2\\
+\text{subject to}\quad &y_i(w^\top x_i+b)\ge1,
+\qquad i=1,\ldots,n.
+\end{aligned}
+$$
+
+Minimising the squared norm maximises the margin width. The factor $1/2$ makes derivatives simpler. It does not change the minimiser.
+
+The objective is convex. The constraints are affine inequalities. This is a convex quadratic programme. Every local minimum is global, although that fact alone does not tell us how much computation is needed.
+
+Hard-margin training needs separable data. If the two classes overlap, these constraints may have no feasible solution.
+
+### A One-Dimensional Example
+
+Take $x_1=-1$ with label $-1$ and $x_2=1$ with label $+1$. The constraints become
+
+$$
+w-b\ge1,
+\qquad
+w+b\ge1.
+$$
+
+Adding them gives $w\ge1$. The smallest possible norm occurs at $w=1$ and $b=0$. The boundary is $x=0$, and the full margin width is $2$.
+
+This example shows why the constraints are essential. Minimising the norm without them would simply give $w=0$.
+
+## From the Primal to the Dual
+
+The [notes on duality](duality-kkt.qmd) explain the general method. Here, write each constraint as $1-y_i(w^\top x_i+b)\le0$. Introduce multipliers $\alpha_i\ge0$:
+
+$$
+L(w,b,\alpha)=\frac12\lVert w\rVert^2
++\sum_i\alpha_i\bigl[1-y_i(w^\top x_i+b)\bigr].
+$$
+
+To find the infimum over $w$ and $b$, differentiate:
+
+$$
+\nabla_wL=w-\sum_i\alpha_i y_i x_i=0,
+\qquad
+\frac{\partial L}{\partial b}=-\sum_i\alpha_i y_i=0.
+$$
+
+Hence
+
+$$
+w=\sum_i\alpha_i y_i x_i,
+\qquad
+\sum_i\alpha_i y_i=0.
+$$
+
+Substitute the first expression back into $L$. The terms containing $w$ combine to give $-\lVert w\rVert^2/2$. The dual problem is
+
+$$
+\begin{aligned}
+\max_{\alpha}\quad &\sum_i\alpha_i
+-\frac12\sum_{i,j}\alpha_i\alpha_j y_i y_j x_i^\top x_j\\
+\text{subject to}\quad &\alpha_i\ge0,
+\qquad \sum_i\alpha_i y_i=0.
+\end{aligned}
+$$
+
+The primal minimises a convex objective. The dual maximises a concave objective. These are consistent directions, not competing definitions of the same problem.
+
+Strict separability gives a strictly feasible point after scaling. The usual strong-duality conditions therefore hold for this hard-margin problem.
+
+## Why Support Vectors Matter
+
+Complementary slackness gives
+
+$$
+\alpha_i\bigl[y_i(w^\top x_i+b)-1\bigr]=0.
+$$
+
+If $\alpha_i>0$, the corresponding training point lies on a supporting plane. Such points are called **support vectors**. They enter the expression for $w$.
+
+If a point lies strictly beyond the margin, its constraint has room to spare. Complementary slackness then forces $\alpha_i=0$. It makes no direct contribution to the fitted decision rule.
+
+The converse needs care. A point can lie on a supporting plane and still have a zero multiplier in a degenerate solution.
+
+For a hard-margin support vector, we can recover the intercept from
+
+$$
+b=y_i-w^\top x_i.
+$$
+
+In the two-point example, the dual constraint gives $\alpha_1=\alpha_2=a$. Its objective is $2a-2a^2$. The maximum occurs at $a=1/2$. Then $w=1$, which agrees with the geometric answer.
+
+## Soft Margins and Imperfect Data
+
+Real data often overlap or contain unusual points. Introduce slack variables $\xi_i\ge0$:
+
+$$
+\begin{aligned}
+\min_{w,b,\xi}\quad &\frac12\lVert w\rVert^2+C\sum_i\xi_i\\
+\text{subject to}\quad &y_i(w^\top x_i+b)\ge1-\xi_i,\\
+&\xi_i\ge0,
+\end{aligned}
+$$
+
+where $C>0$. At an optimum, the smallest feasible slack is used:
+
+$$
+\xi_i=\max\{0,1-y_i f(x_i)\}.
+$$
+
+This is the **hinge loss**. A point can be classified correctly and still have positive loss. A score gap between zero and one is on the correct side, but inside the desired margin.
+
+Larger $C$ makes each unit of margin violation more costly. Smaller $C$ puts relatively more weight on a small norm. Validation data help choose the trade-off. SVMs are also sensitive to feature scales, so the same feature scaling must be used during training and prediction (scikit-learn developers, n.d.).
+
+## The Soft-Margin Dual
+
+The same derivation gives the same dual objective, with one extra bound:
+
+$$
+0\le\alpha_i\le C.
+$$
+
+The upper bound comes from stationarity in $\xi_i$. If $\mu_i\ge0$ is the multiplier for $-\xi_i\le0$, then
+
+$$
+C-\alpha_i-\mu_i=0.
+$$
+
+The KKT conditions give a useful picture:
+
+| Multiplier | What It Implies |
+|---|---|
+| $\alpha_i=0$ | The point is on or beyond the margin; it has no direct term in $w$. |
+| $0<\alpha_i<C$ | The point is exactly on the margin, with $y_i f(x_i)=1$. |
+| $\alpha_i=C$ | The point is on or inside the margin; it may be misclassified. |
+
+An upper-bound multiplier does not prove that a point is wrong. It may still have a positive score with a small margin. To compute $b$ from the margin equality, use a point with $0<\alpha_i<C$ when one is available.
+
+## What This Changes About the Geometry
+
+The hard-margin model asks for perfect separation. The soft-margin model asks whether a wider, simpler boundary is worth a few violations. It balances two goals instead of treating every difficult point as a fixed obstacle.
+
+The dual also changes how we view the data. The prediction score is
+
+$$
+f(x)=\sum_i\alpha_i y_i x_i^\top x+b.
+$$
+
+Only inner products appear. This observation leads directly to [feature maps and kernels](kernels.qmd).
+
+For the multiclass extension, see [the Crammer-Singer project](../../projects/multiclass-svm-crammer-singer.qmd). It applies the margin idea to several competing class scores.
+
+## References
+
+Ying, Y. (2026). *Introduction: Math optimisation for machine learning* [MATH1972 lecture slides]. University of Sydney.
+
+Ying, Y. (n.d.). *Support vector machine and kernels* [MATH1972 lecture slides]. University of Sydney.
+
+scikit-learn developers. (n.d.). *Support vector machines*. [https://scikit-learn.org/stable/modules/svm.html](https://scikit-learn.org/stable/modules/svm.html)
+
+---
+
+[Previous: Lagrange Duality and KKT Conditions](duality-kkt.qmd) · [Next: Feature Maps and Kernels](kernels.qmd) · [Seminar Overview](index.qmd)

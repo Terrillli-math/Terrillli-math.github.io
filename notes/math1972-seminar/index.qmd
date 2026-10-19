@@ -1,0 +1,36 @@
+---
+title: "MATH1972 Seminar Notes"
+description: "Explanations, short proofs, and worked examples from the MATH1972 seminars."
+toc: false
+---
+
+These notes explore ideas from my MATH1972 seminars at the University of Sydney. They cover game theory, optimisation, machine learning, and networks.
+
+Each note develops the ideas behind the definitions. Short proofs explain why the main results work. Small examples show how to use them. The notes draw on the seminar materials, with sources listed on each page.
+
+## Game Theory
+
+[**Nim and Winning Moves**](nim.qmd)
+
+Start with a game of stones. Learn why some positions let you force a win. Build the XOR rule from simple cases, then use it to find winning moves.
+
+## Optimisation and Machine Learning
+
+Read these four notes in order if the topic is new to you.
+
+1. [**Convex Sets and Functions**](convexity.qmd) — understand the geometry that makes optimisation easier. See why a local minimum is also global.
+2. [**Lagrange Duality and KKT Conditions**](duality-kkt.qmd) — turn constraints into useful bounds. Work through active and inactive constraints.
+3. [**Linear SVMs and Margins**](linear-svm.qmd) — connect a geometric gap with a quadratic programme. Follow the primal and dual derivations.
+4. [**Feature Maps and Kernels**](kernels.qmd) — use richer features through inner products. Check a small feature map by hand.
+
+For a related application, see the [Multiclass SVM project](../../projects/multiclass-svm-crammer-singer.qmd). It extends the margin idea to several classes.
+
+## Network Analysis
+
+[**Introduction to Network Analysis**](network-analysis.qmd)
+
+Use one six-node graph to explore degree, density, clustering, and distance. Learn what each measure tells us and what it leaves out.
+
+---
+
+[All Notes](../index.qmd)

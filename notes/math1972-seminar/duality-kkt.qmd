@@ -1,0 +1,271 @@
+---
+title: "Lagrange Duality and KKT Conditions"
+description: "How constraints produce lower bounds, and how KKT conditions describe an optimum."
+categories: [math1972, optimisation]
+---
+
+## Why Introduce Another Problem?
+
+A constraint changes which directions we may move. At a boundary, the gradient of the objective need not be zero. We need a way to describe the balance between a lower cost and an allowed move.
+
+The Lagrangian brings the objective and the constraints into one expression. It leads to a second problem, called the **dual problem**. This problem searches for the strongest lower bound of a particular form.
+
+This note develops the seminar's one-variable example before applying the same ideas to an active constraint (Ying, n.d.). The connection to SVMs appears in [Linear SVMs and Margins](linear-svm.qmd).
+
+## Start With the Primal Problem
+
+Write a constrained minimisation problem as
+
+$$
+\begin{aligned}
+p^*=\inf_x\quad &f_0(x)\\
+\text{subject to}\quad &f_i(x)\leq0,\quad i=1,\ldots,m,\\
+&h_j(x)=0,\quad j=1,\ldots,p.
+\end{aligned}
+$$
+
+Here $p^*$ is the best feasible objective value. This original problem is the **primal problem**. The symbol $\inf$ means the greatest lower bound. It also covers a problem whose best value is approached but never reached.
+
+For a convex problem, $f_0$ and the $f_i$ are convex. The equality functions $h_j$ are affine. We take $x$ in the common domain $D$ of these functions. The formulas below use that domain when taking an infimum.
+
+## The Lagrangian and Its Signs
+
+Choose numbers $\lambda_i\geq0$ for the inequalities. Choose unrestricted real numbers $\nu_j$ for the equalities. Define
+
+$$
+L(x,\lambda,\nu)
+=f_0(x)+\sum_{i=1}^{m}\lambda_i f_i(x)
++\sum_{j=1}^{p}\nu_jh_j(x).
+$$
+
+The numbers $\lambda_i$ and $\nu_j$ are **Lagrange multipliers**.
+
+Why must $\lambda_i$ be nonnegative? At a feasible point, $f_i(x)\leq0$. Multiplying by $\lambda_i\geq0$ keeps the added term nonpositive. Also, $h_j(x)=0$, so the equality terms vanish. Therefore
+
+$$
+L(x,\lambda,\nu)\leq f_0(x)
+\qquad\text{for every feasible }x.
+$$
+
+The sign rule depends on how we write the constraint. For example, $x\geq1$ becomes $1-x\leq0$. Writing the constraint in this standard form first prevents sign errors.
+
+### A Constraint Price Is an Analogy
+
+An inequality multiplier can be viewed as a price attached to its constraint. A large multiplier places more weight on that constraint in the Lagrangian. This analogy is useful, but the formula matters more than the label. The Lagrangian is not simply a positive penalty for every feasible point. At a strictly feasible point, an inequality term is negative.
+
+Under suitable regularity assumptions, optimal multipliers also describe how the optimal value changes when a constraint is relaxed. We will use only the simpler idea here: the multipliers balance the objective against the constraints.
+
+## The Dual Function Gives a Lower Bound
+
+Hold $\lambda$ and $\nu$ fixed. Minimise the Lagrangian over $x$ without imposing the original constraints:
+
+$$
+g(\lambda,\nu)=\inf_{x\in D}L(x,\lambda,\nu).
+$$
+
+The value can be $-\infty$. It need not be attained, so $\inf$ is the correct general notation.
+
+For every feasible $x$ and every $\lambda\geq0$,
+
+$$
+g(\lambda,\nu)
+\leq L(x,\lambda,\nu)
+\leq f_0(x).
+$$
+
+Taking the best feasible primal value gives **weak duality**:
+
+$$
+g(\lambda,\nu)\leq p^*.
+$$
+
+This proof does not require convexity. It uses only feasibility, the multiplier signs, and the definition of an infimum.
+
+The dual problem chooses the strongest such lower bound:
+
+$$
+d^*=\sup_{\lambda\geq0,\,\nu}g(\lambda,\nu).
+$$
+
+Weak duality gives $d^*\leq p^*$. For any primal feasible $x$ and dual feasible multipliers, the difference
+
+$$
+f_0(x)-g(\lambda,\nu)\geq0
+$$
+
+is a **duality gap**. If it is zero, both choices are optimal. This gives a way to certify a solution.
+
+## Strong Duality Needs More Than Convexity
+
+**Strong duality** means $d^*=p^*$. It does not follow from convexity alone.
+
+A useful sufficient condition is **Slater's condition**. In the setting of this note, assume the convex functions are defined on all of $\mathbb{R}^d$. Slater asks for a point $\bar x$ that satisfies every affine equality and satisfies every inequality strictly:
+
+$$
+f_i(\bar x)<0,\qquad h_j(\bar x)=0.
+$$
+
+If the primal optimal value is finite, this condition gives strong duality and an attained dual optimum. More general domains require a relative-interior version of the condition. We will not need that version here (Boyd & Vandenberghe, 2004).
+
+The plain idea is that the constraints leave some room. We are not relying on a feasible region that has been squeezed into an exceptional boundary case.
+
+Strong duality equates optimal values. It does not by itself guarantee that a primal minimiser exists. When using KKT conditions to find a point, we also need a point that actually attains the primal value.
+
+## The Four KKT Conditions
+
+Assume $f_0,f_i,h_j$ are differentiable. The **Karush-Kuhn-Tucker conditions**, or **KKT conditions**, at $(x^*,\lambda^*,\nu^*)$ are:
+
+1. **Primal Feasibility**
+
+   $$
+   f_i(x^*)\leq0,\qquad h_j(x^*)=0.
+   $$
+
+2. **Dual Feasibility**
+
+   $$
+   \lambda_i^*\geq0.
+   $$
+
+3. **Complementary Slackness**
+
+   $$
+   \lambda_i^*f_i(x^*)=0
+   \qquad\text{for every }i.
+   $$
+
+4. **Stationarity**
+
+   $$
+   \nabla f_0(x^*)
+   +\sum_i\lambda_i^*\nabla f_i(x^*)
+   +\sum_j\nu_j^*\nabla h_j(x^*)=0.
+   $$
+
+The equality multipliers $\nu_j^*$ belong in the last sum. They have no sign restriction.
+
+### What Complementary Slackness Says
+
+If $f_i(x^*)<0$, the constraint has spare room. Complementary slackness forces $\lambda_i^*=0$.
+
+If $\lambda_i^*>0$, then $f_i(x^*)=0$. The point lies on that constraint's boundary. We call such a constraint **active**.
+
+The reverse need not hold. An active constraint can have a zero multiplier. For example, minimise $x^2/2$ subject to $x\geq0$. At the optimum $x=0$, the constraint is active, but the multiplier is $0$.
+
+### When Are the Conditions Enough?
+
+For a differentiable convex problem with affine equalities, a feasible KKT triple certifies a global optimum. This is **sufficiency**.
+
+Here is the reason. For fixed feasible multipliers, $L$ is convex in $x$. Stationarity makes $x^*$ a global minimiser of $L$. Complementary slackness and equality feasibility give
+
+$$
+g(\lambda^*,\nu^*)
+=L(x^*,\lambda^*,\nu^*)
+=f_0(x^*).
+$$
+
+The lower bound equals a feasible cost, so both are optimal.
+
+To guarantee that every attained optimum has suitable KKT multipliers, we need an extra condition on the constraints. Slater's condition is one useful choice for convex problems. Without such a condition, KKT multipliers can fail to exist.
+
+## Example 1: A Constraint With Spare Room
+
+The seminar considers
+
+$$
+\min_x\frac{x^2}{2}
+\qquad\text{subject to }2x+5\geq0.
+$$
+
+The feasible set is $x\geq-5/2$. The unconstrained minimiser $x=0$ is already feasible. We therefore expect the constraint to have zero multiplier.
+
+### Form the Dual
+
+Write $f_1(x)=-2x-5\leq0$. Then
+
+$$
+L(x,\lambda)=\frac{x^2}{2}+\lambda(-2x-5),
+\qquad\lambda\geq0.
+$$
+
+For fixed $\lambda$, stationarity in $x$ gives $x-2\lambda=0$. Thus $x=2\lambda$, and
+
+$$
+g(\lambda)
+=\frac{(2\lambda)^2}{2}-2\lambda(2\lambda)-5\lambda
+=-2\lambda^2-5\lambda.
+$$
+
+For $\lambda\geq0$, this is largest at $\lambda^*=0$. Its value is $0$. The primal point $x^*=0$ also has cost $0$. The gap is zero.
+
+### Read the KKT Conditions
+
+At $x^*=0$, the inequality value is $-5<0$. Complementary slackness requires $\lambda^*=0$. Stationarity then becomes $x^*=0$.
+
+The constraint limits the feasible set, but it does not affect this optimum. The multiplier records that fact.
+
+## Example 2: The Constraint Determines the Optimum
+
+Now change the constraint:
+
+$$
+\min_x\frac{x^2}{2}
+\qquad\text{subject to }x\geq1.
+$$
+
+The unconstrained minimiser is no longer allowed. The smallest feasible cost occurs at the boundary $x^*=1$.
+
+Write $1-x\leq0$. The Lagrangian is
+
+$$
+L(x,\lambda)=\frac{x^2}{2}+\lambda(1-x).
+$$
+
+Stationarity in $x$ gives $x=\lambda$. Substitution yields
+
+$$
+g(\lambda)=\lambda-\frac{\lambda^2}{2},
+\qquad\lambda\geq0.
+$$
+
+This concave quadratic is largest at $\lambda^*=1$. Its value is $1/2$, equal to the primal cost at $x^*=1$.
+
+The KKT conditions now read
+
+$$
+x^*\geq1,\qquad\lambda^*\geq0,\qquad
+\lambda^*(1-x^*)=0,\qquad x^*-\lambda^*=0.
+$$
+
+They give $x^*=\lambda^*=1$. The positive multiplier balances the objective's gradient at a boundary where a move towards $0$ is forbidden.
+
+## What the Two Examples Show
+
+| Feature | $2x+5\geq0$ | $x\geq1$ |
+|---|---|---|
+| Primal Optimum | $x^*=0$ | $x^*=1$ |
+| Optimal Cost | $0$ | $1/2$ |
+| Constraint Status | Inactive | Active |
+| Optimal Multiplier | $0$ | $1$ |
+
+Both problems have a strictly feasible point, so Slater's condition applies. Both also have an attained primal optimum. KKT gives a complete description in these examples.
+
+The second example shows why setting only the objective's gradient to zero is insufficient for constrained problems. Stationarity belongs to the full Lagrangian.
+
+## The Connection to SVMs
+
+An SVM has one margin constraint for each training example. Its dual has one corresponding multiplier. KKT connects these multipliers to the training points that shape the boundary.
+
+The dual also rewrites the classifier using inner products between data points. This prepares the step from a linear model to [feature maps and kernels](kernels.qmd).
+
+The useful habit is the same in each problem: write the constraint signs carefully, form the Lagrangian, and check all four KKT conditions. Solving stationarity alone can produce an infeasible point or a multiplier with the wrong sign.
+
+## References
+
+Ying, Y. (n.d.). *Basic mathematics for machine learning: Convex optimisation* [Lecture slides]. School of Mathematics and Statistics, University of Sydney.
+
+Boyd, S., & Vandenberghe, L. (2004). *Convex optimization*. Cambridge University Press. [Official book and free text](https://web.stanford.edu/~boyd/cvxbook/). Chapter 5 develops weak duality, strong duality, and KKT conditions.
+
+---
+
+[Back to MATH1972 Seminar Notes](index.qmd) · Previous: [Convex Sets and Functions](convexity.qmd) · Next: [Linear SVMs and Margins](linear-svm.qmd)

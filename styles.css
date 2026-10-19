@@ -60,23 +60,26 @@ blockquote, .blockquote {
 }
 
 .math.display {
+  display: block;
+  max-width: 100%;
   overflow-x: auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  body.quarto-dark {
-    color: #e5edf1;
-  }
-  body.quarto-dark .hero {
-    background: #243845;
-    border-color: #36505d;
-  }
-  body.quarto-dark .grid h3 {
-    color: #9acbd2;
-  }
-  body.quarto-dark blockquote, body.quarto-dark .blockquote {
-    background: #263b46;
-  }
+body.quarto-dark {
+  color: #e5edf1;
+}
+
+body.quarto-dark .hero {
+  background: #243845;
+  border-color: #36505d;
+}
+
+body.quarto-dark .grid h3 {
+  color: #9acbd2;
+}
+
+body.quarto-dark blockquote, body.quarto-dark .blockquote {
+  background: #263b46;
 }
 
 @media (max-width: 576px) {

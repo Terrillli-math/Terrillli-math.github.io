@@ -1,0 +1,258 @@
+---
+title: "Convex Sets and Functions"
+description: "Why line segments, tangent planes, and curvature make some optimisation problems easier to understand."
+categories: [math1972, optimisation]
+---
+
+## Why Convexity Matters
+
+An optimisation problem asks us to choose the best allowed point. We need two things: a set of allowed points and a function that measures their cost.
+
+Convexity gives both parts a useful shape. A convex set contains every line segment between its points. A convex function never rises above the straight chord between two points on its graph. Together, these properties rule out a local minimum that is worse than a global one.
+
+This note follows Ying's seminar slides on convex optimisation (Ying, n.d.). The explanations and examples build on the definitions in those slides.
+
+## Convex Sets: Keep the Whole Segment
+
+A set $C\subseteq\mathbb{R}^d$ is **convex** if
+
+$$
+(1-t)x+ty\in C
+\qquad
+\text{for every }x,y\in C\text{ and }0\leq t\leq1.
+$$
+
+The expression $(1-t)x+ty$ moves from $x$ to $y$. At $t=0$ it equals $x$. At $t=1$ it equals $y$. At $t=1/2$ it is their midpoint.
+
+Checking the midpoint can disprove convexity. It does not, by itself, prove convexity. The definition asks for every pair of points and every value of $t$.
+
+### Halfspaces and Linear Constraints
+
+A halfspace has the form
+
+$$
+C=\{x:a^\top x\leq b\}.
+$$
+
+If $x,y\in C$, then
+
+$$
+a^\top\bigl((1-t)x+ty\bigr)
+=(1-t)a^\top x+ta^\top y
+\leq(1-t)b+tb=b.
+$$
+
+So the whole segment remains in $C$. The same calculation works for a hyperplane $a^\top x=b$.
+
+Intersections of convex sets are convex. A point on the segment must satisfy every original constraint. This explains why several linear inequalities and equalities still give a convex feasible set. Such a set is called a **polyhedron**. It need not be bounded.
+
+### Balls and Their Boundaries
+
+A closed Euclidean ball is
+
+$$
+B(c,r)=\{x:\lVert x-c\rVert\leq r\},
+\qquad r\geq0.
+$$
+
+For $x,y\in B(c,r)$, the triangle inequality gives
+
+$$
+\begin{aligned}
+\lVert(1-t)x+ty-c\rVert
+&\leq(1-t)\lVert x-c\rVert+t\lVert y-c\rVert\\
+&\leq r.
+\end{aligned}
+$$
+
+The filled ball is convex. Its boundary usually is not. For example, the points $-1$ and $1$ satisfy $x^2=1$. Their midpoint $0$ does not.
+
+This example also explains a rule for convex optimisation. A convex inequality can define a convex set. An equality involving a convex function need not do so. Standard convex problems therefore use **affine equality constraints**, such as $a^\top x=b$.
+
+## Convex Functions: Compare With a Chord
+
+Let $f:C\to\mathbb{R}$, where $C$ is convex. The function is **convex** if
+
+$$
+f\bigl((1-t)x+ty\bigr)
+\leq(1-t)f(x)+tf(y)
+$$
+
+for all $x,y\in C$ and $0\leq t\leq1$.
+
+The left side measures the cost at an average of two points. The right side averages their costs. Convexity says that averaging the points cannot cost more than this average cost.
+
+For $f(x)=x^2$, expand the two sides:
+
+$$
+(1-t)x^2+ty^2-\bigl((1-t)x+ty\bigr)^2
+=t(1-t)(x-y)^2\geq0.
+$$
+
+The formula proves convexity directly. It also shows when the inequality is strict.
+
+### Strict Convexity and Uniqueness
+
+A function is **strictly convex** if the defining inequality is strict whenever $x\ne y$ and $0<t<1$.
+
+Suppose a strictly convex function had two distinct minimisers $x$ and $y$. Their midpoint would have a smaller value than their common minimum. This is impossible. So a strictly convex function has **at most one** minimiser on a convex set.
+
+Existence is a separate question. The strictly convex function $e^x$ on $\mathbb{R}$ has infimum $0$. It never reaches that value. Conversely, the convex function $f(x)=0$ has many minimisers.
+
+::: {.callout-note}
+## Three Different Questions
+
+Convexity tells us how values behave along segments. Strict convexity rules out two distinct minimisers. Neither statement alone guarantees that a minimiser exists.
+:::
+
+## Tangents Give Global Lower Bounds
+
+Suppose $f$ is differentiable on an open convex set. Then convexity is equivalent to
+
+$$
+f(y)\geq f(x)+\nabla f(x)^\top(y-x)
+\qquad\text{for all }x,y\text{ in that set}.
+$$
+
+The right side is the tangent line or tangent plane at $x$. The inequality says that this local approximation lies below the whole graph.
+
+For $f(x)=x^2$, the tangent at $x=1$ is $1+2(y-1)=2y-1$. The gap is
+
+$$
+y^2-(2y-1)=(y-1)^2\geq0.
+$$
+
+The gradient is therefore more than a direction of steepest increase. For a convex function, it also defines a lower bound valid at every other point.
+
+### When a Zero Gradient Is Enough
+
+If $\nabla f(x^*)=0$, the tangent inequality becomes
+
+$$
+f(y)\geq f(x^*)
+$$
+
+for every $y$ in the domain. Thus $x^*$ is a global minimiser.
+
+For an unconstrained differentiable problem on an open convex domain, a minimiser must also have zero gradient. A small move in either direction must be allowed. Otherwise a nonzero gradient would give a direction that lowers the function.
+
+These assumptions matter. The convex function $\max(0,x)$ is not differentiable at $0$. A gradient test cannot be applied there. A constrained minimum can also occur at a boundary where the gradient is nonzero. The next note uses Lagrange multipliers to handle that case.
+
+## The Hessian Measures Curvature
+
+For a twice continuously differentiable function, the **Hessian** $\nabla^2 f(x)$ is its matrix of second derivatives. On an open convex domain,
+
+$$
+f\text{ is convex}
+\quad\Longleftrightarrow\quad
+v^\top\nabla^2f(x)v\geq0
+\quad\text{for every }x\text{ and every }v.
+$$
+
+A symmetric matrix with this property is **positive semidefinite**, written $\nabla^2f(x)\succeq0$.
+
+To see the meaning, follow a line $x+tv$ through the domain. Its second derivative is
+
+$$
+\frac{d^2}{dt^2}f(x+tv)
+=v^\top\nabla^2f(x+tv)v.
+$$
+
+The condition says that the function bends upwards, or stays flat, along every line.
+
+For $f(x_1,x_2)=x_1^2$, the Hessian is
+
+$$
+\begin{pmatrix}2&0\\0&0\end{pmatrix}.
+$$
+
+This function is convex. But it is flat in the $x_2$ direction. Every point $(0,x_2)$ is a minimiser. Positive semidefinite curvature can include flat directions.
+
+## Why Every Local Minimum Is Global
+
+Let $x^*$ be a local minimiser of a convex function on a convex set $C$. Suppose there were a point $y\in C$ with $f(y)<f(x^*)$.
+
+For any $0<t<1$, convexity gives
+
+$$
+f\bigl((1-t)x^*+ty\bigr)
+\leq(1-t)f(x^*)+tf(y)
+<f(x^*).
+$$
+
+As $t$ becomes small, these points approach $x^*$. They remain feasible because $C$ is convex. They have lower cost, which contradicts local minimality.
+
+This proof does not use derivatives. It works for convex functions with corners, such as an absolute value or a hinge loss. The key is the allowed straight path from a proposed minimum to any better point.
+
+## From Shapes to Optimisation Problems
+
+A standard convex problem has a convex objective, convex inequality constraints, and affine equality constraints:
+
+$$
+\begin{aligned}
+\text{minimise}\quad &f_0(x)\\
+\text{subject to}\quad &f_i(x)\leq0,\quad i=1,\ldots,m,\\
+&a_j^\top x=b_j,\quad j=1,\ldots,p.
+\end{aligned}
+$$
+
+Each inequality defines a convex sublevel set. Their intersection with the affine equalities is still convex.
+
+Two common forms are useful to recognise:
+
+| Problem | Objective | Constraints |
+|---|---|---|
+| Linear Programme (LP) | Linear | Linear inequalities and affine equalities |
+| Convex Quadratic Programme (QP) | $\tfrac12x^\top Qx+c^\top x$, with $Q\succeq0$ | Linear inequalities and affine equalities |
+
+The [linear SVM](linear-svm.qmd) is a convex QP. Its objective balances the size of a weight vector against errors in the margin conditions.
+
+The seminar also names semidefinite programming (SDP) and semi-infinite linear programming (SILP). An SDP can impose a positive semidefinite constraint on a matrix that depends affinely on the variables. An SILP has finitely many variables but potentially infinitely many linear constraints. These are useful extensions. Their algorithms lie beyond this introduction.
+
+## A Worked Example: Ridge Regression
+
+Let $X\in\mathbb{R}^{n\times d}$ have data points as rows. Let $y\in\mathbb{R}^n$ contain the observed outputs. Ridge regression chooses $w\in\mathbb{R}^d$ to minimise
+
+$$
+F(w)=\lVert y-Xw\rVert^2+\gamma\lVert w\rVert^2,
+\qquad\gamma>0.
+$$
+
+The first term measures squared prediction error. The second term penalises large weights. Taking the gradient gives
+
+$$
+\nabla F(w)=2X^\top(Xw-y)+2\gamma w.
+$$
+
+Set it to zero:
+
+$$
+(X^\top X+\gamma I)w=X^\top y.
+$$
+
+This is a linear system. Its matrix is positive definite because, for every nonzero $v$,
+
+$$
+v^\top(X^\top X+\gamma I)v
+=\lVert Xv\rVert^2+\gamma\lVert v\rVert^2>0.
+$$
+
+So the system has a unique solution. In theory we can write it with an inverse. In computation, we usually solve the system directly.
+
+The penalty has two roles here. It discourages large weights. It also removes flat directions that may remain when the columns of $X$ are dependent. This example connects curvature, a zero-gradient condition, and uniqueness in one calculation.
+
+## What to Keep in Mind
+
+Convexity is a property of the full problem. A convex objective does not rescue a nonconvex feasible set. A local minimum becomes global only when both the objective and the feasible set have the required convexity.
+
+Before differentiating, check the domain and the constraints. Then ask whether the function is smooth. These small checks tell us which tools apply.
+
+## References
+
+Ying, Y. (n.d.). *Basic mathematics for machine learning: Convex optimisation* [Lecture slides]. School of Mathematics and Statistics, University of Sydney.
+
+Boyd, S., & Vandenberghe, L. (2004). *Convex optimization*. Cambridge University Press. [Official book and free text](https://web.stanford.edu/~boyd/cvxbook/). Chapters 2-4 give further background.
+
+---
+
+[Back to MATH1972 Seminar Notes](index.qmd) · Next: [Lagrange Duality and KKT Conditions](duality-kkt.qmd)

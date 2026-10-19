@@ -5,6 +5,10 @@ toc: false
 
 A selection of my course notes and shorter mathematical explorations.
 
+<!-- BEGIN GENERATED NOTE COLLECTIONS -->
 - [Appendix](<appendix/index.qmd>)
 - [Short Explorations](<atomization/index.qmd>)
 - [MATH1964: Discrete Mathematics for Computation (Adv)](<math1964/index.qmd>)
+<!-- END GENERATED NOTE COLLECTIONS -->
+
+- [MATH1972 Seminar Notes](<math1972-seminar/index.qmd>) — game theory, optimisation, machine learning, and network analysis.

@@ -1,0 +1,354 @@
+---
+title: "Nim and Winning Moves"
+description: "How a mirror strategy leads to nim values, binary XOR, and a way to find winning moves."
+categories: ["math1972", "game theory"]
+---
+
+Nim is a game about removing objects from piles. Its rules are simple. Yet a good strategy depends on how the pile sizes fit together, rather than on their total alone.
+
+These notes develop the ideas in Radnović's (2026) seminar handout. The aim is to explain why the strategy works, as well as how to use it.
+
+## The Rules and the Question
+
+There are finitely many piles. Two players take turns. On each turn, a player removes one or more objects from exactly one pile. A whole pile may be removed.
+
+We first use **normal play**: a player with no legal move loses. Thus the player who removes the last object wins.
+
+Write a position as
+$$
+C=(a_1,a_2,\ldots,a_k),
+$$
+where each $a_i$ is a non-negative integer. The order of the piles does not matter. Empty piles may be omitted. For example, $(3,0,2)$ is the same position as $(2,3)$.
+
+A position is **winning** if the player whose turn it is can force a win. It is **losing** if that player loses against correct play. These words assume that both players choose their moves well.
+
+## A Mirror Strategy for Two Piles
+
+Start with two equal piles, such as $(4,4)$. If the first player removes two objects from one pile, the second player removes two from the other. The position is equal again.
+
+This reply is always legal. Before the first player's move, the piles had the same size. The second pile therefore has enough objects for the matching move.
+
+After each pair of moves, the piles are equal and smaller. The game must end. The second player makes the last move, so $(4,4)$ is losing for the player who starts.
+
+If the piles are unequal, the first player can reduce the larger pile to match the smaller one. This leaves a losing position for the other player. For example,
+$$
+(7,4)\longrightarrow(4,4).
+$$
+
+::: {.callout-tip}
+## A Useful Way to Think about Strategy
+
+We do not need to predict every possible move. We need a set of positions that we can keep returning to. For two piles, equal sizes give that set. The next question is what replaces equality when there are three or more piles.
+:::
+
+The same mirror idea works for two identical collections of piles. Pair each pile with its copy. After a move in one collection, make the matching move in the other. This is the handout's Tweedledum-Tweedledee principle.
+
+## Mex and Nim Values
+
+To describe more than two piles, assign a number to each position.
+
+For a finite set $A$ of non-negative integers, the **minimum excluded value**, written $\operatorname{mex}(A)$, is the smallest non-negative integer missing from $A$. In particular,
+$$
+\begin{aligned}
+\operatorname{mex}(\varnothing)&=0,\\
+\operatorname{mex}\{1,3\}&=0,\\
+\operatorname{mex}\{0,1,3\}&=2.
+\end{aligned}
+$$
+Zero is included among the possible values.
+
+The **nim value** $V(C)$ is defined from the positions reachable in one legal move:
+$$
+V(C)=\operatorname{mex}\{V(D):D\text{ can be reached from }C\text{ in one move}\}.
+$$
+The empty position has value $0$. This definition works recursively because every move removes objects. Eventually, every chain of moves reaches the empty position.
+
+For one pile, the value equals its size. A pile of size $n$ can become any pile of size $0,1,\ldots,n-1$. Therefore,
+$$
+V(n)=\operatorname{mex}\{0,1,\ldots,n-1\}=n.
+$$
+For two small piles,
+$$
+\begin{aligned}
+V(1,1)&=\operatorname{mex}\{1\}=0,\\
+V(1,2)&=\operatorname{mex}\{0,1,2\}=3.
+\end{aligned}
+$$
+The second line uses all three possible results: $(1,1)$, $(1)$, and $(2)$.
+
+### Why Zero Means Losing
+
+The definition of mex gives two facts.
+
+- If $V(C)=0$, no move from $C$ reaches a position with value $0$.
+- If $V(C)>0$, at least one move reaches a position with value $0$.
+
+These facts give a strategy. From a nonzero value, move to zero. The other player must move away from zero. Then restore zero again.
+
+The empty position has value zero and is losing. Working backwards through the finite game proves that every zero-value position is losing. Every nonzero-value position is winning.
+
+A nim value is more than a winning or losing label. It also records information about the available moves. It is not a score, a probability of winning, or the number of moves left.
+
+## Binary XOR: Addition without Carries
+
+The nim value of ordinary Nim has a simple formula:
+$$
+V(a_1,\ldots,a_k)=a_1\oplus\cdots\oplus a_k.
+$$
+The operation $\oplus$ is called **XOR**, or nim addition. Write each number in binary. Add each column modulo $2$, with no carries. A column gives $1$ when it contains an odd number of ones.
+
+For example,
+$$
+\begin{array}{rcl}
+5&=&(101)_2,\\
+2&=&(010)_2,\\
+4&=&(100)_2,\\[2pt]
+5\oplus2\oplus4&=&(011)_2=3.
+\end{array}
+$$
+In ordinary addition, two ones create a carry. Under XOR, they cancel. This gives
+$$
+x\oplus x=0,\qquad x\oplus0=x.
+$$
+XOR is also commutative and associative. We can change the order of the piles or group the calculation in any way.
+
+The mirror strategy is now part of a wider pattern. Two equal piles have XOR zero. More generally, any matched pair of equal piles cancels in the nim sum.
+
+## Why the XOR Strategy Works
+
+Let
+$$
+S=a_1\oplus\cdots\oplus a_k.
+$$
+We need to prove two claims: a move cannot preserve zero, and every nonzero sum has a move to zero.
+
+### A Move from Zero Must Give a Nonzero Sum
+
+A legal move changes one pile from $a$ to a smaller number $b$. All other piles stay fixed. The new XOR is
+$$
+S'=S\oplus a\oplus b.
+$$
+The extra $a$ cancels the old pile size. The extra $b$ inserts the new one.
+
+If $S=0$, then $S'=a\oplus b$. Since $a\ne b$, this is nonzero. Thus no legal move from a zero-sum position reaches another zero-sum position.
+
+### A Nonzero Sum Has a Move to Zero
+
+Suppose $S\ne0$. Look at the highest binary place where $S$ has a $1$. An odd number of piles have a $1$ in that place. Choose one of them, with size $a$, and set
+$$
+b=a\oplus S.
+$$
+We must check that $b<a$. Above the chosen place, $S$ has only zeros. Those digits of $a$ stay unchanged. At the chosen place, the $1$ in $a$ becomes $0$. Lower digits may change, but they cannot undo this decrease. Hence $b<a$, so the move is legal.
+
+Its new sum is
+$$
+S'=S\oplus a\oplus(a\oplus S)=0.
+$$
+The two claims prove the winning strategy. Leave XOR zero after each of your turns.
+
+::: {.callout-note}
+## How to Find All Winning Moves
+
+For each pile size $a_i$, calculate $b_i=a_i\oplus S$. Keep the result only if $b_i<a_i$. Each remaining replacement $a_i\to b_i$ is a winning move.
+
+This finds all such moves. If changing $a_i$ to $b$ gives zero, then $S\oplus a_i\oplus b=0$. Cancelling terms forces $b=a_i\oplus S$.
+:::
+
+### Why XOR Gives the Whole Nim Value
+
+The argument above identifies winning and losing positions. A little more work proves that XOR equals the recursively defined nim value.
+
+Assume the formula already holds for all smaller positions. No move can leave the XOR equal to $S$, since changing $a$ to $b$ changes the sum by $a\oplus b\ne0$.
+
+Now take any integer $r<S$. At the highest binary place where $S$ and $r$ differ, $S$ has a $1$ and $r$ has a $0$. Choose a pile $a$ with a $1$ in that place. Replace it by
+$$
+b=a\oplus S\oplus r.
+$$
+As before, the highest changed digit drops from $1$ to $0$. Thus $b<a$. The new XOR is $r$.
+
+So the values of the next positions include every number below $S$, but exclude $S$ itself. Their mex is exactly $S$. This proves the formula by induction, starting from the empty position.
+
+## A Worked Example
+
+For $(5,2,4)$, the nim sum is $S=3$. Try the replacement formula on each pile:
+$$
+5\oplus3=6,\qquad2\oplus3=1,\qquad4\oplus3=7.
+$$
+Only $2\to1$ reduces a pile. Thus the winning move is
+$$
+(5,2,4)\longrightarrow(5,1,4).
+$$
+Check the result:
+$$
+5\oplus1\oplus4=(101)_2\oplus(001)_2\oplus(100)_2=0.
+$$
+This is the only move that leaves zero. A small removal is enough here. Removing more objects would not make the move better.
+
+## Seminar Exercises
+
+For each position, calculate the nim value and find all winning moves. A winning move means a move that leaves a losing position for the other player.
+
+### Three Piles: $(30,40,50)$
+
+<details>
+<summary>Show the Calculation and All Winning Moves</summary>
+
+The XOR is
+$$
+30\oplus40\oplus50=4.
+$$
+The candidate new sizes are
+$$
+30\oplus4=26,\qquad40\oplus4=44,\qquad50\oplus4=54.
+$$
+Only the first candidate is smaller than its original pile. There is one winning move:
+$$
+(30,40,50)\longrightarrow(26,40,50).
+$$
+This removes four objects from the first pile.
+
+</details>
+
+### Three Piles: $(35,45,55)$
+
+<details>
+<summary>Show the Calculation and All Winning Moves</summary>
+
+The XOR is
+$$
+35\oplus45\oplus55=57.
+$$
+This time, every candidate reduces its pile:
+$$
+35\oplus57=26,\qquad45\oplus57=20,\qquad55\oplus57=14.
+$$
+There are three winning moves:
+$$
+\begin{aligned}
+(35,45,55)&\longrightarrow(26,45,55),\\
+(35,45,55)&\longrightarrow(35,20,55),\\
+(35,45,55)&\longrightarrow(35,45,14).
+\end{aligned}
+$$
+Each move leaves XOR zero. A position can have several winning moves, even though each pile has at most one candidate.
+
+</details>
+
+### Four Piles: $(117,21,27,12)$
+
+<details>
+<summary>Show the Calculation and All Winning Moves</summary>
+
+The XOR is
+$$
+117\oplus21\oplus27\oplus12=119.
+$$
+The candidates are
+$$
+117\oplus119=2,\quad21\oplus119=98,\quad
+27\oplus119=108,\quad12\oplus119=123.
+$$
+Only the first candidate is smaller. The only winning move is
+$$
+(117,21,27,12)\longrightarrow(2,21,27,12).
+$$
+The first player removes $115$ objects from the largest pile.
+
+</details>
+
+### Three Piles: $(100,200,300)$
+
+<details>
+<summary>Show the Calculation and All Winning Moves</summary>
+
+The XOR is
+$$
+100\oplus200\oplus300=384.
+$$
+The candidates are
+$$
+100\oplus384=484,\qquad200\oplus384=328,\qquad300\oplus384=172.
+$$
+Only the last candidate is legal. The only winning move is
+$$
+(100,200,300)\longrightarrow(100,200,172).
+$$
+This removes $128$ objects from the third pile. It also shows why ordinary sums do not give the strategy. Although $100+200=300$, the starting position has nonzero XOR.
+
+</details>
+
+## What Changes When the Rules Change?
+
+The handout ends with three variants. These help separate the method from one particular set of rules.
+
+### Remove One or Two Objects
+
+Suppose a move removes exactly one or two objects from one pile. Let $g(n)$ be the value of one pile under these new rules. Then
+$$
+g(0)=0,\qquad g(1)=1,
+$$
+and, for $n\ge2$,
+$$
+g(n)=\operatorname{mex}\{g(n-1),g(n-2)\}.
+$$
+The values are
+$$
+0,1,2,0,1,2,0,1,2,\ldots.
+$$
+In fact, $g(n)=n\bmod3$. To check the pattern, consider $n$ modulo $3$. The two previous values are the other two members of $\{0,1,2\}$. Their mex is the missing member.
+
+For one pile, multiples of three are losing. From any other size, remove one or two objects to leave a multiple of three.
+
+### Remove Two or Three Objects
+
+Now a player removes exactly two or three objects. Piles of sizes zero and one have no legal move, so
+$$
+g(0)=g(1)=0,\qquad g(2)=g(3)=1,\qquad g(4)=2.
+$$
+For $n\ge3$, use only legal removals in
+$$
+g(n)=\operatorname{mex}\{g(n-2),g(n-3)\}.
+$$
+The pattern is
+$$
+0,0,1,1,2,\;0,0,1,1,2,\ldots.
+$$
+It repeats every five entries. After the first five cases, the recurrence checks each residue class modulo $5$. For residues $0,1,2,3,4$, the sets of earlier values have mex $0,0,1,1,2$, respectively.
+
+For one pile, the losing sizes satisfy $n\equiv0$ or $1\pmod5$. A pile with one object is losing even though it is not empty. The reason is that no allowed move is available.
+
+### Several Piles under Restricted Removals
+
+For either variant, calculate each pile's new value $g(a_i)$ first. The position is losing exactly when
+$$
+g(a_1)\oplus\cdots\oplus g(a_k)=0.
+$$
+The same strategy proof applies. A legal move cannot leave a pile's value unchanged, by the mex definition. If the total XOR is nonzero, the highest-bit argument asks for a smaller value in one pile. The mex definition guarantees a move to every smaller value. Thus a move to total XOR zero exists.
+
+The important change is the input to XOR. Use the new pile values, rather than the original pile sizes.
+
+### When the Last Move Loses
+
+In **misère play**, the player who makes the last move loses. This changes the end of the game. A single object is now losing for the player to move, so the normal-play base case no longer fits.
+
+For ordinary Nim, once every nonempty pile has size one, only the number of piles matters. An odd number of such piles is losing. An even number is winning. The goal near the end is therefore to leave an odd number of single objects to the other player.
+
+For example, in $(1,1,2)$, a normal-play move would remove the pile of size two. That leaves $(1,1)$, with XOR zero. Under misère rules, this gives the other player a win. The correct move is to reduce the pile of size two to one. This leaves $(1,1,1)$, so the other player must eventually take the last object.
+
+This example is enough to show why a strategy must include its ending rule. The normal-play XOR-zero target cannot be used unchanged for misère play.
+
+## What the Method Reveals
+
+The total number of objects tells us that the game ends. It does not tell us who can win. The nim sum captures a different kind of structure: the parity of the ones in each binary place.
+
+The useful step is to identify the positions we want to leave behind. A good target has two properties. Every move leaves the target set, and every position outside it has a move into it. In ordinary Nim, XOR-zero positions have exactly those properties.
+
+The recursive definition and the binary formula serve different purposes. Mex explains what a value means through legal moves. XOR makes the value easy to calculate. The proof connects the two.
+
+## References
+
+Radnović, M. (2026). *MATH1972: Notes on Nim* [Seminar handout]. University of Sydney.
+
+---
+
+[Back to MATH1972 Seminar Notes](index.qmd)

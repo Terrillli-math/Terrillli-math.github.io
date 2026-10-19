@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 400" width="620" height="400" role="img" aria-labelledby="title desc">
+  <title id="title">Adding an Isolated Node</title>
+  <desc id="desc">The original six-node graph is one connected component. A seventh node has no edges. It is a second connected component, with no path to any of the other nodes.</desc>
+  <rect width="620" height="400" rx="14" fill="#f8fafc"/>
+  <rect x="25" y="25" width="405" height="345" rx="20" fill="#eff6ff" stroke="#93c5fd" stroke-width="2" stroke-dasharray="7 6"/>
+  <circle cx="530" cy="190" r="52" fill="#fff7ed" stroke="#fdba74" stroke-width="2" stroke-dasharray="7 6"/>
+  <g stroke="#64748b" stroke-width="3.5" fill="none">
+    <path d="M100 85L310 60 M100 85L80 250 M100 85L205 170 M270 330L375 210 M270 330L80 250 M375 210L310 60 M375 210L205 170 M80 250L205 170"/>
+  </g>
+  <g fill="#dbeafe" stroke="#1e40af" stroke-width="2.5">
+    <circle cx="100" cy="85" r="25"/><circle cx="270" cy="330" r="25"/>
+    <circle cx="375" cy="210" r="25"/><circle cx="310" cy="60" r="25"/>
+    <circle cx="80" cy="250" r="25"/><circle cx="205" cy="170" r="25"/>
+  </g>
+  <circle cx="530" cy="190" r="25" fill="#ffedd5" stroke="#c2410c" stroke-width="2.5"/>
+  <g font-family="Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" dominant-baseline="central" fill="#172554">
+    <text x="100" y="85">1</text><text x="270" y="330">2</text>
+    <text x="375" y="210">3</text><text x="310" y="60">4</text>
+    <text x="80" y="250">5</text><text x="205" y="170">6</text>
+    <text x="530" y="190">7</text>
+  </g>
+</svg>

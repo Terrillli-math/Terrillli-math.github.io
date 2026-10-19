@@ -23,7 +23,7 @@ I use this site to record what I am learning: definitions, proofs, questions, an
 ::: {.g-col-12 .g-col-md-4}
 ### Course Notes
 
-Notes from my undergraduate mathematics courses, currently including discrete mathematics.
+Notes from my undergraduate mathematics courses, including discrete mathematics and MATH1972 seminars.
 :::
 
 ::: {.g-col-12 .g-col-md-4}
@@ -43,6 +43,7 @@ These are working notes. I expect to revisit them as my understanding improves.
 ## Start Reading
 
 - [MATH1964: Discrete Mathematics for Computation (Adv)](notes/math1964/index.qmd)
+- [MATH1972 Seminar Notes](notes/math1972-seminar/index.qmd)
 - [Atomization: Short Mathematical Notes](notes/atomization/index.qmd)
 - [Appendix: Background Topics](notes/appendix/index.qmd)
 

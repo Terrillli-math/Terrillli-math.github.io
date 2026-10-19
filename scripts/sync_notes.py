@@ -32,6 +32,8 @@ WIKI_LINK = re.compile(r"(?<!!)\[\[([^\]]+)\]\]")
 EMBED = re.compile(r"!\[\[([^\]]+)\]\]")
 MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)]+\.md)(#[^)]*)?\)")
 CALLOUT = re.compile(r"^\[!\s*([^\]]+)\]\s*(.*)$", re.I)
+COLLECTIONS_START = "<!-- BEGIN GENERATED NOTE COLLECTIONS -->"
+COLLECTIONS_END = "<!-- END GENERATED NOTE COLLECTIONS -->"
 
 
 def load_manifest() -> tuple[list[tuple[Path, Path]], set[str]]:
@@ -189,6 +191,23 @@ def make_index(title: str, intro: str, entries: list[tuple[str, str]]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+def update_notes_index(current: str | None, entries: list[tuple[str, str]]) -> str:
+    """Refresh source-folder links without rewriting hand-maintained collections."""
+    if current is None:
+        current = (
+            make_index("Notes", "A selection of my course notes and shorter mathematical explorations.", [])
+            + f"\n{COLLECTIONS_START}\n{COLLECTIONS_END}\n"
+        )
+    if current.count(COLLECTIONS_START) != 1 or current.count(COLLECTIONS_END) != 1:
+        raise ValueError("Notes index must contain one generated note collections block; no index was replaced.")
+    start = current.index(COLLECTIONS_START) + len(COLLECTIONS_START)
+    end = current.index(COLLECTIONS_END)
+    if end < start:
+        raise ValueError("Notes index collection markers are in the wrong order; no index was replaced.")
+    links = "\n".join(f"- [{label}](<{href}>)" for label, href in entries)
+    return current[:start] + "\n" + links + "\n" + current[end:]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--vault", type=Path, required=True, help="Absolute Vault path")
@@ -318,8 +337,9 @@ def main() -> int:
                                   f"{group}/index.qmd"))
         main_index = ROOT / "notes" / "index.qmd"
         main_index.parent.mkdir(parents=True, exist_ok=True)
+        current_index = main_index.read_text(encoding="utf-8") if main_index.exists() else None
         main_index.write_text(
-            make_index("Notes", "A selection of my course notes and shorter mathematical explorations.", group_entries),
+            update_notes_index(current_index, group_entries),
             encoding="utf-8",
         )
 

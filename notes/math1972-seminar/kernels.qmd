@@ -1,0 +1,197 @@
+---
+title: "Feature Maps and Kernels"
+description: "How inner products let an SVM use richer features without listing them all."
+categories: ["math1972", "machine learning"]
+---
+
+## When a Straight Boundary Is Too Simple
+
+A linear SVM uses a score of the form $w^\top x+b$. Its boundary is a straight line in two dimensions. Some class patterns cannot be separated that way.
+
+We can change the features instead. A **feature map** $\phi$ replaces each input $x$ with a new vector $\phi(x)$. We then fit a linear rule in the new coordinates:
+
+$$
+f(x)=w^\top\phi(x)+b.
+$$
+
+The score is linear in the new features. It may be nonlinear in the original inputs. This distinction is the main idea behind kernel methods.
+
+These notes build on Ying's SVM seminar slides (n.d.). The extra examples make the feature map and its inner product explicit.
+
+## A Small Example Before the Kernel Trick
+
+Suppose $x$ is a real number. The outer points $-2$ and $2$ have label $+1$. The middle points $-1/2$ and $1/2$ have label $-1$.
+
+No threshold on the number line separates both outer points from both inner points. A score $wx+b$ can change sign at most once.
+
+Now use $\phi(x)=x^2$. The positive examples map to $4$. The negative examples map to $1/4$. A threshold at $1$ separates them:
+
+$$
+f(x)=x^2-1.
+$$
+
+The new feature measures distance from the origin, rather than left-versus-right position. The nonlinear boundary in the original space is $x=\pm1$.
+
+This is a constructed separator. We have not claimed that these particular coefficients solve an SVM training problem. The example shows what a feature map makes possible.
+
+## Inner Products Are the Only Quantities We Need
+
+The [binary SVM dual](linear-svm.qmd) uses the data through $x_i^\top x_j$. After a feature map, this becomes
+
+$$
+\langle\phi(x_i),\phi(x_j)\rangle.
+$$
+
+Define a **kernel** by
+
+$$
+K(x,z)=\langle\phi(x),\phi(z)\rangle.
+$$
+
+If we can evaluate $K$ directly, we do not need to construct every coordinate of $\phi(x)$. This is the kernel trick.
+
+We have changed how an inner product is computed. We have not removed the optimisation problem.
+
+## A Quadratic Feature Map We Can Check
+
+For $x=(x_1,x_2)$, consider
+
+$$
+\phi(x)=\left(x_1^2,\sqrt2\,x_1x_2,x_2^2\right).
+$$
+
+For another point $z=(z_1,z_2)$, its feature-space inner product is
+
+$$
+\begin{aligned}
+\langle\phi(x),\phi(z)\rangle
+&=x_1^2z_1^2+2x_1x_2z_1z_2+x_2^2z_2^2\\
+&=(x_1z_1+x_2z_2)^2\\
+&=(x^\top z)^2.
+\end{aligned}
+$$
+
+The factor $\sqrt2$ is needed. Without it, the middle term would have coefficient one instead of two.
+
+For example, take $x=(1,2)$ and $z=(3,1)$. Directly,
+
+$$
+K(x,z)=(3+2)^2=25.
+$$
+
+The feature vectors give the same answer:
+
+$$
+(1,2\sqrt2,4)\cdot(9,3\sqrt2,1)=9+12+4=25.
+$$
+
+This small calculation contains the whole trick. A short formula replaces a longer feature calculation. The benefit can be much larger when the feature vector has many coordinates.
+
+## What Makes a Kernel Valid?
+
+A resemblance score is not automatically a valid inner-product kernel. If $K$ comes from a real feature map, it must be symmetric. For any inputs $x_1,\ldots,x_n$, its **Gram matrix** has entries
+
+$$
+G_{ij}=K(x_i,x_j).
+$$
+
+It must also be positive semidefinite. This means that, for every real vector $c$,
+
+$$
+\begin{aligned}
+c^\top Gc
+&=\sum_{i,j}c_ic_j\langle\phi(x_i),\phi(x_j)\rangle\\
+&=\left\lVert\sum_i c_i\phi(x_i)\right\rVert^2\ge0.
+\end{aligned}
+$$
+
+That proof explains the condition without needing a theory of infinite-dimensional spaces. It also links kernels with the positive semidefinite matrices in [convex optimisation](convexity.qmd).
+
+Checking one finite Gram matrix is useful for those points. It does not prove that a proposed formula is a valid kernel for every possible input.
+
+## Common Kernels
+
+### Linear Kernel
+
+$$
+K(x,z)=x^\top z.
+$$
+
+This uses the original features. A kernel method need not produce a nonlinear boundary.
+
+### Polynomial Kernel
+
+$$
+K(x,z)=(\gamma x^\top z+r)^d,
+$$
+
+where $d$ is a positive integer, $\gamma>0$, and $r\ge0$. Its expanded features include products of input coordinates. For $r=0$ and $d=2$, the example above shows the map directly when $\gamma=1$.
+
+These coordinate products can express interactions. A linear rule on them can depend on how two original features vary together.
+
+### Gaussian Kernel
+
+$$
+K(x,z)=\exp\bigl(-\gamma\lVert x-z\rVert^2\bigr),
+\qquad\gamma>0.
+$$
+
+Nearby inputs have kernel values close to one. Far-apart inputs have values close to zero. A larger $\gamma$ makes that value fall faster with distance.
+
+This gives a local notion of similarity. The full feature-space construction is beyond these notes. We use the standard Gaussian kernel without proving its validity here.
+
+## The Kernel SVM
+
+For soft-margin classification, replace the inner products in the dual:
+
+$$
+\begin{aligned}
+\max_\alpha\quad &\sum_i\alpha_i
+-\frac12\sum_{i,j}\alpha_i\alpha_j y_i y_j K(x_i,x_j)\\
+\text{subject to}\quad &0\le\alpha_i\le C,
+\qquad\sum_i\alpha_i y_i=0.
+\end{aligned}
+$$
+
+After training, predict from the sign of
+
+$$
+f(x)=\sum_i\alpha_i y_iK(x_i,x)+b.
+$$
+
+The coefficients can be positive or negative after multiplication by $y_i$. Prediction is therefore not just a vote for the most similar point. It combines weighted contributions from the support vectors.
+
+The Gram matrix is positive semidefinite for a valid kernel. Multiplying its rows and columns by labels $\pm1$ preserves that property. The dual objective remains concave.
+
+## Two Parameters with Different Jobs
+
+For a Gaussian SVM, $C$ and $\gamma$ control different things:
+
+| Parameter | Main Role |
+|---|---|
+| $C$ | Sets the cost of margin violations relative to the norm penalty. |
+| $\gamma$ | Sets how quickly similarity falls with distance. |
+
+A large $\gamma$ permits a boundary that responds to very local patterns. A large $C$ makes fitting the training examples more important. Neither setting guarantees better predictions. Use validation data to choose them together (scikit-learn developers, n.d.).
+
+Feature scaling matters here too. A coordinate measured in large units can dominate $\lVert x-z\rVert^2$. The model then treats that coordinate as more important just because of its scale.
+
+## What the Kernel Trick Does and Does Not Give Us
+
+The trick avoids listing the feature coordinates. Some kernels correspond to an infinite-dimensional feature space. We can still compute each kernel value with a finite formula.
+
+This does not mean that every dataset becomes separable. Identical inputs with opposite labels remain identical under the same feature map. Soft margins still have a role.
+
+It also does not make computation free. A dense Gram matrix has $n^2$ entries. Prediction can require many kernel evaluations when there are many support vectors.
+
+The useful change is in representation. We can choose richer features while keeping the same basic SVM optimisation structure.
+
+## References
+
+Ying, Y. (n.d.). *Support vector machine and kernels* [MATH1972 lecture slides]. University of Sydney.
+
+scikit-learn developers. (n.d.). *Support vector machines*. [https://scikit-learn.org/stable/modules/svm.html](https://scikit-learn.org/stable/modules/svm.html)
+
+---
+
+[Previous: Linear SVMs and Margins](linear-svm.qmd) · [Seminar Overview](index.qmd) · [Related Project: Multiclass SVM](../../projects/multiclass-svm-crammer-singer.qmd)
