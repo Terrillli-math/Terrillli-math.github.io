@@ -23,6 +23,5 @@
   <g font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#475569">
     <text x="350" y="60">Component 1</text>
     <text x="350" y="432">Component 2: Isolated Node</text>
-    <text x="350" y="452" font-size="13">Author-Created Example</text>
   </g>
 </svg>

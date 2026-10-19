@@ -23,6 +23,5 @@
   <g font-family="Arial, sans-serif" font-size="15" text-anchor="middle">
     <text x="350" y="330" fill="#5b21b6">Node 3 Has Three Neighbors</text>
     <text x="350" y="354" fill="#9a3412">One of Three Neighbor Pairs Is Linked</text>
-    <text x="350" y="380" font-size="14" fill="#475569">Author-Created Example</text>
   </g>
 </svg>
