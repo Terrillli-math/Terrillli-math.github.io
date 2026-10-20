@@ -121,7 +121,7 @@ def _sample_figure(seed: int, sample_number: int) -> str:
     edge_description = ", ".join(f"{u}–{v}" for u, v in edges)
     description = (
         f"A simple undirected random graph with 9 nodes and {len(edges)} edges. "
-        f"Seed {seed}. Degrees of nodes 1 through 9: {', '.join(map(str, degrees))}. "
+        f"Degrees of nodes 1 through 9: {', '.join(map(str, degrees))}. "
         f"Edges: {edge_description}."
     )
     body = [
@@ -142,7 +142,6 @@ def _sample_figure(seed: int, sample_number: int) -> str:
     for node, (x, y) in positions.items():
         body.append(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="21" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5" data-node="{node}" data-degree="{degrees[node - 1]}"/>')
         body.append(_text(x, y + 1, str(node), 23, "middle", "#172554", 'dominant-baseline="central" font-weight="600"'))
-    body.append(_text(320, 500, f"Seed: {seed}", 18, "middle", MUTED))
     return _document(title, description, body, 520, f"G(n,p); n=9; p=1/3; seed={seed}; pairs=lexicographic; generator=random.Random")
 
 

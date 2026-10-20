@@ -279,7 +279,16 @@ class RandomNetworkFigureTests(unittest.TestCase):
                         for key, value in element.attrib.items():
                             if key.rsplit("}", 1)[-1] == "href":
                                 self.assertTrue(value.startswith("#"), value)
-                    if "degree-poisson" in name:
+                    if name in ("random-network-sample-1.svg", "random-network-sample-2.svg"):
+                        text = " ".join(visible_labels).lower()
+                        self.assertNotIn("seed", text)
+                        for seed in (20261020, 20261021):
+                            self.assertNotIn(str(seed), text)
+                        expected_seed = 20261020 if name.endswith("-1.svg") else 20261021
+                        metadata = root.findtext("svg:metadata", namespaces=SVG_NS)
+                        self.assertIsNotNone(metadata)
+                        self.assertIn(f"seed={expected_seed};", metadata)
+                    elif "degree-poisson" in name:
                         text = " ".join(visible_labels).lower()
                         self.assertIn("binomial", text)
                         self.assertIn("poisson", text)

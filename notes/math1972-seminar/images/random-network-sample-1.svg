@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520" role="img" aria-labelledby="title desc">
   <title id="title">Sample 1: G(9, 1/3)</title>
-  <desc id="desc">A simple undirected random graph with 9 nodes and 16 edges. Seed 20261020. Degrees of nodes 1 through 9: 3, 6, 4, 3, 3, 4, 3, 2, 4. Edges: 1–5, 1–6, 1–9, 2–3, 2–4, 2–5, 2–6, 2–7, 2–9, 3–4, 3–5, 3–8, 4–7, 6–7, 6–9, 8–9.</desc>
+  <desc id="desc">A simple undirected random graph with 9 nodes and 16 edges. Degrees of nodes 1 through 9: 3, 6, 4, 3, 3, 4, 3, 2, 4. Edges: 1–5, 1–6, 1–9, 2–3, 2–4, 2–5, 2–6, 2–7, 2–9, 3–4, 3–5, 3–8, 4–7, 6–7, 6–9, 8–9.</desc>
   <metadata>G(n,p); n=9; p=1/3; seed=20261020; pairs=lexicographic; generator=random.Random</metadata>
   <rect width="640" height="520" rx="16" fill="#f8fafc"/>
   <g font-family="Arial, Helvetica, sans-serif">
@@ -42,6 +42,5 @@
     <text x="147.66" y="255.61" font-size="23" text-anchor="middle" fill="#172554" dominant-baseline="central" font-weight="600">8</text>
     <circle cx="207.51" cy="150.94" r="21" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5" data-node="9" data-degree="4"/>
     <text x="207.51" y="151.94" font-size="23" text-anchor="middle" fill="#172554" dominant-baseline="central" font-weight="600">9</text>
-    <text x="320.00" y="500.00" font-size="18" text-anchor="middle" fill="#475569" >Seed: 20261020</text>
   </g>
 </svg>
