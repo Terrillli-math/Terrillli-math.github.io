@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 552" width="640" height="552" role="img" aria-labelledby="title desc">
+  <title id="title">Degrees Near a Poisson Distribution</title>
+  <desc id="desc">Probability mass functions for Binomial(24, 3/24), Binomial(99, 3/99), and Poisson(3). All have mean 3. The binomial curves move closer to the Poisson curve as n grows. Only degrees 0 through 12 are shown. Tail probabilities are omitted, not rescaled. Lines join discrete values to help compare them.</desc>
+  <metadata>Exact PMFs; n=25,100; p=3/(n-1); Poisson mean=3; k=0..12; no renormalization</metadata>
+  <rect width="640" height="552" rx="16" fill="#f8fafc"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="320.00" y="36.00" font-size="25" text-anchor="middle" fill="#0f172a" font-weight="600">Degrees Near a Poisson Distribution</text>
+    <text x="320.00" y="63.00" font-size="20" text-anchor="middle" fill="#475569" >All three distributions have mean 3</text>
+    <line x1="87.00" y1="85.00" x2="123.00" y2="85.00" stroke="#2563eb" stroke-width="3" />
+    <circle cx="105" cy="85.00" r="4.2" fill="#2563eb"/>
+    <text x="135.00" y="91.00" font-size="19" text-anchor="start" fill="#0f172a" >Binomial(24, 3/24): n = 25</text>
+    <line x1="87.00" y1="111.00" x2="123.00" y2="111.00" stroke="#7c3aed" stroke-width="3" />
+    <rect x="101" y="107.00" width="8" height="8" fill="#7c3aed"/>
+    <text x="135.00" y="117.00" font-size="19" text-anchor="start" fill="#0f172a" >Binomial(99, 3/99): n = 100</text>
+    <line x1="87.00" y1="137.00" x2="123.00" y2="137.00" stroke="#b45309" stroke-width="3" stroke-dasharray="7 5"/>
+    <text x="135.00" y="143.00" font-size="19" text-anchor="start" fill="#0f172a" >Poisson(3)</text>
+    <line x1="85.00" y1="447.00" x2="610.00" y2="447.00" stroke="#cbd5e1" stroke-width="1" />
+    <text x="75.00" y="453.00" font-size="18" text-anchor="end" fill="#475569" >0.00</text>
+    <line x1="85.00" y1="393.20" x2="610.00" y2="393.20" stroke="#cbd5e1" stroke-width="1" />
+    <text x="75.00" y="399.20" font-size="18" text-anchor="end" fill="#475569" >0.05</text>
+    <line x1="85.00" y1="339.40" x2="610.00" y2="339.40" stroke="#cbd5e1" stroke-width="1" />
+    <text x="75.00" y="345.40" font-size="18" text-anchor="end" fill="#475569" >0.10</text>
+    <line x1="85.00" y1="285.60" x2="610.00" y2="285.60" stroke="#cbd5e1" stroke-width="1" />
+    <text x="75.00" y="291.60" font-size="18" text-anchor="end" fill="#475569" >0.15</text>
+    <line x1="85.00" y1="231.80" x2="610.00" y2="231.80" stroke="#cbd5e1" stroke-width="1" />
+    <text x="75.00" y="237.80" font-size="18" text-anchor="end" fill="#475569" >0.20</text>
+    <line x1="85.00" y1="178.00" x2="610.00" y2="178.00" stroke="#cbd5e1" stroke-width="1" />
+    <text x="75.00" y="184.00" font-size="18" text-anchor="end" fill="#475569" >0.25</text>
+    <line x1="85.00" y1="447.00" x2="85.00" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="85.00" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >0</text>
+    <line x1="172.50" y1="447.00" x2="172.50" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="172.50" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >2</text>
+    <line x1="260.00" y1="447.00" x2="260.00" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="260.00" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >4</text>
+    <line x1="347.50" y1="447.00" x2="347.50" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="347.50" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >6</text>
+    <line x1="435.00" y1="447.00" x2="435.00" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="435.00" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >8</text>
+    <line x1="522.50" y1="447.00" x2="522.50" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="522.50" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >10</text>
+    <line x1="610.00" y1="447.00" x2="610.00" y2="453.00" stroke="#475569" stroke-width="1" />
+    <text x="610.00" y="473.00" font-size="18" text-anchor="middle" fill="#475569" >12</text>
+    <line x1="85.00" y1="178.00" x2="85.00" y2="447.00" stroke="#475569" stroke-width="1.4" />
+    <line x1="85.00" y1="447.00" x2="610.00" y2="447.00" stroke="#475569" stroke-width="1.4" />
+    <polyline points="85.00,403.35 128.75,297.34 172.50,201.12 216.25,189.41 260.00,253.81 303.75,336.61 347.50,397.06 391.25,428.65 435.00,441.43 478.75,445.59 522.50,446.70 566.25,446.94 610.00,446.99" fill="none" stroke="#2563eb" stroke-width="2.8" stroke-linejoin="round" />
+    <circle cx="85.00" cy="403.35" r="3.5" fill="#2563eb"/>
+    <circle cx="128.75" cy="297.34" r="3.5" fill="#2563eb"/>
+    <circle cx="172.50" cy="201.12" r="3.5" fill="#2563eb"/>
+    <circle cx="216.25" cy="189.41" r="3.5" fill="#2563eb"/>
+    <circle cx="260.00" cy="253.81" r="3.5" fill="#2563eb"/>
+    <circle cx="303.75" cy="336.61" r="3.5" fill="#2563eb"/>
+    <circle cx="347.50" cy="397.06" r="3.5" fill="#2563eb"/>
+    <circle cx="391.25" cy="428.65" r="3.5" fill="#2563eb"/>
+    <circle cx="435.00" cy="441.43" r="3.5" fill="#2563eb"/>
+    <circle cx="478.75" cy="445.59" r="3.5" fill="#2563eb"/>
+    <circle cx="522.50" cy="446.70" r="3.5" fill="#2563eb"/>
+    <circle cx="566.25" cy="446.94" r="3.5" fill="#2563eb"/>
+    <circle cx="610.00" cy="446.99" r="3.5" fill="#2563eb"/>
+    <polyline points="85.00,395.86 128.75,288.78 172.50,204.72 216.25,202.20 260.00,263.40 303.75,337.99 347.50,393.63 391.25,424.84 435.00,439.04 478.75,444.48 522.50,446.29 566.25,446.82 610.00,446.96" fill="none" stroke="#7c3aed" stroke-width="2.8" stroke-linejoin="round" />
+    <rect x="82.00" y="392.86" width="6" height="6" fill="#7c3aed"/>
+    <rect x="125.75" y="285.78" width="6" height="6" fill="#7c3aed"/>
+    <rect x="169.50" y="201.72" width="6" height="6" fill="#7c3aed"/>
+    <rect x="213.25" y="199.20" width="6" height="6" fill="#7c3aed"/>
+    <rect x="257.00" y="260.40" width="6" height="6" fill="#7c3aed"/>
+    <rect x="300.75" y="334.99" width="6" height="6" fill="#7c3aed"/>
+    <rect x="344.50" y="390.63" width="6" height="6" fill="#7c3aed"/>
+    <rect x="388.25" y="421.84" width="6" height="6" fill="#7c3aed"/>
+    <rect x="432.00" y="436.04" width="6" height="6" fill="#7c3aed"/>
+    <rect x="475.75" y="441.48" width="6" height="6" fill="#7c3aed"/>
+    <rect x="519.50" y="443.29" width="6" height="6" fill="#7c3aed"/>
+    <rect x="563.25" y="443.82" width="6" height="6" fill="#7c3aed"/>
+    <rect x="607.00" y="443.96" width="6" height="6" fill="#7c3aed"/>
+    <polyline points="85.00,393.43 128.75,286.29 172.50,205.93 216.25,205.93 260.00,266.20 303.75,338.52 347.50,392.76 391.25,423.75 435.00,438.28 478.75,444.09 522.50,446.13 566.25,446.76 610.00,446.94" fill="none" stroke="#b45309" stroke-width="2.8" stroke-linejoin="round" stroke-dasharray="7 5"/>
+    <text x="347.00" y="501.00" font-size="21" text-anchor="middle" fill="#0f172a" >Number of Neighbours, k</text>
+    <text x="21.00" y="312.00" font-size="20" text-anchor="middle" fill="#0f172a" transform="rotate(-90 21 312)">Probability</text>
+    <text x="320.00" y="532.00" font-size="17" text-anchor="middle" fill="#475569" >k = 0–12 shown; probabilities are not rescaled.</text>
+  </g>
+</svg>

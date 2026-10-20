@@ -30,3 +30,21 @@ The seminar pages rewrite the supplied handouts as connected study notes. The ta
 | Introduction to Network Analysis | Uses unordered edge pairs, zero diagonal entries, and edge counts in the sparsity discussion. Corrects adjacency powers to count walks. Repairs the distance formula and states disconnected-graph conventions. Separates global transitivity from average local clustering and states the low-degree convention. | Uses an independently constructed seven-node graph, new SVG diagrams, and newly calculated statistics. Includes the handshaking proof, local/global calculations, an isolated-node comparison, and a bridge-removal exercise. |
 
 The worked numerical examples and graph structure were replaced with independently constructed examples. This includes new Nim positions and removal rules, shifted quadratic and KKT examples, a small ridge calculation, a two-point SVM, and feature-map calculations. Standard mathematical definitions and general proofs remain part of the exposition. The public references now list external sources only.
+
+## Random Networks and Connectivity
+
+### Mathematical Corrections and Caveats
+
+- Finite degrees are binomial. The Poisson statement is a limit for each fixed nonnegative degree, including zero, when the edge probability vanishes and the mean degree tends to a positive constant.
+- Independent edges do not give independent degrees or isolation indicators. The isolation-pair exponent is $2n-3$, because the shared absent edge must be counted only once. Both covariance terms are included in the calculations.
+- For $p=c\log n/n$, the second-moment concentration proof applies to $0<c<1$, not to $c\leq1$. At $c=1$, the isolated-node expectation tends to one; the critical Poisson result is cited, not derived from expectation alone.
+- Absence of isolated nodes is necessary but not sufficient for connectivity. The complete connectivity threshold is stated as a cited theorem, separate from the first-moment proof about isolated nodes.
+- The logarithmic distance expression is a typical-distance heuristic inside the giant component for fixed mean degree greater than one. It is not an exact diameter formula. The whole sparse graph still has isolated nodes with high probability.
+- Equal degree distributions do not force equal realised degrees. The model allows isolated nodes and degree outliers; its limitation is the homogeneous independent-edge assumption.
+
+### Added Explanations and Examples
+
+- Derives edge and degree laws from indicators, checks them with the handshaking lemma, and explains the difference between an expectation and an observed count.
+- Supplies a short binomial-to-Poisson derivation, proofs of Markov and Chebyshev, and a folded isolation-variance derivation. Gives a counterexample showing why a diverging expectation alone is insufficient.
+- Solves the finite-size equation for an expected single isolated node. Contrasts bounded mean degree with the larger connectivity scale, and links breadth-first layers to the short-route heuristic.
+- Adds two reproducible $G(9,1/3)$ samples, a binomial/Poisson probability comparison, and exact expected-isolate curves. No source figures, simulation results, real-network data table, or teaching PDF is republished. Public references are external only.

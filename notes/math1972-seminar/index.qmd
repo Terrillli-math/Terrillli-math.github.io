@@ -31,6 +31,10 @@ For a related application, see the [Multiclass SVM project](../../projects/multi
 
 Use one seven-node graph to explore degree, density, clustering, and distance. Learn what each measure tells us and what it leaves out.
 
+[**Random Networks and Connectivity**](random-networks.qmd)
+
+Build a graph from independent random edges. Derive degree and edge-count distributions, then use expectation and variance to study isolated nodes and connectivity. See why short typical routes do not imply that the whole graph is connected.
+
 ---
 
 [All Notes](../index.qmd)
