@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 452" width="640" height="452" role="img" aria-labelledby="title desc">
+  <title id="title">One Graph, Four Node Scores</title>
+  <desc id="desc">A four-node graph with edges 1-2, 1-3, 2-3, and 3-4. Node scores are 0, 1, 1, and 2. Degrees are 2, 2, 3, and 1. Nodes 1, 2, and 3 form the only triangle.</desc>
+  <metadata>n=4; edges=12,13,23,34; x=0,1,1,2; degrees=2,2,3,1; triangles=1</metadata>
+  <rect width="640" height="452" rx="16" fill="#f8fafc"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="320.00" y="38.00" font-size="27" text-anchor="middle" fill="#0f172a" font-weight="600">One Graph, Four Node Scores</text>
+    <text x="320.00" y="72.00" font-size="21" text-anchor="middle" fill="#475569" >4 edges · 1 triangle</text>
+    <line x1="135.00" y1="165.00" x2="135.00" y2="330.00" stroke="#2563eb" stroke-width="3.2" class="graph-edge" data-source="1" data-target="2"/>
+    <line x1="135.00" y1="165.00" x2="360.00" y2="247.50" stroke="#2563eb" stroke-width="3.2" class="graph-edge" data-source="1" data-target="3"/>
+    <line x1="135.00" y1="330.00" x2="360.00" y2="247.50" stroke="#2563eb" stroke-width="3.2" class="graph-edge" data-source="2" data-target="3"/>
+    <line x1="360.00" y1="247.50" x2="520.00" y2="140.00" stroke="#2563eb" stroke-width="3.2" class="graph-edge" data-source="3" data-target="4"/>
+    <circle cx="135.00" cy="165.00" r="24" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5" data-node="1" data-score="0" data-degree="2"/>
+    <text x="135.00" y="166.00" font-size="24" text-anchor="middle" fill="#172554" dominant-baseline="central" font-weight="600">1</text>
+    <text x="60.00" y="172.00" font-size="22" text-anchor="middle" fill="#475569" >x = 0</text>
+    <circle cx="135.00" cy="330.00" r="24" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5" data-node="2" data-score="1" data-degree="2"/>
+    <text x="135.00" y="331.00" font-size="24" text-anchor="middle" fill="#172554" dominant-baseline="central" font-weight="600">2</text>
+    <text x="135.00" y="382.00" font-size="22" text-anchor="middle" fill="#475569" >x = 1</text>
+    <circle cx="360.00" cy="247.50" r="24" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5" data-node="3" data-score="1" data-degree="3"/>
+    <text x="360.00" y="248.50" font-size="24" text-anchor="middle" fill="#172554" dominant-baseline="central" font-weight="600">3</text>
+    <text x="360.00" y="299.50" font-size="22" text-anchor="middle" fill="#475569" >x = 1</text>
+    <circle cx="520.00" cy="140.00" r="24" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5" data-node="4" data-score="2" data-degree="1"/>
+    <text x="520.00" y="141.00" font-size="24" text-anchor="middle" fill="#172554" dominant-baseline="central" font-weight="600">4</text>
+    <text x="520.00" y="192.00" font-size="22" text-anchor="middle" fill="#475569" >x = 2</text>
+    <text x="320.00" y="425.00" font-size="20" text-anchor="middle" fill="#475569" >Node numbers label vertices; x is a fixed score.</text>
+  </g>
+</svg>

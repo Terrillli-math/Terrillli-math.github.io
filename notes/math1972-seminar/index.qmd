@@ -35,6 +35,10 @@ Use one seven-node graph to explore degree, density, clustering, and distance. L
 
 Build a graph from independent random edges. Derive degree and edge-count distributions, then use expectation and variance to study isolated nodes and connectivity. See why short typical routes do not imply that the whole graph is connected.
 
+[**Exponential Random Graph Models**](exponential-random-graphs.qmd)
+
+Fit a probability model to an observed graph. Use node features to vary edge probabilities, then see how triangles introduce edge dependence. Work through small exact examples and check structure beyond the fitted statistics.
+
 ---
 
 [All Notes](../index.qmd)

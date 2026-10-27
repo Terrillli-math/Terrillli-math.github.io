@@ -48,3 +48,24 @@ The worked numerical examples and graph structure were replaced with independent
 - Supplies a short binomial-to-Poisson derivation, proofs of Markov and Chebyshev, and a folded isolation-variance derivation. Gives a counterexample showing why a diverging expectation alone is insufficient.
 - Solves the finite-size equation for an expected single isolated node. Contrasts bounded mean degree with the larger connectivity scale, and links breadth-first layers to the short-route heuristic.
 - Adds two reproducible $G(9,1/3)$ samples, a binomial/Poisson probability comparison, and exact expected-isolate curves. No source figures, simulation results, real-network data table, or teaching PDF is republished. Public references are external only.
+
+## Exponential Random Graph Models
+
+### Mathematical Corrections and Caveats
+
+- The probability of a particular labelled graph has no binomial coefficient. The coefficient belongs to the probability of its edge count. Probabilities on this finite graph space are masses, not densities.
+- Finite log-odds are real-valued for probabilities strictly between zero and one. Zero and one require infinite limiting logits. The edges-only MLE has the closed form $\widehat p=m/\binom n2$; a finite natural-parameter MLE exists only for an interior density in this case.
+- Conditional edge independence given fixed node features is an assumption of the logistic special case, not a defining property of every ERGM. General triangle terms introduce edge dependence. General ERGM coefficients describe conditional odds through change statistics; conditional and marginal edge probabilities differ.
+- The normalising constant depends on the model parameters and fixed covariates. It may cancel in a ratio between two graphs at the same parameter, but cannot be omitted from a likelihood as parameters vary.
+- For an undirected node-covariate sum, a coefficient acts on $x_i+x_j$. It multiplies odds, not probabilities. This models activity rather than similarity. Positive associations do not force larger realised degrees or establish causal effects.
+- A finite interior MLE matches the included statistics in expectation. Neither existence nor a unique identifiable fit is automatic. Standard errors and coefficient significance do not establish model fit. Distance checks must retain unreachable pairs, and a plug-in comparison is not automatically a calibrated hypothesis test.
+
+### Added Explanations and Examples
+
+- Builds the graph likelihood and derives the independent-edge MLE. Shows that all graphs of the same size have equal probability under $G(n,p)$, even when their shapes differ.
+- Adds a new four-node graph with edges $12,13,23,34$, scores $(0,1,1,2)$, and a hand-checkable logistic example. The chosen slope and intercept are illustrative, not fabricated fitted coefficients or real measurements.
+- Derives the logistic joint distribution, the identity $\sum_{i<j}a_{ij}(x_i+x_j)=\sum_i x_i d_i$, the ERGM normaliser, and the conditional edge formula by comparing graphs with and without one edge.
+- Uses a new three-node edge-and-triangle model with coefficients $-\log2$ and $\log4$. All eight graphs give normaliser $15/4$, triangle probability $2/15$, expected edge count $6/5$, and marginal edge probability $2/5$. Conditional edge probabilities are $1/3$ or $2/3$.
+- Explains likelihood equations as observed-minus-expected statistics. Keeps the derivative in a folded section; does not develop advanced estimation algorithms.
+- Replaces the teaching material's data and diagnostic plots with new SVGs and an exact triangle-count check over all 64 labelled four-node graphs under $G(4,2/3)$. The observed graph has one triangle, and the model mean is $32/27$. Labels separate exact probabilities, observations, and illustrative parameter choices.
+- Public references are external only. Original PDFs, QMD source, lecturer figures, R code, real-network data, and fitted result tables are not copied into the website. The Obsidian source remains unchanged. The three recurring source folders are unchanged.

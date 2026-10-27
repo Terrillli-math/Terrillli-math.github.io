@@ -34,6 +34,7 @@ website:
           contents:
             - notes/math1972-seminar/network-analysis.qmd
             - notes/math1972-seminar/random-networks.qmd
+            - notes/math1972-seminar/exponential-random-graphs.qmd
   navbar:
     left:
       - text: Home

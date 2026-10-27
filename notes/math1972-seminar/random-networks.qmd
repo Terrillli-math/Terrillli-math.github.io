@@ -555,4 +555,4 @@ Frieze, A., & Karoński, M. (2026). *Introduction to random graphs* (Author manu
 
 ---
 
-[Previous: Introduction to Network Analysis](network-analysis.qmd) · [MATH1972 Seminar Notes](index.qmd)
+[Previous: Introduction to Network Analysis](network-analysis.qmd) · [Next: Exponential Random Graph Models](exponential-random-graphs.qmd) · [MATH1972 Seminar Notes](index.qmd)
