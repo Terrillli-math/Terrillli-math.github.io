@@ -2,6 +2,9 @@
 title: "Exponential Random Graph Models"
 description: "Move from independent edges to a probability model for a whole network. Derive likelihoods, interpret coefficients, and check model fit."
 categories: [math1972, network analysis]
+format:
+  html:
+    css: ../calculus/equation-layout.css
 ---
 
 ## From Random Edges to Network Structure
@@ -167,7 +170,7 @@ $$
 \mathbb E[D_i\mid x]=\sum_{j\ne i}p_{ij}.
 $$
 
-For node $4$, this is $4/7+8/11+8/11=156/77\approx2.026$. Its observed degree is only $1$. A model describes a range of possible outcomes. A positive coefficient does not impose an ordering on observed degrees.
+For node $4$, add $4/7$ and two copies of $8/11$. The expected degree is $156/77\approx2.026$. Its observed degree is only $1$. A model describes a range of possible outcomes. A positive coefficient does not impose an ordering on observed degrees.
 
 ## From Edge Probabilities to a Whole-Graph Model
 
@@ -184,6 +187,17 @@ Shared endpoints do not invalidate this assumption. The node features are fixed 
 
 Substituting the logistic expression gives
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\Pr_\beta(A=a\mid x)=\frac{\exp\{\beta_0T_0(a)+\beta_1T_1(a,x)\}}
+{\kappa(\beta,x)}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\Pr_\beta(A=a\mid x)\\
@@ -191,6 +205,9 @@ $$
 {\kappa(\beta,x)}.
 \end{aligned}
 $$
+
+:::
+::::
 
 Here
 
@@ -216,6 +233,21 @@ This changes how we see the model. Instead of assigning separate edge probabilit
 
 Let $\mathcal G_n$ contain all simple undirected graphs on these $n$ labelled nodes. It has $2^N$ elements. Choose statistics $T_0,\ldots,T_K$. For finite parameters, define
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\begin{aligned}
+\Pr_\theta(A=a\mid x)&=\frac{\exp\{\sum_{r=0}^K\theta_rT_r(a,x)\}}
+{\kappa(\theta,x)},\\
+\kappa(\theta,x)&=\sum_{b\in\mathcal G_n}
+\exp\{\sum_{r=0}^K\theta_rT_r(b,x)\}.
+\end{aligned}
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\Pr_\theta(A=a\mid x)\\
@@ -226,6 +258,9 @@ $$
 \exp\{\sum_{r=0}^K\theta_rT_r(b,x)\}.
 \end{aligned}
 $$
+
+:::
+::::
 
 The **normalising constant** $\kappa$ makes the probabilities sum to one. It depends on the parameters and on the fixed covariates. It is constant across possible graphs for one parameter choice. It is not constant when we change the parameters to fit the model.
 
@@ -261,6 +296,18 @@ $$
 
 The normaliser cancels when we divide the two graph probabilities. Therefore the conditional odds of this edge are
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\frac{\Pr(A_{ij}=1\mid A_{-ij}=a_{-ij},x)}
+{\Pr(A_{ij}=0\mid A_{-ij}=a_{-ij},x)}
+=\exp\{\sum_r\theta_r\Delta_{ij}T_r\}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\frac{\Pr(A_{ij}=1\mid A_{-ij}=a_{-ij},x)}
@@ -268,6 +315,9 @@ $$
 &\qquad=\exp\{\sum_r\theta_r\Delta_{ij}T_r\}.
 \end{aligned}
 $$
+
+:::
+::::
 
 Here $A_{-ij}$ means all edge variables except the chosen one. Taking logarithms gives a linear expression in the change statistics.
 
@@ -279,6 +329,17 @@ $$
 
 For the edge-and-triangle model,
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\Pr(A_{ij}=1\mid A_{-ij}=a_{-ij})
+=\frac{1}{1+\exp\{-(\theta_E+\theta_Ts_{ij})\}}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\Pr(A_{ij}=1\mid A_{-ij}=a_{-ij})\\
@@ -286,7 +347,10 @@ $$
 \end{aligned}
 $$
 
-For $\theta_T>0$, an extra shared neighbour multiplies the conditional odds by $e^{\theta_T}$. This is an exact interpretation while the remaining edges are fixed. It is not a causal claim about how a network formed over time.
+:::
+::::
+
+Compare two configurations of the remaining edges. If one configuration gives the endpoints one extra shared neighbour, its conditional odds for the candidate edge are $e^{\theta_T}$ times those for the other configuration. For $\theta_T>0$, the odds are higher in the configuration with more shared neighbours. These odds describe an association between edges in the model.
 
 ![Conditional probabilities for a candidate edge on three nodes. With no shared neighbour its probability is 1/3. With one shared neighbour its probability is 2/3. The dashed edge is the candidate, not an observed edge.](images/ergm-edge-toggle.svg){#fig-ergm-toggle width=640 fig-align="center"}
 
@@ -411,6 +475,18 @@ Each triple is a triangle with probability $p^3$. Different triangle indicators 
 
 Since there are only $64$ graphs, we can obtain the full distribution without simulation:
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\Pr(t(A)=r)=\sum_{b:\,t(b)=r}
+\left(\frac23\right)^{m(b)}
+\left(\frac13\right)^{6-m(b)}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\Pr(t(A)=r)\\
@@ -419,6 +495,9 @@ $$
 \left(\frac13\right)^{6-m(b)}.
 \end{aligned}
 $$
+
+:::
+::::
 
 ![Exact triangle-count probabilities under G(4, 2/3), found by enumerating all 64 labelled graphs. The observed example has one triangle. Three triangles cannot occur on four nodes.](images/ergm-triangle-check.svg){#fig-ergm-triangle-check width=640 fig-align="center"}
 

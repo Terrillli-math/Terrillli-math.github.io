@@ -32,7 +32,7 @@ $$
 
 One complex function now holds both real integrands. We can integrate it once, then separate its real and imaginary parts.
 
-The same idea will work with polynomial factors. It will also work with products and integer powers of sine and cosine. The useful step is to turn those products into a finite sum of exponentials.
+The same idea will work with polynomial factors. It also works with products of nonnegative integer powers of sine and cosine. The useful step is to turn those products into a finite sum of exponentials.
 
 ## Integrating a Complex Exponential
 
@@ -631,24 +631,24 @@ Here $P$ is a real polynomial. The frequencies $a_m,b_j$ and the parameter $c$ a
 
 Those integer powers matter. Expanding them uses only finite products and finite binomial sums. No infinite series is needed. An empty product is understood to be $1$.
 
-The trigonometric product can therefore be written as
+Let $S$ be the finite set of real frequencies in the expansion. The trigonometric product can be written as
 
 $$
-\sum_{\gamma\in\Gamma}\alpha_\gamma e^{i\gamma x},
+\sum_{\nu\in S}\alpha_\nu e^{i\nu x}.
 $$
 
-where $\Gamma$ is a finite set of real frequencies. The coefficients $\alpha_\gamma$ may be complex. Hence
+Here $\nu$ is a frequency in $S$, and $\alpha_\nu$ is its coefficient. The coefficient may be complex. Hence
 
 $$
-f(x)=\sum_{\gamma\in\Gamma}
-\alpha_\gamma P(x)e^{(c+i\gamma)x}.
+f(x)=\sum_{\nu\in S}
+\alpha_\nu P(x)e^{(c+i\nu)x}.
 $$
 
 We can now follow one procedure:
 
 1. Replace each sine and cosine by its exponential expression.
 2. Expand the finite products and collect equal frequencies.
-3. Integrate each term using the polynomial formula. If $c+i\gamma=0$, integrate that polynomial term directly.
+3. Integrate each term using the polynomial formula. If $c+i\nu=0$, integrate that polynomial term directly.
 4. Combine the results and use Euler's formula to return to real functions.
 
 Since $f$ is real-valued, we may take the real part of the resulting complex primitive. Its derivative is still $f$. After combining terms, a real answer can be written as
@@ -657,7 +657,7 @@ Since $f$ is real-valued, we may take the real part of the resulting complex pri
 ::: {.equation-wide}
 
 $$
-e^{cx}\sum_{\gamma\in\Gamma}\bigl[A_\gamma(x)\cos(\gamma x)+B_\gamma(x)\sin(\gamma x)\bigr]+C,
+e^{cx}\sum_{\nu\in S}\bigl[A_\nu(x)\cos(\nu x)+B_\nu(x)\sin(\nu x)\bigr]+C,
 $$
 
 :::
@@ -665,17 +665,17 @@ $$
 
 $$
 \begin{aligned}
-e^{cx}\biggl[&\sum_{\gamma\in\Gamma}
-A_\gamma(x)\cos(\gamma x)\\
-&+\sum_{\gamma\in\Gamma}
-B_\gamma(x)\sin(\gamma x)\biggr]+C,
+e^{cx}\biggl[&\sum_{\nu\in S}
+A_\nu(x)\cos(\nu x)\\
+&+\sum_{\nu\in S}
+B_\nu(x)\sin(\nu x)\biggr]+C,
 \end{aligned}
 $$
 
 :::
 ::::
 
-with real polynomials $A_\gamma$ and $B_\gamma$. A zero frequency contributes a polynomial when $c=0$. That term may have degree one higher than $P$.
+with real polynomials $A_\nu$ and $B_\nu$. A zero frequency contributes a polynomial when $c=0$. That term may have degree one higher than $P$.
 
 For a single sine or cosine factor, there is no need to expand a whole product. We can start with $P(x)e^{(c+ib)x}$ and take its imaginary or real part, just as in the first two examples.
 

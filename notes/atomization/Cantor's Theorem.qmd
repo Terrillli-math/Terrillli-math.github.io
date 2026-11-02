@@ -15,7 +15,7 @@ For finite sets, this follows from $|\mathcal{P}(A)|=2^{|A|}>|A|$. Cantor's theo
 ## Functions and Cardinality
 
 - $|A|\leq|B|$ means that there is an injection $A\to B$.
-- $|A|\geq|B|$ means that there is a surjection $A\to B$ (assuming the axiom of choice when stated in full generality).
+- $|A|\geq|B|$ means that there is an injection $B\to A$.
 - $|A|=|B|$ means that there is a bijection $A\to B$.
 :::
 
@@ -33,9 +33,11 @@ S=\{a\in A:a\notin f(a)\}.
 $$
 Since $S\subseteq A$, it belongs to $\mathcal{P}(A)$. Suppose, for a contradiction, that $f$ is surjective. Then some $s\in A$ satisfies $f(s)=S$. But the definition of $S$ gives
 $$
-s\in S\quad\Longleftrightarrow\quad s\notin f(s)=S,
+s\in S\quad\Longleftrightarrow\quad s\notin f(s)\quad\Longleftrightarrow\quad s\notin S,
 $$
-which is impossible. Therefore $f$ is not surjective, and $|A|<|\mathcal{P}(A)|$.
+which is impossible. Thus no function $A\to\mathcal{P}(A)$ is surjective.
+
+An injection $j:\mathcal{P}(A)\to A$ would give such a surjection. Send each $j(T)$ back to $T$, and send every element outside the image of $j$ to $\varnothing$. Each $T\in\mathcal{P}(A)$ would have a preimage $j(T)$, contradicting the diagonal argument. Together with the injection in Step 1, this proves $|A|<|\mathcal{P}(A)|$.
 
 ::: {.callout-tip}
 ## A Connection with Russell's Paradox

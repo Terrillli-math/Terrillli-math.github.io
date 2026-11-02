@@ -20,10 +20,11 @@ $$
 $$
 x \notin S.
 $$
-We can list the elements of $S$ with curly braces:
+For a finite set, we can list its elements in braces, as in $S=\{x_1,\ldots,x_n\}$. Some infinite sets can also be listed in a sequence:
 $$
 S = \{x_1, x_2, x_3, \cdots\}
 $$
+A set can also be described by a condition for membership. This works for sets whose elements cannot be listed in a sequence.
 
 ::: {.callout-note}
 ## Example

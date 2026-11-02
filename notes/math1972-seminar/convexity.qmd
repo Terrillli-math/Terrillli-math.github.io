@@ -268,7 +268,7 @@ The penalty has two roles here. It discourages large weights. It also removes fl
 
 ## What to Keep in Mind
 
-Convexity is a property of the full problem. A convex objective does not rescue a nonconvex feasible set. A local minimum becomes global only when both the objective and the feasible set have the required convexity.
+A convex objective on a convex feasible set guarantees that every local minimum is global. The proof uses convexity of the set to stay feasible and convexity of the objective to compare values along the segment.
 
 Before differentiating, check the domain and the constraints. Then ask whether the function is smooth. These small checks tell us which tools apply.
 

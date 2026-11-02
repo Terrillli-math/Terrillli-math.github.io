@@ -13,3 +13,9 @@ A function $f:X\to Y$ can be seen as a set $\Gamma\subseteq X\times Y$. For each
 $$
 	\Gamma = \{ (x,y) : x \in X \land f(x) = y \} = \{ (x, f(x)) : x \in X \}\subseteq X \times Y.
 $$
+
+## Sequences
+
+An infinite *sequence* in a set $Y$ is a function $a:\mathbb{N}\to Y$. Here $\mathbb{N}=\{0,1,2,\ldots\}$. We write $a_n$ for the value $a(n)$ and $(a_n)_{n\geq0}$ for the whole sequence. A finite sequence of length $m$ can be indexed by $0,1,\ldots,m-1$.
+
+For example, the rule $a_n=(-1)^n$ gives the sequence $(1,-1,1,-1,\ldots)$. Its set of values is $\{-1,1\}$. The sequence also records which value occurs at each index.

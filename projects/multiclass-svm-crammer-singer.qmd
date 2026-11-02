@@ -28,7 +28,7 @@ $$
 s_k(x) = w_k^\top x.
 $$
 
-The predicted class is the class with the largest score:
+The predicted class is the class with the largest score. A fixed rule selects one class if several share that score.
 
 $$
 \hat y = \operatorname*{arg\,max}_{k \in \{1,\ldots,K\}} w_k^\top x.
@@ -57,7 +57,8 @@ The model aims for $m_i \ge 1$. This condition says more than “the correct cla
 This leads to a useful distinction:
 
 - If $m_i < 0$, the example is misclassified.
-- If $0 \le m_i < 1$, the prediction is correct but not confident enough under the SVM margin rule.
+- If $m_i=0$, the true class is tied for the largest score. The prediction depends on how ties are resolved.
+- If $0<m_i<1$, the prediction is correct and falls short of the desired margin.
 - If $m_i \ge 1$, the example satisfies the desired margin.
 
 The hinge loss for one example is
@@ -102,7 +103,7 @@ The loss is now zero. This example shows why accuracy alone is not enough during
 
 ## 5. The Primal Optimisation Problem
 
-A common form of the Crammer-Singer primal problem is
+Let $W$ collect the class weight vectors. A common form of the Crammer-Singer primal problem is
 
 $$
 \min_{W,\,\xi}
@@ -111,7 +112,7 @@ $$
 + C\sum_{i=1}^{n}\xi_i
 $$
 
-subject to
+subject to the following constraints for each training example $i$
 
 $$
 w_{y_i}^\top x_i - w_k^\top x_i
@@ -127,10 +128,10 @@ $$
 
 The two parts of the objective have different roles:
 
-- $\frac12\sum_k\lVert w_k\rVert^2$ controls model complexity. Smaller weights usually give a smoother decision rule.
+- $\frac12\sum_k\lVert w_k\rVert^2$ penalises large weights. The norm of each weight vector bounds how much its score can change per unit of input movement.
 - $C\sum_i\xi_i$ penalises margin violations.
 
-The parameter $C$ sets the trade-off. A large $C$ places more pressure on the model to fit the training data. A small $C$ allows more violations in exchange for stronger regularisation.
+The parameter $C>0$ sets the trade-off. A larger $C$ places more weight on fitting the training data. A smaller $C$ places relatively more weight on keeping the norms small.
 
 At the optimum, the slack variable for example $i$ equals its hinge loss:
 
@@ -141,7 +142,7 @@ $$
 
 This gives a simple interpretation. There is one slack value for each example because the strongest rival already summarises all wrong classes.
 
-The original paper places a parameter $\beta$ in front of the regularisation term. This note uses the more familiar $C$ form. The two forms are equivalent after rescaling the objective. The symbols differ, but the trade-off is the same (Crammer & Singer, 2001).
+The original paper multiplies the norm penalty by $\beta>0$ and gives each slack variable a coefficient of $1$. Dividing that objective by $\beta$ gives the form above with $C=1/\beta$ (Crammer & Singer, 2001).
 
 ## 6. Why the Problem Is Convex
 
@@ -151,13 +152,21 @@ Therefore, the full primal problem is convex. Any local optimum is a global opti
 
 ## 7. From the Primal to the Dual
 
-The paper writes all class vectors as the rows of a matrix $M$. It then introduces non-negative Lagrange multipliers $\eta_{i,r}$ for the margin constraints. The stationarity conditions give two important relations:
+The paper writes the class weight vectors as the rows of a matrix $M$. It combines the two kinds of constraints into one formula for every example $i$ and every class $r$.
+
+$$
+M_{y_i}\cdot x_i+\delta_{y_i,r}-M_r\cdot x_i\ge1-\xi_i.
+$$
+
+Here $\delta_{y_i,r}$ is $1$ when $y_i=r$ and $0$ otherwise. For $r\ne y_i$, this is a margin constraint. For $r=y_i$, it reduces to $\xi_i\ge0$.
+
+Let $\eta_{i,r}\ge0$ be the multiplier for that constraint. In the paper's $\beta$ formulation, the coefficient of $\xi_i$ in the Lagrangian is $1-\sum_r\eta_{i,r}$. Stationarity in $\xi_i$ gives
 
 $$
 \sum_{r=1}^{K}\eta_{i,r}=1
 $$
 
-for every training example $i$, and
+for every example $i$. Stationarity in the weights gives
 
 $$
 M_r
@@ -166,9 +175,7 @@ M_r
 \bigl(\delta_{y_i,r}-\eta_{i,r}\bigr)x_i.
 $$
 
-Here $\delta_{y_i,r}$ is $1$ when $y_i=r$ and $0$ otherwise.
-
-The second equation gives the main structural insight. Each class vector is a weighted combination of training examples. The data points do not disappear after optimisation. They determine the final decision rule through the dual coefficients.
+Write $\tau_{i,r}=\delta_{y_i,r}-\eta_{i,r}$. Up to the common factor $1/\beta$, these coefficients express each class weight vector as a weighted sum of the training examples.
 
 The first equation says that the multiplier vector for each example lies on a simplex. Its components sum to one. This creates a probability-like geometry, but the multipliers are optimisation variables. They are not predicted class probabilities.
 
@@ -176,7 +183,7 @@ The first equation says that the multiplier vector for each example lies on a si
 
 In a binary SVM, the important training examples are called support vectors. Crammer and Singer use the related idea of a **support pattern**.
 
-An example becomes a support pattern when its dual coefficients affect the learned class vectors. These examples usually lie on a margin boundary or violate a margin constraint. Easy examples that sit well inside the correct region often have no active contribution.
+An example is a support pattern when $\tau_{i,r}\ne0$ for at least one class $r$. If the margin is strictly above one, all the wrong class constraints have room, so their multipliers are zero by complementary slackness. The simplex equation then gives $\eta_{i,y_i}=1$ and every coefficient $\tau_{i,r}$ is zero.
 
 This gives another way to read the model. Training is driven mainly by ambiguous or difficult examples. Those examples reveal where the class boundaries need support.
 
@@ -188,15 +195,13 @@ $$
 K(x_i,x_j)=\langle \phi(x_i),\phi(x_j)\rangle.
 $$
 
-The prediction rule then has the form
+The factor $1/\beta$ in the weight formula is positive and common to all class scores, so it leaves their ordering unchanged. The prediction rule becomes
 
 $$
 \hat y
 = \operatorname*{arg\,max}_{r}
-\sum_{i=1}^{n}\tau_{i,r}K(x,x_i),
+\sum_{i=1}^{n}\tau_{i,r}K(x,x_i).
 $$
-
-where $\tau_{i,r}$ are transformed dual coefficients.
 
 The kernel trick does not simply “reduce the dimension.” It avoids writing the feature map $\phi(x)$ explicitly. This can make a high-dimensional or even infinite-dimensional feature space usable. It also allows nonlinear decision boundaries in the original input space.
 
@@ -231,11 +236,11 @@ The direct method is elegant, but it is not always the best choice. OVR is often
 
 ### 12.1 Correct Is Not the Same as Confident
 
-A correct prediction can still have positive loss. The correct class must beat every wrong class by at least the required margin.
+A correct prediction can still have positive loss. Zero hinge loss requires the correct class to beat every wrong class by at least one point.
 
 ### 12.2 The Loss Couples All Classes
 
-The correct class is compared with its strongest rival. If the strongest rival changes, the active constraint also changes. This is the central multiclass feature of the method.
+The strongest rival determines the margin. When the margin is at most one, its constraint is tight at the smallest feasible slack. If several rivals tie for the largest wrong score, their constraints are all tight in this case. When the margin exceeds one, every rival constraint has room.
 
 ### 12.3 One Example Can Support Several Class Boundaries
 
@@ -243,7 +248,7 @@ An ambiguous example can influence more than one class vector through its dual c
 
 ### 12.4 Regularisation Prevents Score Inflation
 
-Without a penalty on the weights, the model could increase score gaps by scaling the weight vectors. The norm penalty makes large weights costly. It forces the model to balance margin size with model complexity.
+Multiplying every weight vector by the same positive factor leaves predictions unchanged and scales the score gaps. If the data are strictly separable, scaling the weights up can drive the hinge loss to zero. The norm penalty makes this scaling costly.
 
 ### 12.5 The Strongest Competitor Carries Useful Information
 

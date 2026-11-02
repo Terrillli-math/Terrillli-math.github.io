@@ -85,3 +85,20 @@ The worked numerical examples and graph structure were replaced with independent
 - Replaces all concrete worked examples with $e^{2x}\sin x$, its cosine companion, the polynomial factor $x+1$, and the product $(x+1)e^{2x}\sin x\cos(3x)$. Uses fresh frequencies $4$ and $2$ in the product calculation. Adds the finite-interval example $\int_0^\pi e^{2x}\sin x\,dx=(e^{2\pi}+1)/5$.
 - Makes the general polynomial primitive explicit as a finite derivative sum. Proves it using $\omega Q+Q'=P$ and pairwise cancellation. Explains why separating frequencies keeps the final product answer readable.
 - The public note has no references section or source-file links. No source file is copied into the repository or modified. The new Calculus collection is maintained outside the automatic Notes index region; recurring sync keeps its original three source folders.
+
+## Sitewide Mathematics Review
+
+### Mathematical Corrections
+
+- Cantor's theorem now compares cardinalities by injections. The proof explicitly rules out an injection from the power set back into the original set. Basic Set Theory limits enumeration to at most countable sets. Cardinality & Power Sets shows how a singleton can be both an element and a subset.
+- The real polynomial factorisation applies to nonzero polynomials and includes a constant factor. The Euler integration introduction now specifies nonnegative integer powers. The Nim proof targets nonnegative integers below the XOR.
+- Convexity is a sufficient condition for the stated local-to-global result. The Lagrangian term is strictly negative at a strictly feasible point only for a positive multiplier. Scaling an SVM separator gives at least one tight margin constraint. Both classes touch their respective planes at a hard-margin optimum with both classes present.
+- The Crammer–Singer note treats zero margin as a tie. It relates the paper's all-class multipliers to the nonnegative slack constraint and defines the coefficients in kernel prediction. It distinguishes the strongest rival from a tight constraint.
+- The network notes state when density and global transitivity are defined. They distinguish the connectivity threshold scale from a condition for connectivity with high probability. The ERGM odds comparison specifies which remaining edges are conditioned on in each configuration.
+
+### Added Explanations and Presentation
+
+- Functions & Sequences now defines a sequence as a function on an index set and gives a short example.
+- The kernel note explains scaling in terms of numerical magnitudes. The multiclass SVM note relates regularisation to score sensitivity.
+- Random Networks and Connectivity and Exponential Random Graph Models now keep each compact equality on one line at desktop widths. Narrow columns use the existing split forms. The network introduction uses descriptive figure captions.
+- The Euler integration note uses $S$ for the set of frequencies and $\nu$ for one frequency.

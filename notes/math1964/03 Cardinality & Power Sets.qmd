@@ -34,7 +34,9 @@ Both $\varnothing$ and $S$ belong to $\mathcal{P}(S)$. If $|S|=n$ is finite, the
 ::: {.callout-tip}
 ## Elements and Subsets Are Different
 
-For $A=\{a,b,c\}$, we have $a\in A$, $\{a\}\subseteq A$, and $\{a\}\in\mathcal{P}(A)$. But $\{a\}\notin A$.
+For $A=\{1,2,3\}$, we have $1\in A$, $\{1\}\subseteq A$, and $\{1\}\in\mathcal{P}(A)$. Here $\{1\}\notin A$.
+
+For $B=\{1,\{1\}\}$, the set $\{1\}$ is both an element and a subset of $B$. The two statements describe different relationships.
 :::
 
 ### Comparing $\mathcal{P}(\mathbb{N})$ and $\mathcal{P}(\mathbb{Z})$

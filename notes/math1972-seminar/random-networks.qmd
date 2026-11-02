@@ -2,6 +2,9 @@
 title: "Random Networks and Connectivity"
 description: "Build a random graph from independent edges, then use probability to study degrees, isolated nodes, and connectivity."
 categories: [math1972, network analysis]
+format:
+  html:
+    css: ../calculus/equation-layout.css
 ---
 
 ## From a Network to a Random Model
@@ -171,6 +174,16 @@ The expected degree stays close to $\lambda$. Each node has many possible neighb
 
 For a fixed integer $k\geq0$, the binomial formula gives
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\Pr(D_i=k)=\binom{n-1}{k}p_n^k(1-p_n)^{n-1-k}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 \Pr(D_i=k)
@@ -179,7 +192,21 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 Put $s=n-1$. We can separate the expression into three factors:
+
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\Pr(D_i=k)=\frac{(sp_n)^k}{k!}
+\left[\prod_{r=0}^{k-1}\left(1-\frac r s\right)\right](1-p_n)^{s-k}.
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -189,6 +216,9 @@ $$
 &\quad\cdot(1-p_n)^{s-k}.
 \end{aligned}
 $$
+
+:::
+::::
 
 The product is $1$ when $k=0$. For any fixed $k$, its factors tend to $1$. The first factor tends to $\lambda^k/k!$.
 
@@ -295,6 +325,19 @@ Markov turns a small mean into a small chance of a large value. The nonnegative 
 
 If $Y$ has finite variance and $t>0$, apply Markov to $(Y-\mathbb E[Y])^2$:
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\begin{aligned}
+\Pr(|Y-\mathbb E[Y]|\geq t)&=\Pr((Y-\mathbb E[Y])^2\geq t^2)\\
+&\leq\frac{\operatorname{Var}(Y)}{t^2}.
+\end{aligned}
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\Pr(|Y-\mathbb E[Y]|\geq t)\\
@@ -302,6 +345,9 @@ $$
 &\quad\leq\frac{\operatorname{Var}(Y)}{t^2}.
 \end{aligned}
 $$
+
+:::
+::::
 
 Chebyshev controls deviation from the mean. If the variance is small compared with the square of the mean, relative deviations become unlikely.
 
@@ -395,6 +441,20 @@ The covariance is positive for $0<p<1$. Learning that $i$ is isolated already te
 
 Expanding the variance of the sum gives
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\begin{aligned}
+\operatorname{Var}(X)
+&=\sum_i\operatorname{Var}(I_i)+2\sum_{i<j}\operatorname{Cov}(I_i,I_j)\\
+&=nq(1-q)+n(n-1)p(1-p)^{2n-3}.
+\end{aligned}
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 \operatorname{Var}(X)
@@ -404,6 +464,9 @@ $$
 &\quad+n(n-1)p(1-p)^{2n-3}.
 \end{aligned}
 $$
+
+:::
+::::
 
 Divide by $\mu^2=n^2q^2$ to obtain the relative variance used above. Ignoring covariance would miss the second term.
 
@@ -545,7 +608,7 @@ $$
 
 The mean number of isolated nodes grows linearly. The relative variance tends to zero, so $X/\mu_n\xrightarrow{p}1$. In particular, isolated nodes remain with high probability.
 
-The giant component can contain many nodes, but it does not contain every node. Connectivity needs the larger scale $p\sim\log n/n$, rather than merely a mean degree above one.
+The giant component leaves isolated nodes outside it. The connectivity threshold is on the larger scale $\log n/n$. At $p_n=\log n/n$, the connectivity probability tends to $e^{-1}$. At $p_n=2\log n/n$, the graph is connected with high probability.
 
 :::
 

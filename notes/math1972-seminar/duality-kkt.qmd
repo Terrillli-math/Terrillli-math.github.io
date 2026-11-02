@@ -51,7 +51,7 @@ The sign rule depends on how we write the constraint. For example, $x\geq1$ beco
 
 ### A Constraint Price Is an Analogy
 
-An inequality multiplier can be viewed as a price attached to its constraint. A large multiplier places more weight on that constraint in the Lagrangian. This analogy is useful, but the formula matters more than the label. The Lagrangian is not simply a positive penalty for every feasible point. At a strictly feasible point, an inequality term is negative.
+An inequality multiplier can be viewed as a price attached to its constraint. A large multiplier places more weight on that constraint in the Lagrangian. When $f_i(x)<0$, the term $\lambda_i f_i(x)$ is negative if $\lambda_i>0$ and zero if $\lambda_i=0$.
 
 Under suitable regularity assumptions, optimal multipliers also describe how the optimal value changes when a constraint is relaxed. We will use only the simpler idea here: the multipliers balance the objective against the constraints.
 

@@ -162,13 +162,13 @@ The argument above identifies winning and losing positions. A little more work p
 
 Assume the formula already holds for all smaller positions. No move can leave the XOR equal to $S$, since changing $a$ to $b$ changes the sum by $a\oplus b\ne0$.
 
-Now take any integer $r<S$. At the highest binary place where $S$ and $r$ differ, $S$ has a $1$ and $r$ has a $0$. Choose a pile $a$ with a $1$ in that place. Replace it by
+Now take any integer $r$ with $0\le r<S$. At the highest binary place where $S$ and $r$ differ, $S$ has a $1$ and $r$ has a $0$. Choose a pile $a$ with a $1$ in that place. Replace it by
 $$
 b=a\oplus S\oplus r.
 $$
 As before, the highest changed digit drops from $1$ to $0$. Thus $b<a$. The new XOR is $r$.
 
-So the values of the next positions include every number below $S$, but exclude $S$ itself. Their mex is exactly $S$. This proves the formula by induction, starting from the empty position.
+So the values of the next positions include every nonnegative integer below $S$ and exclude $S$ itself. Their mex is exactly $S$. This proves the formula by induction, starting from the empty position.
 
 ## A Worked Example
 

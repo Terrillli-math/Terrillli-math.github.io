@@ -33,7 +33,7 @@ $$
 
 Each edge is an unordered pair. The pair $\{1,2\}$ is the same edge as $\{2,1\}$. We count it once.
 
-![An author-created seven-node graph. A triangle on nodes 1, 2, and 3 is joined by edge 3-4 to a four-cycle on nodes 4, 5, 6, and 7.](images/network-example.svg){#fig-example-network width=700 fig-align="center"}
+![A seven-node graph. Edge 3-4 joins a triangle on nodes 1, 2, and 3 to a four-cycle on nodes 4, 5, 6, and 7.](images/network-example.svg){#fig-example-network width=700 fig-align="center"}
 
 The graph has two simple parts: a triangle and a four-cycle. The edge $\{3,4\}$ joins them. It is a **bridge**: removing it splits the graph into two components.
 
@@ -129,7 +129,7 @@ $$
 
 edges. This counts every pair of distinct nodes once.
 
-The **edge density** is the fraction of those possible edges that are present:
+For $n\geq2$, the **edge density** is the fraction of those possible edges that are present:
 
 $$
 \rho=\frac{m}{\binom n2}.
@@ -162,7 +162,7 @@ The value lies between $0$ and $1$. It measures the density *inside the neighbor
 
 The neighbors of node $3$ are $1$, $2$, and $4$. They have three possible pairs. Only $\{1,2\}$ is an edge.
 
-![The author-created graph with node 3 in purple and its neighbors 1, 2, and 4 in blue. The orange edge 1-2 is the only edge among those three neighbors.](images/network-neighborhood.svg){#fig-node-three-neighborhood width=700 fig-align="center"}
+![Node 3 is purple, and its neighbors 1, 2, and 4 are blue. The orange edge 1-2 is the only edge among those three neighbors.](images/network-neighborhood.svg){#fig-node-three-neighborhood width=700 fig-align="center"}
 
 Therefore,
 
@@ -198,6 +198,8 @@ $$
 C_{\mathrm{global}}
 =\frac{3T}{\sum_i\binom{k_i}{2}}.
 $$
+
+This ratio is undefined if there are no connected triples. For example, it is undefined in a graph with just one edge.
 
 Each triangle closes three triples, one at each of its nodes. Our graph has one triangle: $\{1,2,3\}$. It has
 
@@ -292,7 +294,7 @@ A graph is **connected** if every pair of nodes has a path between them. A **con
 
 Now add an eighth node without any edges.
 
-![The author-created seven-node graph forms one connected component. A separate node labelled 8 has no edges and forms a second component.](images/network-isolated-node.svg){#fig-isolated-node width=700 fig-align="center"}
+![The original seven nodes form one connected component. A separate node labelled 8 has no edges and forms a second component.](images/network-isolated-node.svg){#fig-isolated-node width=700 fig-align="center"}
 
 There are two components: $\{1,2,3,4,5,6,7\}$ and $\{8\}$. The new node has degree $0$. No path joins it to the other seven nodes.
 

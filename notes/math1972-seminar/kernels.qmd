@@ -174,7 +174,7 @@ For a Gaussian SVM, $C$ and $\gamma$ control different things:
 
 A large $\gamma$ permits a boundary that responds to very local patterns. A large $C$ makes fitting the training examples more important. Neither setting guarantees better predictions. Use validation data to choose them together (scikit-learn developers, n.d.).
 
-Feature scaling matters here too. A coordinate measured in large units can dominate $\lVert x-z\rVert^2$. The model then treats that coordinate as more important just because of its scale.
+Feature scaling matters here too. A coordinate whose values vary on a large numerical scale can dominate $\lVert x-z\rVert^2$. A change of units can therefore change how similar the model finds two points.
 
 ## What the Kernel Trick Does and Does Not Give Us
 
