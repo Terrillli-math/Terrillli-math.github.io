@@ -69,3 +69,19 @@ The worked numerical examples and graph structure were replaced with independent
 - Explains likelihood equations as observed-minus-expected statistics. Keeps the derivative in a folded section; does not develop advanced estimation algorithms.
 - Replaces the teaching material's data and diagnostic plots with new SVGs and an exact triangle-count check over all 64 labelled four-node graphs under $G(4,2/3)$. The observed graph has one triangle, and the model mean is $32/27$. Labels separate exact probabilities, observations, and illustrative parameter choices.
 - Public references are external only. Original PDFs, QMD source, lecturer figures, R code, real-network data, and fitted result tables are not copied into the website. The Obsidian source remains unchanged. The three recurring source folders are unchanged.
+
+## Integration with Euler's Formula
+
+### Mathematical Corrections and Caveats
+
+- Repairs the general power identity: $\sin^m t=[-i\sinh(it)]^m=(-i)^m[\sinh(it)]^m$. A single factor of $-i$ outside the power is not valid in general. Requires nonnegative integer trigonometric powers for a finite exponential expansion.
+- States that the integration variable is real. Complex-valued integrals and antiderivatives are handled by their real and imaginary parts. Constants in the two real primitives are independently arbitrary.
+- Keeps the condition $\omega\ne0$ for division by a complex frequency. Terms with $\omega=0$ are integrated as polynomials. The general real answer has the factor $e^{cx}$, rather than the special-case factor $e^x$.
+- The source's final worked product primitive contains an incorrect cosine coefficient: $(25x-1)/100$ should be $(25x-25)/100$ in its original example. That worked example is replaced entirely. All new primitives are checked by differentiation.
+
+### Added Explanations and Replacement Examples
+
+- Keeps the full progression from Euler's formula to one trigonometric factor, a polynomial factor, trigonometric products, hyperbolic notation, and the general finite-product method. The website copy is one complete note.
+- Replaces all concrete worked examples with $e^{2x}\sin x$, its cosine companion, the polynomial factor $x+1$, and the product $(x+1)e^{2x}\sin x\cos(3x)$. Uses fresh frequencies $4$ and $2$ in the product calculation. Adds the finite-interval example $\int_0^\pi e^{2x}\sin x\,dx=(e^{2\pi}+1)/5$.
+- Makes the general polynomial primitive explicit as a finite derivative sum. Proves it using $\omega Q+Q'=P$ and pairwise cancellation. Explains why separating frequencies keeps the final product answer readable.
+- The public note has no references section or source-file links. No source file is copied into the repository or modified. The new Calculus collection is maintained outside the automatic Notes index region; recurring sync keeps its original three source folders.

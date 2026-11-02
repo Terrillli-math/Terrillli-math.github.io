@@ -1,0 +1,14 @@
+---
+title: "Calculus"
+toc: false
+---
+
+Notes on calculus methods and the ideas behind them.
+
+[**Integration with Euler's Formula**](euler-formula-integration.qmd)
+
+Keep sine and cosine together as one complex exponential. Start with a simple integral, add a polynomial factor, then extend the same idea to products of trigonometric functions.
+
+---
+
+[All Notes](../index.qmd)

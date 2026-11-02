@@ -11,4 +11,5 @@ A selection of my course notes and shorter mathematical explorations.
 - [MATH1964: Discrete Mathematics for Computation (Adv)](<math1964/index.qmd>)
 <!-- END GENERATED NOTE COLLECTIONS -->
 
+- [Calculus](<calculus/index.qmd>) — integration methods and the ideas behind them.
 - [MATH1972 Seminar Notes](<math1972-seminar/index.qmd>) — game theory, optimisation, machine learning, and network analysis.

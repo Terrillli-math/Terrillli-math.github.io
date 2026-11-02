@@ -42,6 +42,7 @@ These are working notes. I expect to revisit them as my understanding improves.
 
 ## Start Reading
 
+- [Calculus](notes/calculus/index.qmd)
 - [MATH1964: Discrete Mathematics for Computation (Adv)](notes/math1964/index.qmd)
 - [MATH1972 Seminar Notes](notes/math1972-seminar/index.qmd)
 - [Atomization: Short Mathematical Notes](notes/atomization/index.qmd)

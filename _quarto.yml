@@ -14,6 +14,13 @@ website:
   description: "Mathematics notes and a record of learning."
   search: true
   sidebar:
+    - id: calculus
+      title: "Calculus"
+      style: docked
+      contents:
+        - text: "Calculus Overview"
+          href: notes/calculus/index.qmd
+        - notes/calculus/euler-formula-integration.qmd
     - id: math1972-seminar
       title: "MATH1972 Seminar Notes"
       style: docked
