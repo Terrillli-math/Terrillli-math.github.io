@@ -2,6 +2,9 @@
 title: "Integration with Euler's Formula"
 description: "Use one complex exponential to integrate exponential and trigonometric products, then extend the method to polynomial factors."
 categories: [calculus, complex numbers]
+format:
+  html:
+    css: equation-layout.css
 ---
 
 ## Keep Sine and Cosine Together
@@ -74,6 +77,16 @@ $$
 
 we have
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\frac{e^{(2+i)x}}{2+i}=\frac{e^{2x}}5\bigl[(2\cos x+\sin x)+i(2\sin x-\cos x)\bigr].
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 \frac{e^{(2+i)x}}{2+i}
@@ -83,7 +96,20 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 Taking the real and imaginary parts gives
+
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\int e^{2x}\cos x\,dx=\frac{e^{2x}}5(2\cos x+\sin x)+C
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -92,7 +118,20 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 and
+
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\int e^{2x}\sin x\,dx=\frac{e^{2x}}5(2\sin x-\cos x)+C.
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -101,9 +140,22 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 The denominator $5$ is $|2+i|^2$. It appears when we divide by $2+i$, rather than from a separate integration rule.
 
 More generally, let $a,b\in\mathbb R$ with $a^2+b^2>0$. The same calculation gives
+
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\int e^{ax}\cos(bx)\,dx=\frac{e^{ax}}{a^2+b^2}\bigl[a\cos(bx)+b\sin(bx)\bigr]+C,
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -114,6 +166,19 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\int e^{ax}\sin(bx)\,dx=\frac{e^{ax}}{a^2+b^2}\bigl[a\sin(bx)-b\cos(bx)\bigr]+C.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\int e^{ax}\sin(bx)\,dx\\
@@ -123,11 +188,24 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 These formulas also cover $a=0$ or $b=0$, provided they are not both zero. If both are zero, the cosine integrand is $1$ and the sine integrand is $0$. We integrate those directly.
 
 ## Adding a Polynomial Factor
 
 Now consider the pair
+
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\int (x+1)e^{2x}\cos x\,dx,\qquad \int (x+1)e^{2x}\sin x\,dx.
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{gathered}
@@ -135,6 +213,9 @@ $$
 \int (x+1)e^{2x}\sin x\,dx.
 \end{gathered}
 $$
+
+:::
+::::
 
 Again, combine them into one integral:
 
@@ -144,6 +225,20 @@ $$
 $$
 
 Integration by parts still plays a role. It now acts on a polynomial and a single exponential. With $u=x+1$ and $dv=e^{\omega x}\,dx$,
+
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\begin{aligned}
+\int (x+1)e^{\omega x}\,dx
+&=\frac{(x+1)e^{\omega x}}{\omega}-\frac1\omega\int e^{\omega x}\,dx\\
+&=e^{\omega x}\left(\frac{x+1}{\omega}-\frac1{\omega^2}\right)+K.
+\end{aligned}
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -155,7 +250,20 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 For $\omega=2+i$,
+
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\frac{x+1}{\omega}-\frac1{\omega^2}=\frac{(10x+7)-i(5x+1)}{25}.
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -164,7 +272,20 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 Multiplying by $e^{2x}(\cos x+i\sin x)$ now gives both answers:
+
+:::: {.equation-layout .equation-long}
+::: {.equation-wide}
+
+$$
+\int (x+1)e^{2x}\cos x\,dx=\frac{e^{2x}}{25}\bigl[(10x+7)\cos x+(5x+1)\sin x\bigr]+C,
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -175,6 +296,19 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
+:::: {.equation-layout .equation-long}
+::: {.equation-wide}
+
+$$
+\int (x+1)e^{2x}\sin x\,dx=\frac{e^{2x}}{25}\bigl[(10x+7)\sin x-(5x+1)\cos x\bigr]+C.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\int (x+1)e^{2x}\sin x\,dx\\
@@ -183,6 +317,9 @@ $$
 &\qquad\qquad-(5x+1)\cos x\bigr]+C.
 \end{aligned}
 $$
+
+:::
+::::
 
 The polynomial factor changes the coefficients of sine and cosine. It does not change the basic form of the answer.
 
@@ -213,12 +350,25 @@ $$
 
 There is also a direct way to understand the formula. Differentiating the proposed answer gives
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\frac{d}{dx}\bigl(e^{\omega x}Q(x)\bigr)=e^{\omega x}\bigl(\omega Q(x)+Q'(x)\bigr).
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\frac{d}{dx}\bigl(e^{\omega x}Q(x)\bigr)\\
 &\quad=e^{\omega x}\bigl(\omega Q(x)+Q'(x)\bigr).
 \end{aligned}
 $$
+
+:::
+::::
 
 So the whole integration problem reduces to finding a polynomial $Q$ such that
 
@@ -254,12 +404,25 @@ If $\omega=0$, the integrand is just $P(x)$. Use ordinary polynomial integration
 
 The next step is to handle more than one trigonometric factor. Euler's formula gives
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\sin t=\frac{e^{it}-e^{-it}}{2i},\quad \cos t=\frac{e^{it}+e^{-it}}2.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 \sin t&=\frac{e^{it}-e^{-it}}{2i},\\
 \cos t&=\frac{e^{it}+e^{-it}}2.
 \end{aligned}
 $$
+
+:::
+::::
 
 After substituting these expressions, a product of sines and cosines becomes a sum of exponentials. Multiplying exponentials just adds their exponents.
 
@@ -269,6 +432,16 @@ This is the link to the polynomial formula. Each term has the form $P(x)e^{\omeg
 
 For complex $z$, define
 
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\sinh z=\frac{e^z-e^{-z}}2,\quad \cosh z=\frac{e^z+e^{-z}}2.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 \sinh z&=\frac{e^z-e^{-z}}2,\\
@@ -276,7 +449,20 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 Then
+
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\sin t=-i\sinh(it),\quad \cos t=\cosh(it).
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -285,7 +471,20 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
 This is another notation for the same conversion. For a nonnegative integer $m$, the whole sine expression must be raised to the power:
+
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+\sin^m t=[-i\sinh(it)]^m=(-i)^m[\sinh(it)]^m.
+$$
+
+:::
+::: {.equation-narrow}
 
 $$
 \begin{aligned}
@@ -294,6 +493,9 @@ $$
 &=(-i)^m[\sinh(it)]^m.
 \end{aligned}
 $$
+
+:::
+::::
 
 The factor is $(-i)^m$, not a single $-i$ for every power. Writing the exponentials directly often makes this factor easier to track.
 
@@ -307,6 +509,20 @@ $$
 
 Expanding the two trigonometric factors gives
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\begin{aligned}
+\sin x\cos(3x)
+&=\frac1{4i}\bigl[e^{4ix}-e^{-4ix}-e^{2ix}+e^{-2ix}\bigr]\\
+&=\frac12\bigl[\sin(4x)-\sin(2x)\bigr].
+\end{aligned}
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\sin x\cos(3x)\\
@@ -315,6 +531,9 @@ $$
 &\quad=\frac12\bigl[\sin(4x)-\sin(2x)\bigr].
 \end{aligned}
 $$
+
+:::
+::::
 
 The product has split into two frequencies, $4$ and $2$. The last equality is also a product-to-sum identity. Here it follows directly from multiplying exponentials.
 
@@ -332,6 +551,16 @@ $$
 
 Then $F_b'(x)=(x+1)e^{2x}\sin(bx)$. Using $b=4$ and $b=2$ gives
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+F_4(x)=\frac{e^{2x}}{100}\bigl[(10x+13)\sin(4x)-(20x+16)\cos(4x)\bigr],
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &F_4(x)\\
@@ -341,6 +570,19 @@ $$
 \end{aligned}
 $$
 
+:::
+::::
+
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+F_2(x)=\frac{e^{2x}}8\bigl[2(x+1)\sin(2x)-(2x+1)\cos(2x)\bigr].
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &F_2(x)\\
@@ -349,6 +591,9 @@ $$
 &\qquad\qquad-(2x+1)\cos(2x)\bigr].
 \end{aligned}
 $$
+
+:::
+::::
 
 Therefore the required answer is
 
@@ -362,13 +607,25 @@ Keeping the answer in two pieces shows where each frequency comes from. It also 
 
 The general integrand has the form
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+f(x)=P(x)e^{cx}\prod_{m=1}^{M}\sin(a_mx)^{t_m}\prod_{j=1}^{J}\cos(b_jx)^{r_j}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
-f(x)&=P(x)e^{cx}\\
-&\quad\cdot\prod_{m=1}^{M}\sin(a_mx)^{t_m}\\
-&\quad\cdot\prod_{j=1}^{J}\cos(b_jx)^{r_j}.
+f(x)=P(x)e^{cx}&\prod_{m=1}^{M}\sin(a_mx)^{t_m}\\
+&{}\cdot\prod_{j=1}^{J}\cos(b_jx)^{r_j}.
 \end{aligned}
 $$
+
+:::
+::::
 
 Here $P$ is a real polynomial. The frequencies $a_m,b_j$ and the parameter $c$ are real. The powers $t_m,r_j$ are nonnegative integers.
 
@@ -396,6 +653,16 @@ We can now follow one procedure:
 
 Since $f$ is real-valued, we may take the real part of the resulting complex primitive. Its derivative is still $f$. After combining terms, a real answer can be written as
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+e^{cx}\sum_{\gamma\in\Gamma}\bigl[A_\gamma(x)\cos(\gamma x)+B_\gamma(x)\sin(\gamma x)\bigr]+C,
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 e^{cx}\biggl[&\sum_{\gamma\in\Gamma}
@@ -404,6 +671,9 @@ A_\gamma(x)\cos(\gamma x)\\
 B_\gamma(x)\sin(\gamma x)\biggr]+C,
 \end{aligned}
 $$
+
+:::
+::::
 
 with real polynomials $A_\gamma$ and $B_\gamma$. A zero frequency contributes a polynomial when $c=0$. That term may have degree one higher than $P$.
 
@@ -420,6 +690,16 @@ $$
 
 For example, the first calculation gives
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
+$$
+\int_0^\pi e^{2x}\sin x\,dx=\left[\frac{e^{2x}}5(2\sin x-\cos x)\right]_0^\pi=\frac{e^{2\pi}+1}{5}.
+$$
+
+:::
+::: {.equation-narrow}
+
 $$
 \begin{aligned}
 &\int_0^\pi e^{2x}\sin x\,dx\\
@@ -427,6 +707,9 @@ $$
 &\quad=\frac{e^{2\pi}+1}{5}.
 \end{aligned}
 $$
+
+:::
+::::
 
 There is no integration constant to determine. We use the same primitive at both endpoints.
 

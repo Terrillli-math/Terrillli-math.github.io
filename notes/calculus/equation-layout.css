@@ -1,0 +1,38 @@
+/* Use the width of the article, including when sidebars are present. */
+.equation-layout {
+  container-type: inline-size;
+}
+
+.equation-narrow {
+  display: none;
+}
+
+@container (width < 24rem) {
+  .equation-short > .equation-wide {
+    display: none;
+  }
+
+  .equation-short > .equation-narrow {
+    display: block;
+  }
+}
+
+@container (width < 30rem) {
+  .equation-medium > .equation-wide {
+    display: none;
+  }
+
+  .equation-medium > .equation-narrow {
+    display: block;
+  }
+}
+
+@container (width < 610px) {
+  .equation-long > .equation-wide {
+    display: none;
+  }
+
+  .equation-long > .equation-narrow {
+    display: block;
+  }
+}
