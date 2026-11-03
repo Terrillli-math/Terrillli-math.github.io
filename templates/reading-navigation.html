@@ -238,23 +238,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const offset = document.querySelector('meta[name="quarto:offset"]')?.content || "./";
   const url = new URL(offset + "signature-strokes.svg", location.href);
   Promise.all([document.fonts.load('160px "Great Vibes"'), fetch(url, {cache:"no-cache"}).then(r => { if (!r.ok) throw new Error("Signature unavailable"); return r.text(); })]).then(([, source]) => {
-    window.setTimeout(() => {
-      if (!document.documentElement.classList.contains("signature-pending")) return;
-      names.forEach((name, index) => {
-        const fragment = document.createElement("template");
-        fragment.innerHTML = source.replaceAll("signature-mask", "signature-mask-" + index);
-        const svg = fragment.content.querySelector("svg");
-        if (!svg) return;
-        const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
-        name.replaceChildren(label, svg); name.classList.add("signature-rendered");
-        // Reset the SVG timeline after insertion so the drawing always starts
-        // from its first stroke, even if the page took time to load.
-        svg.pauseAnimations();
-        svg.setCurrentTime(0);
-      });
-      document.documentElement.classList.remove("signature-pending");
-      requestAnimationFrame(() => names.forEach(name => name.querySelector("svg")?.unpauseAnimations()));
-    }, 5000);
+    if (!document.documentElement.classList.contains("signature-pending")) return;
+    const drawings = [];
+    names.forEach((name, index) => {
+      const fragment = document.createElement("template");
+      fragment.innerHTML = source.replaceAll("signature-mask", "signature-mask-" + index);
+      const svg = fragment.content.querySelector("svg");
+      if (!svg) return;
+      const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
+      name.replaceChildren(label, svg); name.classList.add("signature-rendered");
+      svg.pauseAnimations();
+      svg.setCurrentTime(0);
+      drawings.push(svg);
+    });
+    document.documentElement.classList.remove("signature-pending");
+    let start;
+    function drawSignature(now) {
+      if (start === undefined) start = now;
+      const elapsed = Math.min((now - start) % 2550, 1750) / 1000;
+      drawings.forEach(svg => svg.setCurrentTime(elapsed));
+      requestAnimationFrame(drawSignature);
+    }
+    if (drawings.length) requestAnimationFrame(drawSignature);
   }).catch(() => { document.documentElement.classList.remove("signature-pending"); });
 });
 </script>
