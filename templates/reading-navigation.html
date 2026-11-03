@@ -247,8 +247,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!svg) return;
         const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
         name.replaceChildren(label, svg); name.classList.add("signature-rendered");
+        // Reset the SVG timeline after insertion so the drawing always starts
+        // from its first stroke, even if the page took time to load.
+        svg.pauseAnimations();
+        svg.setCurrentTime(0);
       });
       document.documentElement.classList.remove("signature-pending");
+      requestAnimationFrame(() => names.forEach(name => name.querySelector("svg")?.unpauseAnimations()));
     }, 5000);
   }).catch(() => { document.documentElement.classList.remove("signature-pending"); });
 });
