@@ -483,3 +483,5 @@ body.quarto-dark .topic-motion .threshold { stroke:#ffe0a6; }
 .topic-motion .kkt-point { offset-path:none; animation:none; fill:var(--motion-cool); }
 
 .topic-motion .accent { fill:var(--site-accent); }
+
+.topic-motion .descent-dot { offset-path:none; animation:none; fill:var(--motion-cool); }
