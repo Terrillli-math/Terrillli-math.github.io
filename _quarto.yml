@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
     - fonts/*
+    - signature-strokes.svg
   render:
     - index.qmd
     - about.qmd

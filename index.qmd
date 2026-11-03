@@ -6,7 +6,7 @@ title: "Home"
 
 # Terrill Li {.unlisted}
 
-Mathematics student at the University of Sydney.
+Pure Mathematics student at the University of Sydney.
 
 I use this site to record what I am learning. I write about definitions, proofs, questions, and connections that become clearer with time.
 

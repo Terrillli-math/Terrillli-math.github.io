@@ -485,3 +485,33 @@ body.quarto-dark .topic-motion .threshold { stroke:#ffe0a6; }
 .topic-motion .accent { fill:var(--site-accent); }
 
 .topic-motion .descent-dot { offset-path:none; animation:none; fill:var(--motion-cool); }
+
+/* Signature lettering for the site name. */
+@font-face {
+  font-family: "Great Vibes";
+  src: url("fonts/GreatVibes-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.hero h1, .navbar-title {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  letter-spacing: 0;
+  animation: signature-reveal 2.8s ease-out both;
+}
+.hero h1 { display:table; font-size:clamp(3.6rem, 7vw, 5.3rem); line-height:1.35; }
+.navbar-title { display:inline-block; font-size:1.8rem; line-height:1.25; }
+@keyframes signature-reveal {
+  from { clip-path:inset(-0.3em 100% -0.3em -0.3em); }
+  to { clip-path:inset(-0.3em -0.3em -0.3em -0.3em); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .hero h1, .navbar-title { animation:none; }
+}
+
+.signature-rendered { animation:none !important; clip-path:none; }
+.signature-rendered .signature-accessible { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.signature-rendered svg { display:block; width:100%; height:auto; overflow:visible; }
+.hero h1.signature-rendered { width:min(100%, 410px); line-height:0; }
+.navbar-title { animation:none; }
