@@ -21,7 +21,7 @@ I use this site to record what I am learning. I write about definitions, proofs,
 ::: {.g-col-12 .g-col-md-4}
 ### Course Notes
 
-Notes from my undergraduate mathematics courses, including discrete mathematics and MATH1972 seminars.
+Notes from my undergraduate mathematics courses, including discrete mathematics.
 :::
 
 ::: {.g-col-12 .g-col-md-4}
@@ -42,7 +42,7 @@ These are working notes. I expect to revisit them as my understanding improves.
 
 - [Calculus](notes/calculus/index.qmd)
 - [MATH1964: Discrete Mathematics for Computation (Adv)](notes/math1964/index.qmd)
-- [MATH1972 Seminar Notes](notes/math1972-seminar/index.qmd)
+- [Further Explorations](notes/math1972-seminar/index.qmd)
 - [Atomization](notes/atomization/index.qmd)
 - [Appendix: Background Topics](notes/appendix/index.qmd)
 

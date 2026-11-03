@@ -352,4 +352,4 @@ igraph. (n.d.). *Transitivity of a graph*. [https://r.igraph.org/reference/trans
 
 ---
 
-[Next: Random Networks and Connectivity](random-networks.qmd) · [MATH1972 Seminar Notes](index.qmd)
+[Next: Random Networks and Connectivity](random-networks.qmd) · [Further Explorations](index.qmd)

@@ -360,4 +360,4 @@ The recursive definition and the binary formula serve different purposes. Mex ex
 
 ---
 
-[Back to MATH1972 Seminar Notes](index.qmd)
+[Back to Further Explorations](index.qmd)

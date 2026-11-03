@@ -21,7 +21,7 @@ class NotesIndexTests(unittest.TestCase):
         current = (
             "---\ntitle: Notes\n---\n\nMy introduction.\n\n"
             + SYNC.COLLECTIONS_START + "\nOld generated links.\n" + SYNC.COLLECTIONS_END
-            + "\n\n- [MATH1972 Seminar Notes](math1972-seminar/index.qmd)\n"
+            + "\n\n- [Further Explorations](math1972-seminar/index.qmd)\n"
         )
         entries = [("Appendix", "appendix/index.qmd")]
         result = SYNC.update_notes_index(current, entries)
@@ -76,7 +76,7 @@ class NotesIndexTests(unittest.TestCase):
                 self.assertNotIn("NotSelected", completed.stdout)
                 index = (project / "notes/index.qmd").read_text(encoding="utf-8")
                 self.assertEqual(index.split(SYNC.COLLECTIONS_END)[1], manual_suffix)
-                self.assertEqual(index.count("MATH1972 Seminar Notes"), 1)
+                self.assertEqual(index.count("- [Further Explorations](<math1972-seminar/index.qmd>)"), 1)
                 self.assertEqual(len(list((project / ".sync-pending").rglob("*.qmd"))), 3)
                 self.assertFalse((project / "notes/math1972-seminar/NotSelected.qmd").exists())
             after_sources = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in vault.rglob("*.md")}

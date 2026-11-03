@@ -554,4 +554,4 @@ Statnet Development Team. (n.d.). *Conduct goodness-of-fit diagnostics on an exp
 
 ---
 
-[Previous: Random Networks and Connectivity](random-networks.qmd) · [MATH1972 Seminar Notes](index.qmd)
+[Previous: Random Networks and Connectivity](random-networks.qmd) · [Further Explorations](index.qmd)

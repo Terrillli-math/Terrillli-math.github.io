@@ -17,7 +17,7 @@ A selection of my course notes and shorter mathematical explorations.
 <!-- END GENERATED NOTE COLLECTIONS -->
 
 - [Calculus](<calculus/index.qmd>) — integration methods and the ideas behind them.
-- [MATH1972 Seminar Notes](<math1972-seminar/index.qmd>) — game theory, optimisation, machine learning, and network analysis.
+- [Further Explorations](<math1972-seminar/index.qmd>) — game theory, optimisation, machine learning, and network analysis.
 
 :::
 
@@ -29,6 +29,6 @@ A selection of my course notes and shorter mathematical explorations.
 - <time datetime="2026-11-03">3 Nov 2026</time> · [Linear SVMs and Margins](<math1972-seminar/linear-svm.qmd>)<br>Clarified when the training points touch both margin planes.
 - <time datetime="2026-10-28">28 Oct 2026</time> · [Exponential Random Graph Models](<math1972-seminar/exponential-random-graphs.qmd>)<br>Added an example of how a triangle term makes edges dependent.
 - <time datetime="2026-10-20">20 Oct 2026</time> · [Random Networks and Connectivity](<math1972-seminar/random-networks.qmd>)<br>Added a study note on isolated vertices and the connectivity threshold.
-- <time datetime="2026-10-19">19 Oct 2026</time> · [MATH1972 Seminar Collection](<math1972-seminar/index.qmd>)<br>Started a collection on game theory, optimisation, and network analysis.
+- <time datetime="2026-10-19">19 Oct 2026</time> · [Further Explorations Collection](<math1972-seminar/index.qmd>)<br>Started a collection on game theory, optimisation, and network analysis.
 
 :::

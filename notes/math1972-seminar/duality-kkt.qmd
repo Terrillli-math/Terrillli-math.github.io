@@ -286,4 +286,4 @@ Boyd, S., & Vandenberghe, L. (2004). *Convex optimization*. Cambridge University
 
 ---
 
-[Back to MATH1972 Seminar Notes](index.qmd) · Previous: [Convex Sets and Functions](convexity.qmd) · Next: [Linear SVMs and Margins](linear-svm.qmd)
+[Back to Further Explorations](index.qmd) · Previous: [Convex Sets and Functions](convexity.qmd) · Next: [Linear SVMs and Margins](linear-svm.qmd)
