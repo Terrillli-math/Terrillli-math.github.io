@@ -498,7 +498,6 @@ body.quarto-dark .topic-motion .threshold { stroke:#ffe0a6; }
   font-family: "Great Vibes", cursive;
   font-weight: 400;
   letter-spacing: 0;
-  animation: signature-reveal 2.8s ease-out both;
 }
 .hero h1 { display:table; font-size:clamp(3.6rem, 7vw, 5.3rem); line-height:1.35; }
 .navbar-title { display:inline-block; font-size:1.8rem; line-height:1.25; }

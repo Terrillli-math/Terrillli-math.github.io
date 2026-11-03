@@ -234,10 +234,11 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const names = [...document.querySelectorAll(".hero h1")].filter(el => el.textContent.trim() === "Terrill Li");
-  if (!names.length || !document.fonts) return;
+  if (!names.length || !document.fonts) { document.documentElement.classList.remove("signature-pending"); return; }
   const offset = document.querySelector('meta[name="quarto:offset"]')?.content || "./";
   const url = new URL(offset + "signature-strokes.svg", location.href);
   Promise.all([document.fonts.load('160px "Great Vibes"'), fetch(url, {cache:"no-cache"}).then(r => { if (!r.ok) throw new Error("Signature unavailable"); return r.text(); })]).then(([, source]) => {
+    if (!document.documentElement.classList.contains("signature-pending")) return;
     names.forEach((name, index) => {
       const fragment = document.createElement("template");
       fragment.innerHTML = source.replaceAll("signature-mask", "signature-mask-" + index);
@@ -246,7 +247,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
       name.replaceChildren(label, svg); name.classList.add("signature-rendered");
     });
-  }).catch(() => {});
+    document.documentElement.classList.remove("signature-pending");
+  }).catch(() => { document.documentElement.classList.remove("signature-pending"); });
 });
 </script>
 
@@ -269,7 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return [
       (radius + width*Math.cos(twist))*Math.cos(t),
       (radius + width*Math.cos(twist))*Math.sin(t),
-      .12*Math.sin(3*t) + width*Math.sin(twist)
+      .12*Math.sin(3*t) + width*Math.sin(twist),
+      .48*Math.sin(2*t) + .20*u*Math.cos(twist)
     ];
   }
   for (let i=0; i<segments; i++) {
@@ -282,11 +285,18 @@ document.addEventListener("DOMContentLoaded", () => {
   function transform(p, angle) {
     const phase = angle - .45;
     const yaw = angle, pitch = .48 + phase * .73, roll = phase * .39;
+    // Rotate the x-w plane in four dimensions, then use perspective to
+    // project the resulting point into ordinary three-dimensional space.
+    const fourAngle = phase * .45;
+    const cf=Math.cos(fourAngle), sf=Math.sin(fourAngle);
+    const x4=p[0]*cf-p[3]*sf, w4=p[0]*sf+p[3]*cf;
+    const perspective=3.6/(3.6-w4);
+    const projected=[x4*perspective,p[1]*perspective,p[2]*perspective];
     const cy=Math.cos(yaw), sy=Math.sin(yaw);
     const cp=Math.cos(pitch), sp=Math.sin(pitch);
     const cr=Math.cos(roll), sr=Math.sin(roll);
-    const x=p[0]*cy+p[2]*sy, z=-p[0]*sy+p[2]*cy;
-    const y=p[1]*cp-z*sp, depth=p[1]*sp+z*cp;
+    const x=projected[0]*cy+projected[2]*sy, z=-projected[0]*sy+projected[2]*cy;
+    const y=projected[1]*cp-z*sp, depth=projected[1]*sp+z*cp;
     return [x*cr-y*sr, x*sr+y*cr, depth];
   }
   function draw(angle) {
@@ -306,17 +316,17 @@ document.addEventListener("DOMContentLoaded", () => {
     cells.sort((a,b)=>a.z-b.z);
     for(const cell of cells) {
       ctx.beginPath();
-      cell.points.forEach((p,i)=>{const k=size*.30, x=size*.5+p[0]*k,y=size*.5+p[1]*k; if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});
+      cell.points.forEach((p,i)=>{const k=size*.26, x=size*.5+p[0]*k,y=size*.5+p[1]*k; if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});
       ctx.closePath(); const l=cell.light; ctx.fillStyle=`rgb(${Math.round(4+8*l)},${Math.round(100+67*l)},${Math.round(145+82*l)})`; ctx.fill(); ctx.strokeStyle=ctx.fillStyle; ctx.lineWidth=.65*dpr; ctx.stroke();
     }
   }
   function tick(now) {
-    if (visible && !reduced) { if(previous)time+=Math.min(now-previous,60); previous=now; draw(time*.0018+.45); } else previous=0;
+    if (visible && !reduced) { if(previous)time+=Math.min(now-previous,60); previous=now; draw(time*.001152+.45); } else previous=0;
     requestAnimationFrame(tick);
   }
   draw(.45);
   if (!reduced) requestAnimationFrame(tick);
-  if ("IntersectionObserver" in window) new IntersectionObserver(entries=>{visible=entries[0].isIntersecting; if(visible)draw(time*.0018+.45);}).observe(canvas);
-  window.addEventListener("resize",()=>draw(time*.0018+.45),{passive:true});
+  if ("IntersectionObserver" in window) new IntersectionObserver(entries=>{visible=entries[0].isIntersecting; if(visible)draw(time*.001152+.45);}).observe(canvas);
+  window.addEventListener("resize",()=>draw(time*.001152+.45),{passive:true});
 });
 </script>

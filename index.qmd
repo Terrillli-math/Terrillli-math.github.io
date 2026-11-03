@@ -2,6 +2,14 @@
 title: "Home"
 ---
 
+<style>.signature-pending .hero h1 { visibility: hidden; }</style>
+<script>
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches && document.fonts) {
+  document.documentElement.classList.add("signature-pending");
+  window.setTimeout(() => document.documentElement.classList.remove("signature-pending"), 4000);
+}
+</script>
+
 :::: {.hero}
 
 ::: {.hero-copy}
