@@ -515,3 +515,10 @@ body.quarto-dark .topic-motion .threshold { stroke:#ffe0a6; }
 .signature-rendered svg { display:block; width:100%; height:auto; overflow:visible; }
 .hero h1.signature-rendered { width:min(100%, 410px); line-height:0; }
 .navbar-title { animation:none; }
+
+/* A quiet three-dimensional ribbon beside the introduction. */
+.hero { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(200px,.85fr); align-items:center; gap:clamp(1rem,3vw,2rem); }
+.hero-copy { min-width:0; }
+.hero-visual { display:flex; justify-content:center; align-items:center; min-width:0; }
+.hero-ribbon { display:block; width:min(100%,310px); aspect-ratio:1; }
+@media (max-width:700px) { .hero { grid-template-columns:1fr; } .hero-visual { order:2; } .hero-ribbon { width:min(70%,270px); } }

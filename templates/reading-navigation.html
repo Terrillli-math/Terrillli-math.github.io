@@ -249,3 +249,74 @@ document.addEventListener("DOMContentLoaded", () => {
   }).catch(() => {});
 });
 </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.querySelector(".hero-ribbon");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let visible = true, time = 0, previous = 0;
+  // A continuous ribbon with three half-twists. Its shape closes smoothly
+  // after one circuit, while the turning surface reveals different overlaps.
+  const mesh = [], segments = 240, strips = 12;
+  function point(t, u) {
+    const radius = 1.02 + .10 * Math.cos(3*t);
+    const twist = 1.5*t;
+    const width = .37*u;
+    return [
+      (radius + width*Math.cos(twist))*Math.cos(t),
+      (radius + width*Math.cos(twist))*Math.sin(t),
+      .12*Math.sin(3*t) + width*Math.sin(twist)
+    ];
+  }
+  for (let i=0; i<segments; i++) {
+    const t=2*Math.PI*i/segments, next=2*Math.PI*(i+1)/segments;
+    for (let j=0; j<strips; j++) {
+      const u=-1+2*j/strips, v=-1+2*(j+1)/strips;
+      mesh.push([point(t,u),point(next,u),point(next,v),point(t,v)]);
+    }
+  }
+  function transform(p, angle) {
+    const phase = angle - .45;
+    const yaw = angle, pitch = .48 + phase * .73, roll = phase * .39;
+    const cy=Math.cos(yaw), sy=Math.sin(yaw);
+    const cp=Math.cos(pitch), sp=Math.sin(pitch);
+    const cr=Math.cos(roll), sr=Math.sin(roll);
+    const x=p[0]*cy+p[2]*sy, z=-p[0]*sy+p[2]*cy;
+    const y=p[1]*cp-z*sp, depth=p[1]*sp+z*cp;
+    return [x*cr-y*sr, x*sr+y*cr, depth];
+  }
+  function draw(angle) {
+    const rect=canvas.getBoundingClientRect(), dpr=Math.min(devicePixelRatio || 1,2);
+    const size=Math.max(1,Math.round(rect.width*dpr));
+    if (canvas.width!==size || canvas.height!==size) { canvas.width=size; canvas.height=size; }
+    ctx.clearRect(0,0,size,size);
+    const cells=[];
+    for (const surface of mesh) {
+      const points=surface.map(p=>transform(p,angle));
+      const a=points[0], b=points[1], c=points[3];
+      const ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],vx=c[0]-a[0],vy=c[1]-a[1],vz=c[2]-a[2];
+      const nx=uy*vz-uz*vy, ny=uz*vx-ux*vz, nz=ux*vy-uy*vx, norm=Math.hypot(nx,ny,nz)||1;
+      const light=.52+.48*Math.abs((nx*.25-ny*.45+nz*.86)/norm);
+      cells.push({points,z:points.reduce((sum,p)=>sum+p[2],0)/4,light});
+    }
+    cells.sort((a,b)=>a.z-b.z);
+    for(const cell of cells) {
+      ctx.beginPath();
+      cell.points.forEach((p,i)=>{const k=size*.30, x=size*.5+p[0]*k,y=size*.5+p[1]*k; if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});
+      ctx.closePath(); const l=cell.light; ctx.fillStyle=`rgb(${Math.round(4+8*l)},${Math.round(100+67*l)},${Math.round(145+82*l)})`; ctx.fill(); ctx.strokeStyle=ctx.fillStyle; ctx.lineWidth=.65*dpr; ctx.stroke();
+    }
+  }
+  function tick(now) {
+    if (visible && !reduced) { if(previous)time+=Math.min(now-previous,60); previous=now; draw(time*.0018+.45); } else previous=0;
+    requestAnimationFrame(tick);
+  }
+  draw(.45);
+  if (!reduced) requestAnimationFrame(tick);
+  if ("IntersectionObserver" in window) new IntersectionObserver(entries=>{visible=entries[0].isIntersecting; if(visible)draw(time*.0018+.45);}).observe(canvas);
+  window.addEventListener("resize",()=>draw(time*.0018+.45),{passive:true});
+});
+</script>

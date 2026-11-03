@@ -2,7 +2,9 @@
 title: "Home"
 ---
 
-::: {.hero}
+:::: {.hero}
+
+::: {.hero-copy}
 
 # Terrill Li {.unlisted}
 
@@ -13,6 +15,12 @@ I use this site to record what I am learning. I write about definitions, proofs,
 [Explore the Notes](notes/index.qmd){.btn .btn-primary} [About Me](about.qmd){.btn .btn-outline-secondary}
 
 :::
+
+::: {.hero-visual}
+<canvas class="hero-ribbon" role="img" aria-label="A curved blue ribbon with three twists rotating in three dimensions"></canvas>
+:::
+
+::::
 
 ## What You Will Find Here
 
