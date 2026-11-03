@@ -10,6 +10,17 @@ Suppose we want to separate two groups of points. We label them $+1$ and $-1$. M
 
 A support vector machine looks for a large gap between the classes. This gap is called the **margin**. It gives the boundary some room before a small change in a point changes its predicted class.
 
+<div class="topic-motion-slot" data-motion="svm"></div>
+
+::: {.motion-equation}
+
+$$
+y_i(w^\top x_i+b)\geq1,\qquad \text{margin}=\frac{2}{\lVert w\rVert}
+$$
+
+:::
+
+
 This is a useful design rule. It is not a promise that the largest training margin always gives the best predictions. The data, the features, and the choice of regularisation still matter.
 
 The main aim of these notes is to connect the geometry with the optimisation. The numerical example below was constructed for these notes.

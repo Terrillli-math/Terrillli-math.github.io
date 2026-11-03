@@ -10,6 +10,17 @@ An optimisation problem asks us to choose the best allowed point. We need two th
 
 Convexity gives both parts a useful shape. A convex set contains every line segment between its points. A convex function never rises above the straight chord between two points on its graph. Together, these properties rule out a local minimum that is worse than a global one.
 
+<div class="topic-motion-slot" data-motion="optimisation"></div>
+
+::: {.motion-equation}
+
+$$
+f((1-t)x+ty)\leq(1-t)f(x)+tf(y),\qquad 0\leq t\leq1
+$$
+
+:::
+
+
 The examples below connect the main definitions with simple optimisation problems. The worked examples were constructed for these notes.
 
 ## Convex Sets: Keep the Whole Segment

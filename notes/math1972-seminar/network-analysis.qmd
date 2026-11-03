@@ -37,6 +37,17 @@ The graph has a triangle on nodes $1$, $2$, and $3$, and a four-cycle on nodes $
 
 A drawing helps us see the connections. Its exact shape is not part of the graph. We can move a node without changing any edge. Two edges may also cross in a drawing without creating a new node.
 
+<div class="topic-motion-slot" data-motion="bridge"></div>
+
+::: {.motion-equation}
+
+$$
+e=\{3,4\}
+$$
+
+:::
+
+
 This is a useful first distinction. A graph records *which objects are linked*. A layout chooses *where to draw them*.
 
 ### The Adjacency Matrix

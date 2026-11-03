@@ -9,6 +9,17 @@ The *cardinality* $|S|$ of a finite set is its number of distinct elements. We c
 
 The *continuum hypothesis* says there is no set $S$ with $|\mathbb{N}|<|S|<|\mathbb{R}|$. We write $|\mathbb{N}|=\aleph_0$ and $|\mathbb{R}|=2^{\aleph_0}$. If the hypothesis holds, then $|\mathbb{R}|=\aleph_1$. The usual ZFC axioms do not decide whether it holds, provided those axioms are consistent.
 
+<div class="topic-motion-slot" data-motion="cardinality"></div>
+
+::: {.motion-equation}
+
+$$
+f(n)=2n,\qquad n\in\mathbb{N}
+$$
+
+:::
+
+
 ::: {.callout-note}
 ## How Can We Show $|A|=|B|$?
 

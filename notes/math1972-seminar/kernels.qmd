@@ -18,6 +18,17 @@ The score is linear in the new features. It may be nonlinear in the original inp
 
 The numerical examples were constructed for these notes. They make the feature map and its inner product explicit.
 
+<div class="topic-motion-slot" data-motion="kernels"></div>
+
+::: {.motion-equation}
+
+$$
+\underbrace{x}_{\text{input}}\mapsto\underbrace{\phi(x)}_{\text{mapped feature}}=x^2,\qquad \phi(-4)=16,\ \phi(3)=9,\ \phi(-1)=1,\ \phi(2)=4
+$$
+
+:::
+
+
 ## A Small Example Before the Kernel Trick
 
 Suppose $x$ is a real number. Choose the outer points $-4$ and $3$ with label $+1$. Choose the middle points $-1$ and $2$ with label $-1$.

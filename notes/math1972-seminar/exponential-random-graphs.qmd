@@ -15,6 +15,17 @@ This is a useful baseline. It also raises two questions. What if some nodes have
 
 These are different changes to the model. The first can keep edges independent. The second introduces dependence between edges.
 
+<div class="topic-motion-slot" data-motion="ergm"></div>
+
+::: {.motion-equation}
+
+$$
+\Delta\log\operatorname{odds}_{\triangle}=\theta_{\triangle},\qquad \text{odds factor}=e^{\theta_{\triangle}}
+$$
+
+:::
+
+
 An **exponential random graph model**, or **ERGM**, gives a probability to each possible network. We will build the idea from simple likelihoods. Then we will use a small triangle model to see what dependence means.
 
 Throughout, graphs are simple, undirected, and labelled. There are no loops. The node set is fixed. Write $A$ for a random adjacency matrix and $a$ for the graph we observe. Treating $a$ as one draw is a modelling choice. It does not require a literal collection of repeated networks.

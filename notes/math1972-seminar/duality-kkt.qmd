@@ -12,6 +12,17 @@ The Lagrangian brings the objective and the constraints into one expression. It 
 
 This note compares inactive and active constraints through two one-variable problems. The worked examples were constructed for these notes. The connection to SVMs appears in [Linear SVMs and Margins](linear-svm.qmd).
 
+<div class="topic-motion-slot" data-motion="duality"></div>
+
+::: {.motion-equation}
+
+$$
+f(x)=(x-3)^2,\quad x\leq1,\qquad x^*=1,\ f\prime(1)=-4,\ \lambda^*=4
+$$
+
+:::
+
+
 ## Start with the Primal Problem
 
 Write a constrained minimisation problem as

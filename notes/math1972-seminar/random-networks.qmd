@@ -13,6 +13,17 @@ The [previous note](network-analysis.qmd) describes a fixed graph. Its edges are
 
 A different question comes next. Could a feature of this graph arise from a simple random process? To answer it, we need a model that produces whole graphs.
 
+<div class="topic-motion-slot" data-motion="network"></div>
+
+::: {.motion-equation}
+
+$$
+G(n,p),\qquad \Pr(\{i,j\}\in E)=p
+$$
+
+:::
+
+
 A **random graph model** is a probability distribution on graphs. Each draw gives one possible network. The model does not say that a real network was built by tossing coins. It gives a baseline for comparison.
 
 The choice of baseline matters. A graph may look unusual under independent edges but ordinary under another model. An unexpected result can reveal a poor model, rather than a surprising real-world cause.

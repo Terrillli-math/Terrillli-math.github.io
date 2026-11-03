@@ -11,6 +11,17 @@ p(x)=a_0+a_1x+\cdots+a_nx^n,
 $$
 where the coefficients are real or complex numbers. If $a_n\neq0$, its *degree* is $n$; if $a_n=1$, it is *monic*. A number $x_0$ is a *root* or *zero* of $p$ when $p(x_0)=0$.
 
+<div class="topic-motion-slot" data-motion="polynomial"></div>
+
+::: {.motion-equation}
+
+$$
+p(x)=x^2-4=(x-2)(x+2)
+$$
+
+:::
+
+
 If a real-coefficient polynomial has a complex root $z$, then its conjugate $\overline z$ is also a root, because $p(\overline z)=\overline{p(z)}$.
 
 ## 2. Factor and Remainder Theorems

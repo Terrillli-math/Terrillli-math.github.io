@@ -8,6 +8,17 @@ Nim is a game about removing objects from piles. Its rules are simple. Yet a goo
 
 The aim is to explain why the strategy works, as well as how to use it. The worked examples and practice problems were constructed for these notes.
 
+<div class="topic-motion-slot" data-motion="nim"></div>
+
+::: {.motion-equation}
+
+$$
+3\oplus4\oplus5=2,\qquad 1\oplus4\oplus5=0
+$$
+
+:::
+
+
 ## The Rules and the Question
 
 There are finitely many piles. Two players take turns. On each turn, a player removes one or more objects from exactly one pile. A whole pile may be removed.
