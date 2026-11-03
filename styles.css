@@ -27,7 +27,7 @@
   --site-bar: #edf2fa;
   --site-focus: #855613;
   --site-gradient: linear-gradient(135deg, #f7f9fd 0%, #c4d7ec 100%);
-  --site-reading-gradient: linear-gradient(135deg, #f7f9fd 0%, #cfdef0 100%);
+  --site-reading-gradient: var(--site-gradient);
   --site-hero-gradient: linear-gradient(315deg, #f8fafd 12%, #e0eaf7 100%);
   --site-serif: Georgia, "Times New Roman", serif;
   --site-ui: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -46,8 +46,8 @@ body.quarto-dark {
   --site-border: #3b4553;
   --site-bar: #1d242d;
   --site-focus: #e7bc76;
-  --site-gradient: linear-gradient(135deg, #181c22 0%, #405d7b 100%);
-  --site-reading-gradient: linear-gradient(135deg, #181c22 0%, #3a526c 100%);
+  --site-gradient: linear-gradient(135deg, #181c22 0%, #456583 100%);
+  --site-reading-gradient: var(--site-gradient);
   --site-hero-gradient: linear-gradient(135deg, #1c222b 12%, #253445 100%);
 }
 
