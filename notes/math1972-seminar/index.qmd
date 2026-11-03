@@ -3,8 +3,6 @@ title: "Further Explorations"
 description: "Explanations, short proofs, and worked examples across mathematical topics."
 ---
 
-Each note develops the ideas behind the definitions. Short proofs explain why the main results work. Small examples show how to use them. The notes draw on seminar material. The worked numerical examples were created for these notes.
-
 ## Game Theory
 
 [**Nim and Winning Moves**](nim.qmd)
