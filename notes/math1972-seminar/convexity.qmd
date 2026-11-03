@@ -1,7 +1,7 @@
 ---
 title: "Convex Sets and Functions"
 description: "Why line segments, tangent planes, and curvature make some optimisation problems easier to understand."
-categories: [math1972, optimisation]
+categories: ["Optimisation", "Convexity"]
 ---
 
 ## Why Convexity Matters
@@ -69,7 +69,7 @@ The filled ball is convex. Its boundary usually is not. For example, the points 
 
 This example also explains a rule for convex optimisation. A convex inequality can define a convex set. An equality involving a convex function need not do so. Standard convex problems therefore use **affine equality constraints**, such as $a^\top x=b$.
 
-## Convex Functions: Compare With a Chord
+## Convex Functions: Compare with a Chord
 
 Let $f:C\to\mathbb{R}$, where $C$ is convex. The function is **convex** if
 

@@ -1,7 +1,7 @@
 ---
 title: "Linear SVMs and Margins"
 description: "How a geometric gap becomes a convex optimisation problem."
-categories: ["math1972", "machine learning", "optimisation"]
+categories: ["Machine Learning", "Optimisation", "Support Vector Machines"]
 ---
 
 ## Why One Separating Line Is Not Enough

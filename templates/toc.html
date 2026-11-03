@@ -1,0 +1,8 @@
+$if(table-of-contents)$
+<details class="reading-toc">
+  <summary id="$idprefix$toc-title">$if(toc-title)$$toc-title$$else$Contents$endif$</summary>
+  <nav id="$idprefix$TOC" role="doc-toc" aria-labelledby="$idprefix$toc-title">
+    $table-of-contents$
+  </nav>
+</details>
+$endif$

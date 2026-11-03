@@ -1,6 +1,6 @@
 ---
 title: "Cantor's Theorem"
-categories: ["atomization"]
+categories: ["Set Theory"]
 ---
 
 ::: {.callout-note}
@@ -25,7 +25,7 @@ Define $i:A\to\mathcal{P}(A)$ by $i(a)=\{a\}$. Distinct elements have distinct s
 
 For example, if $A=\{1,2,3\}$, this map sends $1,2,3$ to $\{1\},\{2\},\{3\}$ respectively.
 
-### Step 2: Show that No Function Is Surjective
+### Step 2: Show That No Function Is Surjective
 
 Let $f:A\to\mathcal{P}(A)$ be any function. Consider its *diagonal set*
 $$

@@ -1,7 +1,7 @@
 ---
 title: "Nim and Winning Moves"
 description: "How a mirror strategy leads to nim values, binary XOR, and a way to find winning moves."
-categories: ["math1972", "game theory"]
+categories: ["Game Theory", "Discrete Mathematics"]
 ---
 
 Nim is a game about removing objects from piles. Its rules are simple. Yet a good strategy depends on how the pile sizes fit together, rather than on their total alone.

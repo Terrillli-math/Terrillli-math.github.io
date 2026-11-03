@@ -1,6 +1,6 @@
 ---
 title: "Square Roots of Complex Numbers"
-categories: ["atomization"]
+categories: ["Algebra", "Complex Numbers"]
 ---
 
 To solve $z^2=a+bi$, where $a,b\in\mathbb{R}$, write $z=x+yi$ with $x,y\in\mathbb{R}$. Comparing real and imaginary parts gives

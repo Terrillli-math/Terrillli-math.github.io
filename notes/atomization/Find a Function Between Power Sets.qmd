@@ -1,6 +1,6 @@
 ---
 title: "Functions Between Power Sets"
-categories: ["atomization"]
+categories: ["Set Theory"]
 ---
 
 Given a function $f:X\to Y$, there are two natural ways to obtain functions between the power sets of $X$ and $Y$.

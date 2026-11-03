@@ -25,7 +25,7 @@ ENGLISH_TITLES = {
 }
 GROUP_TITLES = {
     "Appendix": "Appendix",
-    "Atomization": "Short Explorations",
+    "Atomization": "Atomization",
     "MATH1964 Notes": "MATH1964: Discrete Mathematics for Computation (Adv)",
 }
 WIKI_LINK = re.compile(r"(?<!!)\[\[([^\]]+)\]\]")
@@ -169,7 +169,7 @@ def convert_body(
     return "\n".join(changed_lines).rstrip() + "\n"
 
 
-def make_qmd(source: Path, output: Path, by_stem: dict[str, Path], category: str,
+def make_qmd(source: Path, output: Path, by_stem: dict[str, Path],
              warnings: list[str]) -> str:
     metadata, body = front_matter_and_body(source.read_text(encoding="utf-8"))
     title = title_from(source, metadata)
@@ -177,7 +177,6 @@ def make_qmd(source: Path, output: Path, by_stem: dict[str, Path], category: str
     header = (
         "---\n"
         f"title: {json.dumps(title, ensure_ascii=False)}\n"
-        f"categories: [{json.dumps(category, ensure_ascii=False)}]\n"
         "---\n\n"
     )
     return header + converted
@@ -225,7 +224,7 @@ def main() -> int:
         parser.error("The website project must not live inside the Vault.")
 
     folders, extensions = load_manifest()
-    selected: list[tuple[Path, Path, str]] = []
+    selected: list[tuple[Path, Path]] = []
     empty: list[str] = []
     for source_folder, destination_folder in folders:
         directory = vault / source_folder
@@ -245,10 +244,10 @@ def main() -> int:
             if not source.read_text(encoding="utf-8").strip():
                 empty.append(str(source.relative_to(vault)))
                 continue
-            selected.append((source, output, destination_folder.name))
+            selected.append((source, output))
 
     by_stem: dict[str, Path] = {}
-    for source, output, _ in selected:
+    for source, output in selected:
         if not output.exists():
             continue
         key = source.stem.casefold()
@@ -259,7 +258,7 @@ def main() -> int:
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
     generated = json.loads(GENERATED.read_text(encoding="utf-8")) if GENERATED.exists() else {}
     if args.record_generated_hashes:
-        for source, output, _ in selected:
+        for source, output in selected:
             key = str(source.relative_to(vault))
             if key in state and output.exists():
                 generated[key] = hashlib.sha256(output.read_bytes()).hexdigest()
@@ -268,7 +267,7 @@ def main() -> int:
         print(f"Recorded {len(generated)} generated page hashes.")
         return 0
     if args.acknowledge:
-        matching = [(source, output) for source, output, _ in selected
+        matching = [(source, output) for source, output in selected
                     if str(source.relative_to(vault)) == args.acknowledge]
         if len(matching) != 1 or not matching[0][1].exists():
             parser.error("--acknowledge requires one existing website page from the selected folders")
@@ -280,7 +279,7 @@ def main() -> int:
 
     warnings: list[str] = []
     changes: list[str] = []
-    for source, output, category in selected:
+    for source, output in selected:
         key = str(source.relative_to(vault))
         digest = hashlib.sha256(source.read_bytes()).hexdigest()
         if state.get(key) == digest and output.exists():
@@ -290,7 +289,7 @@ def main() -> int:
                 warnings.append(f"{key}: website copy has manual edits; refresh skipped")
                 continue
         try:
-            qmd = make_qmd(source, output, by_stem, category, warnings)
+            qmd = make_qmd(source, output, by_stem, warnings)
         except ValueError as exc:
             warnings.append(str(exc))
             continue
@@ -319,7 +318,7 @@ def main() -> int:
         group_entries: list[tuple[str, str]] = []
         for source_folder, destination_folder in folders:
             group = destination_folder.name
-            pages = [(source, output) for source, output, _ in selected
+            pages = [(source, output) for source, output in selected
                      if output.is_relative_to(ROOT / destination_folder) and output.exists()]
             if not pages:
                 continue

@@ -3,6 +3,9 @@ title: "Multiclass SVM: The Crammer-Singer Approach"
 date: 2026-10-12
 description: "A direct multiclass model based on margins, kernels, and joint optimisation."
 categories: ["machine learning", "support vector machines", "optimisation"]
+format:
+  html:
+    css: ../notes/calculus/equation-layout.css
 ---
 
 This note explains the main ideas behind multiclass support vector machines. It focuses on how the margin, the dual form, kernels, and the training method connect. The technical details are checked against the original paper by Crammer and Singer.
@@ -63,11 +66,27 @@ This leads to a useful distinction:
 
 The hinge loss for one example is
 
+:::: {.equation-layout .equation-medium}
+::: {.equation-wide}
+
 $$
 \ell_i
 = \max\!\left(0,\,1-m_i\right)
 = \max\!\left(0,\,1 + \max_{k \ne y_i} w_k^\top x_i - w_{y_i}^\top x_i\right).
 $$
+
+:::
+::: {.equation-narrow}
+
+$$
+\begin{aligned}
+\ell_i &= \max\!\left(0,\,1-m_i\right)\\
+&= \max\!\left(0,\,1 + \max_{k \ne y_i} w_k^\top x_i - w_{y_i}^\top x_i\right).
+\end{aligned}
+$$
+
+:::
+::::
 
 Only the strongest wrong class determines this loss. The loss asks one direct question: how far is the correct class from its most serious rival?
 
@@ -224,11 +243,15 @@ The method turns one large problem into many small updates. Each step is easier 
 
 ## 11. Comparison with Reduction Methods
 
+::: {.reading-table tabindex="0" role="region" aria-label="Comparison of multiclass SVM methods"}
+
 | Method | Number of models | Main strength | Main limitation |
 |---|---:|---|---|
 | One-versus-rest | $K$ | Simple and easy to parallelise | Scores from separate classifiers may not be directly comparable |
 | One-versus-one | $K(K-1)/2$ | Each classifier solves a smaller two-class problem | The number of classifiers grows with the square of $K$ |
 | Crammer-Singer | One joint model with $K$ weight vectors | Learns class competition directly | Joint optimisation can be more demanding |
+
+:::
 
 The direct method is elegant, but it is not always the best choice. OVR is often a strong baseline. OVO may work well when pairwise boundaries are easy to learn. The final choice depends on validation results and computing cost. It also depends on the structure of the data.
 

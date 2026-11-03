@@ -1,6 +1,6 @@
 ---
 title: "03 Cardinality and Power Sets"
-categories: ["math1964"]
+categories: ["Discrete Mathematics", "Set Theory"]
 ---
 
 ## 3.1 Cardinality

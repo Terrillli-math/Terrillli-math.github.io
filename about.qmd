@@ -11,7 +11,3 @@ This website records what I am learning in mathematics. I share course notes, sh
 I am especially interested in analysis, probability, stochastic processes, and the foundations of mathematics. As I study further, these interests may change or become more focused.
 
 I am also interested in how artificial intelligence affects learning and research. Clear definitions and basic ideas help me use new tools well. They also help me spot gaps in an explanation.
-
-## Current Study
-
-My current coursework includes calculus, linear algebra, mathematical statistics, and discrete mathematics. The [notes](notes/index.qmd) section will grow alongside these courses.

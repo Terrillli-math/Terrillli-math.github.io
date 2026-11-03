@@ -1,16 +1,14 @@
 ---
 title: "Home"
-page-layout: full
-toc: false
 ---
 
 ::: {.hero}
 
-# Terrill Li
+# Terrill Li {.unlisted}
 
 Mathematics student at the University of Sydney.
 
-I use this site to record what I am learning: definitions, proofs, questions, and the connections that become clearer with time.
+I use this site to record what I am learning. I write about definitions, proofs, questions, and connections that become clearer with time.
 
 [Explore the Notes](notes/index.qmd){.btn .btn-primary} [About Me](about.qmd){.btn .btn-outline-secondary}
 
@@ -45,7 +43,9 @@ These are working notes. I expect to revisit them as my understanding improves.
 - [Calculus](notes/calculus/index.qmd)
 - [MATH1964: Discrete Mathematics for Computation (Adv)](notes/math1964/index.qmd)
 - [MATH1972 Seminar Notes](notes/math1972-seminar/index.qmd)
-- [Atomization: Short Mathematical Notes](notes/atomization/index.qmd)
+- [Atomization](notes/atomization/index.qmd)
 - [Appendix: Background Topics](notes/appendix/index.qmd)
+
+See [recent updates](notes/index.qmd#recent-updates) for new and revised notes.
 
 The notes preserve my own learning process. If you spot a mathematical mistake or a broken link, please let me know through [GitHub](https://github.com/Terrillli-math).

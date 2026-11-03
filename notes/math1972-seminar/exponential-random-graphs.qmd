@@ -1,7 +1,7 @@
 ---
 title: "Exponential Random Graph Models"
 description: "Move from independent edges to a probability model for a whole network. Derive likelihoods, interpret coefficients, and check model fit."
-categories: [math1972, network analysis]
+categories: ["Network Analysis", "Probability", "Statistics"]
 format:
   html:
     css: ../calculus/equation-layout.css
@@ -84,10 +84,6 @@ $$
 
 There are $N=6$ possible edges and $m=4$ observed edges. The degrees are $(2,2,3,1)$. There is one triangle, on nodes $1,2,3$.
 
-![A four-node graph with edges 1–2, 1–3, 2–3, and 3–4. The node scores are 0, 1, 1, and 2.](images/ergm-four-nodes.svg){#fig-ergm-four-nodes width=640 fig-align="center"}
-
-The node scores in the figure are fixed values for a later example. They are not measurements from a real network.
-
 The independent-edge estimate is $\widehat p=2/3$. The fitted probability of this particular labelled graph is
 
 $$
@@ -142,7 +138,7 @@ The Statnet Development Team (2026, “Nodal Covariates”) discusses this disti
 
 ### Exact Probabilities in the Small Example
 
-Use the four scores from @fig-ergm-four-nodes:
+Assign the four nodes in the earlier example these fixed scores.
 
 $$
 x=(0,1,1,2).
@@ -352,9 +348,7 @@ $$
 
 Compare two configurations of the remaining edges. If one configuration gives the endpoints one extra shared neighbour, its conditional odds for the candidate edge are $e^{\theta_T}$ times those for the other configuration. For $\theta_T>0$, the odds are higher in the configuration with more shared neighbours. These odds describe an association between edges in the model.
 
-![Conditional probabilities for a candidate edge on three nodes. With no shared neighbour its probability is 1/3. With one shared neighbour its probability is 2/3. The dashed edge is the candidate, not an observed edge.](images/ergm-edge-toggle.svg){#fig-ergm-toggle width=640 fig-align="center"}
-
-The figure uses $\theta_E=-\log2$ and $\theta_T=\log4$. A shared neighbour multiplies the odds by four. The probability changes from $1/3$ to $2/3$.
+Take $\theta_E=-\log2$ and $\theta_T=\log4$. With no shared neighbour, the candidate edge has probability $1/3$. One shared neighbour multiplies the odds by four and raises the probability to $2/3$.
 
 ### Check the Whole Distribution on Three Nodes
 
@@ -499,13 +493,19 @@ $$
 :::
 ::::
 
-![Exact triangle-count probabilities under G(4, 2/3), found by enumerating all 64 labelled graphs. The observed example has one triangle. Three triangles cannot occur on four nodes.](images/ergm-triangle-check.svg){#fig-ergm-triangle-check width=640 fig-align="center"}
+| Triangle Count | Probability |
+|---:|---:|
+| 0 | $249/729$ |
+| 1 | $224/729$ |
+| 2 | $192/729$ |
+| 3 | $0$ |
+| 4 | $64/729$ |
 
-The observed count is one. This is an ordinary value in the displayed distribution. It does not show a clear triangle mismatch. It also does not establish that the model fits every other feature.
+The observed count is one. The fitted model gives this count a probability of about $31\%$. It does not show a clear triangle mismatch. It also does not establish that the model fits every other feature.
 
-Three triangles cannot occur on four nodes. Any three distinct triples together require all six edges, which also complete the fourth triangle. The zero in the plot is a structural restriction, not a simulation error.
+Three triangles cannot occur on four nodes. Any three distinct triples together require all six edges, which also complete the fourth triangle. This explains the zero probability for three triangles.
 
-The fitted probability $2/3$ is held fixed for this comparison. The plot is a model check. It is not a confidence interval for $p$, or a calibrated hypothesis test that accounts for estimating $p$ from this graph.
+The fitted probability $2/3$ is held fixed for this comparison. The distribution gives a model check for triangle counts. It is not a confidence interval for $p$, or a calibrated hypothesis test that accounts for estimating $p$ from this graph.
 
 ## What These Models Can and Cannot Explain
 

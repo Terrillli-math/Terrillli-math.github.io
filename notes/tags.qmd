@@ -1,0 +1,66 @@
+---
+title: "Tags"
+toc: false
+listing:
+  id: tagged-notes
+  contents: "**/*.qmd"
+  include:
+    categories: "*"
+  exclude:
+    categories: [appendix, atomization, math1964, math1972]
+  type: table
+  fields: [title, categories]
+  field-display-names:
+    title: Note
+    categories: Tags
+  categories: true
+  sort: "title asc"
+  sort-ui: false
+  filter-ui: false
+---
+
+Choose a tag to see notes on that topic.
+
+::: {#tag-filters role="group" aria-label="Filter notes by tag"}
+:::
+
+::: {#tagged-notes}
+:::
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const filters = document.querySelector("#quarto-margin-sidebar .quarto-listing-category");
+  if (!filters) return;
+  document.getElementById("tag-filters").append(filters);
+
+  for (const link of document.querySelectorAll("#listing-tagged-notes a.listing-title")) {
+    link.classList.add("no-external");
+  }
+
+  for (const category of filters.children) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.append(...category.childNodes);
+    category.append(button);
+  }
+
+  function updateSelection() {
+    const selected = filters.querySelector(".category.active") ?? filters.firstElementChild;
+    for (const category of filters.children) {
+      category.firstElementChild.setAttribute("aria-pressed", String(category === selected));
+    }
+  }
+
+  new MutationObserver(updateSelection).observe(filters, {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  updateSelection();
+
+  // Quarto reapplies named filters on history navigation. Reset the All view too.
+  window.addEventListener("hashchange", () => {
+    if (!new URLSearchParams(location.hash.slice(1)).get("category")) activateCategory("");
+  });
+});
+</script>

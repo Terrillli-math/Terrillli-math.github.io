@@ -1,7 +1,7 @@
 ---
 title: "Feature Maps and Kernels"
 description: "How inner products let an SVM use richer features without listing them all."
-categories: ["math1972", "machine learning"]
+categories: ["Machine Learning", "Linear Algebra", "Support Vector Machines"]
 ---
 
 ## When a Straight Boundary Is Too Simple

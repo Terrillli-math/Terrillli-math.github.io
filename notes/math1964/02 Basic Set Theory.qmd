@@ -1,6 +1,6 @@
 ---
 title: "02 Basic Set Theory"
-categories: ["math1964"]
+categories: ["Discrete Mathematics", "Set Theory"]
 ---
 
 ## 2.1 Set Theory

@@ -1,6 +1,6 @@
 ---
 title: "04 Cartesian Products"
-categories: ["math1964"]
+categories: ["Discrete Mathematics", "Set Theory"]
 ---
 
 ## Cartesian Products

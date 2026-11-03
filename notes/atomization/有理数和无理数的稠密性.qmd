@@ -1,6 +1,6 @@
 ---
 title: "Density of Rational and Irrational Numbers"
-categories: ["atomization"]
+categories: ["Real Analysis"]
 ---
 
 ::: {.callout-note}

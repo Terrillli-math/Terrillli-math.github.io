@@ -1,7 +1,7 @@
 ---
 title: "Integration with Euler's Formula"
 description: "Use one complex exponential to integrate exponential and trigonometric products, then extend the method to polynomial factors."
-categories: [calculus, complex numbers]
+categories: ["Calculus", "Complex Numbers"]
 format:
   html:
     css: equation-layout.css

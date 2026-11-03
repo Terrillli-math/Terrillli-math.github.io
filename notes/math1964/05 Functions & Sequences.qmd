@@ -1,6 +1,6 @@
 ---
 title: "05 Functions & Sequences"
-categories: ["math1964"]
+categories: ["Discrete Mathematics", "Set Theory"]
 ---
 
 ## Functions

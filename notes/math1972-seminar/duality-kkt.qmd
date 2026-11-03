@@ -1,7 +1,7 @@
 ---
 title: "Lagrange Duality and KKT Conditions"
 description: "How constraints produce lower bounds, and how KKT conditions describe an optimum."
-categories: [math1972, optimisation]
+categories: ["Optimisation", "Convexity"]
 ---
 
 ## Why Introduce Another Problem?
@@ -12,7 +12,7 @@ The Lagrangian brings the objective and the constraints into one expression. It 
 
 This note compares inactive and active constraints through two one-variable problems. The worked examples were constructed for these notes. The connection to SVMs appears in [Linear SVMs and Margins](linear-svm.qmd).
 
-## Start With the Primal Problem
+## Start with the Primal Problem
 
 Write a constrained minimisation problem as
 
@@ -168,7 +168,7 @@ The lower bound equals a feasible cost, so both are optimal.
 
 To guarantee that every attained optimum has suitable KKT multipliers, we need an extra condition on the constraints. Slater's condition is one useful choice for convex problems. Without such a condition, KKT multipliers can fail to exist.
 
-## Example 1: A Constraint With Spare Room
+## Example 1: A Constraint with Spare Room
 
 First, consider
 

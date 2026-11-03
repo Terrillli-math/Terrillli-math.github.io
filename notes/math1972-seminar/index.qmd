@@ -1,12 +1,11 @@
 ---
 title: "MATH1972 Seminar Notes"
 description: "Explanations, short proofs, and worked examples from the MATH1972 seminars."
-toc: false
 ---
 
 These notes explore ideas from my MATH1972 seminars at the University of Sydney. They cover game theory, optimisation, machine learning, and networks.
 
-Each note develops the ideas behind the definitions. Short proofs explain why the main results work. Small examples show how to use them. The notes draw on seminar material. The figures and worked numerical examples were created for these notes. External references are listed where they help explain an idea.
+Each note develops the ideas behind the definitions. Short proofs explain why the main results work. Small examples show how to use them. The notes draw on seminar material. The worked numerical examples were created for these notes. External references are listed where they help explain an idea.
 
 ## Game Theory
 

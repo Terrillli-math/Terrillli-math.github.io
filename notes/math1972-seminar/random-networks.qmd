@@ -1,7 +1,7 @@
 ---
 title: "Random Networks and Connectivity"
 description: "Build a random graph from independent edges, then use probability to study degrees, isolated nodes, and connectivity."
-categories: [math1972, network analysis]
+categories: ["Graph Theory", "Network Analysis", "Probability"]
 format:
   html:
     css: ../calculus/equation-layout.css
@@ -153,13 +153,7 @@ $$
 \end{aligned}
 $$
 
-The two draws below use the same node positions and the same model. Only the edge choices change.
-
-![A draw from G(9, 1/3) with 16 edges and no isolated nodes.](images/random-network-sample-1.svg){#fig-random-sample-one width=640 fig-align="center"}
-
-![A second draw from G(9, 1/3) with 15 edges and no isolated nodes.](images/random-network-sample-2.svg){#fig-random-sample-two width=640 fig-align="center"}
-
-The edge counts are $16$ and $15$, not $12$. There is no contradiction. An expectation is a probability-weighted average over all possible draws. It is not a requirement for one draw, or even for these two draws together.
+Two draws from the same model gave $16$ and $15$ edges. Neither had an isolated node. An expectation is a probability-weighted average over all possible draws. It is not a requirement for one draw, or even for these two draws together.
 
 ## Why a Poisson Distribution Appears
 
@@ -242,9 +236,7 @@ $$
 
 The arrow means convergence in distribution. It does not turn a finite binomial variable into an exact Poisson variable.
 
-![Binomial degree probabilities with mean 3, compared with Poisson(3). The plot shows degrees from 0 to 12 without renormalising the displayed probabilities.](images/random-network-degree-poisson.svg){#fig-degree-poisson width=720 fig-align="center"}
-
-In this comparison, $p_n=3/(n-1)$. The binomial mean is exactly $3$ for both graph sizes. Its variance is $3(1-3/(n-1))$, which approaches the Poisson variance $3$.
+For example, take $p_n=3/(n-1)$ for $n\geq4$. The binomial mean is exactly $3$. Its variance is $3(1-3/(n-1))$, which approaches the Poisson variance $3$.
 
 The probability at degree zero matters too. It tells us how often a node has no neighbors. That leads to a question about the whole graph.
 
@@ -303,9 +295,7 @@ The notation $a_n\sim b_n$ means that $a_n/b_n\to1$. All logarithms in this note
 
 This calculation identifies a useful scale. It does not prove a transition in probability. We must still connect a mean to the chance that $X$ is zero.
 
-![The exact expected number of isolated nodes for three graph sizes, with p = c log(n)/n. The vertical scale is logarithmic. These curves are expectations, not probabilities.](images/random-network-isolated-expectation.svg){#fig-isolated-expectation width=720 fig-align="center"}
-
-The curves use $n=60$, $600$, and $6000$. The line at height one marks $\mathbb E[X]=1$. The crossing approaches $c=1$ as $n$ grows. It is not exactly at $c=1$ for a finite graph.
+If we write $p=c\log n/n$, the value of $c$ that makes $\mathbb E[X]=1$ is $np_*/\log n$. This ratio tends to $1$.
 
 ## Two Probability Bounds
 

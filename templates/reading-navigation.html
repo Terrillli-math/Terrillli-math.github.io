@@ -1,0 +1,194 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const shell = document.querySelector("#quarto-content.page-layout-article");
+  const main = document.getElementById("quarto-document-content");
+  if (!shell || !main) return;
+
+  const offset = document.querySelector('meta[name="quarto:offset"]')?.content;
+  if (offset) {
+    const notesDirectory = new URL(offset + "notes/", location.href);
+    if (location.pathname.startsWith(notesDirectory.pathname)) {
+      for (const category of main.querySelectorAll(".quarto-title .quarto-category")) {
+        const tag = category.textContent.trim();
+        const link = document.createElement("a");
+        link.className = "note-tag no-external";
+        link.textContent = tag;
+        // Link directly so encoded characters in the note URL do not affect tag navigation.
+        link.href = new URL("tags.html#category=" + encodeURIComponent(tag), notesDirectory);
+        category.replaceWith(link);
+      }
+    }
+  }
+
+  const bodyContents = main.querySelector(".reading-toc");
+  const chapters = bodyContents?.querySelector('nav[role="doc-toc"]');
+  if (!chapters) return;
+
+  const targets = [...chapters.querySelectorAll("a[href]")].flatMap(link => {
+    const hash = link.hash;
+    const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (!target) return [];
+    // Quarto can rewrite chapter links as external URLs in a local preview.
+    link.setAttribute("href", hash);
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    link.removeAttribute("data-original-href");
+    return [{link, target}];
+  });
+  if (!targets.length) return;
+
+  const desktop = window.matchMedia("(min-width: 1024px)");
+  const preferenceKey = "reading-contents-expanded";
+  let expanded = true;
+  const header = document.getElementById("quarto-header");
+  const rail = document.createElement("dialog");
+  rail.className = "reading-rail";
+  rail.id = "reading-navigation";
+  rail.setAttribute("aria-labelledby", "reading-chapters-title");
+
+  const opener = document.createElement("button");
+  opener.type = "button";
+  opener.className = "reading-rail-open";
+  opener.textContent = "Contents";
+  opener.setAttribute("aria-controls", rail.id);
+  opener.setAttribute("aria-expanded", "false");
+  opener.setAttribute("aria-haspopup", "dialog");
+
+  const close = document.createElement("button");
+  close.type = "button";
+  close.className = "reading-rail-close";
+
+  const title = document.createElement("h2");
+  title.id = "reading-chapters-title";
+  title.textContent = bodyContents.querySelector("summary").textContent;
+  chapters.setAttribute("aria-labelledby", title.id);
+  const heading = document.createElement("div");
+  heading.className = "reading-rail-heading";
+  heading.append(title, close);
+  rail.append(heading, chapters);
+  bodyContents.remove();
+
+  shell.insertBefore(rail, main);
+  shell.insertBefore(opener, main);
+  shell.classList.add("with-reading-rail");
+
+  function loadPreference() {
+    try {
+      expanded = localStorage.getItem(preferenceKey) !== "false";
+    } catch {
+      // The current page can still be toggled when storage is unavailable.
+    }
+  }
+
+  function applyViewport() {
+    if (rail.matches(":modal")) rail.close();
+    rail.open = desktop.matches && expanded;
+    close.textContent = desktop.matches ? "" : "Close";
+    if (desktop.matches) {
+      rail.setAttribute("role", "complementary");
+      opener.removeAttribute("aria-haspopup");
+      close.setAttribute("aria-label", "Collapse Contents");
+    } else {
+      rail.removeAttribute("role");
+      opener.setAttribute("aria-haspopup", "dialog");
+      close.removeAttribute("aria-label");
+    }
+    opener.setAttribute("aria-expanded", String(rail.open));
+  }
+
+  function setExpanded(value) {
+    expanded = value;
+    try {
+      localStorage.setItem(preferenceKey, String(value));
+    } catch {
+      // Keep the local toggle usable even if the preference cannot be saved.
+    }
+    applyViewport();
+  }
+
+  function restorePreference() {
+    loadPreference();
+    if (desktop.matches) applyViewport();
+  }
+
+  loadPreference();
+  applyViewport();
+  desktop.addEventListener("change", applyViewport);
+  window.addEventListener("storage", event => {
+    if (event.key === preferenceKey || event.key === null) restorePreference();
+  });
+  window.addEventListener("pageshow", event => {
+    if (event.persisted) restorePreference();
+  });
+  opener.addEventListener("click", () => {
+    if (desktop.matches) {
+      setExpanded(true);
+      close.focus({preventScroll: true});
+      return;
+    }
+    rail.returnValue = "";
+    rail.showModal();
+    opener.setAttribute("aria-expanded", "true");
+  });
+  close.addEventListener("click", () => {
+    if (desktop.matches) {
+      setExpanded(false);
+      opener.focus({preventScroll: true});
+    } else {
+      rail.close();
+    }
+  });
+  rail.addEventListener("close", () => {
+    if (rail.open) return;
+    opener.setAttribute("aria-expanded", "false");
+    if (!desktop.matches && rail.returnValue !== "chapter") opener.focus();
+  });
+
+  let headerHeight = header?.offsetHeight ?? 70;
+  if (header) {
+    const refreshHeader = () => {
+      headerHeight = header.offsetHeight;
+      shell.style.setProperty("--reading-header", headerHeight + "px");
+    };
+    refreshHeader();
+    new ResizeObserver(refreshHeader).observe(header);
+  }
+
+  chapters.addEventListener("click", event => {
+    if (event.button !== 0 || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    const entry = targets.find(({link}) => link === event.target.closest("a"));
+    if (!entry) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (rail.matches(":modal")) rail.close("chapter");
+    if (location.hash !== entry.link.hash) history.pushState(null, "", entry.link.hash);
+    entry.target.tabIndex = -1;
+    entry.target.focus({preventScroll: true});
+    entry.target.scrollIntoView({block: "start", behavior: "instant"});
+  }, {capture: true});
+  let activeChapter;
+  function markChapter() {
+    let current = targets[0];
+    for (const entry of targets) {
+      if (entry.target.getBoundingClientRect().top <= headerHeight + 32) current = entry;
+      else break;
+    }
+    if (current === activeChapter) return;
+    activeChapter?.link.removeAttribute("aria-current");
+    current?.link.setAttribute("aria-current", "location");
+    activeChapter = current;
+  }
+  let pending = false;
+  function scheduleChapter() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      markChapter();
+    });
+  }
+  window.addEventListener("scroll", scheduleChapter, {passive: true});
+  window.addEventListener("resize", scheduleChapter);
+  markChapter();
+});
+</script>

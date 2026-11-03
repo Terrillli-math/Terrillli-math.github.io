@@ -1,6 +1,6 @@
 ---
 title: "Polynomials"
-categories: ["appendix"]
+categories: ["Algebra", "Polynomials"]
 ---
 
 ## 1. Definitions

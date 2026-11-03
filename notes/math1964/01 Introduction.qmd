@@ -1,6 +1,6 @@
 ---
 title: "01 Introduction"
-categories: ["math1964"]
+categories: ["Discrete Mathematics"]
 ---
 
 These notes give an overview of discrete mathematics and why it matters.

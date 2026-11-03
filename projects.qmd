@@ -2,10 +2,12 @@
 title: "Projects"
 ---
 
-## A Mathematics Website
+## A Mathematics Website {.project-entry}
 
-This website is my first ongoing project. I turn private study notes into clear pages and check the mathematics as I go. I plan to revise them as I learn more. The site uses Quarto and is intended for GitHub Pages.
+This website is an ongoing project. I check the mathematics in my study notes and work on explaining it more clearly. I revise the pages as I learn more. The site uses Quarto and is hosted on GitHub Pages.
 
-## Multiclass SVM
+## Multiclass SVM {.project-entry}
 
-[Multiclass SVM: The Crammer-Singer Approach](projects/multiclass-svm-crammer-singer.qmd) explains a direct method for multiclass classification. It develops the margin, the primal and dual problems, kernelisation, and the training method. It also compares the model with one-versus-rest and one-versus-one SVMs.
+This project explains how the Crammer-Singer method trains one model for several classes. The strongest rival sets the margin for each example. The project connects this idea to hinge loss, the primal and dual problems, and kernels.
+
+[Read the Crammer-Singer project](projects/multiclass-svm-crammer-singer.qmd)

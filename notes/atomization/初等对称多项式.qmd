@@ -1,6 +1,6 @@
 ---
 title: "Elementary Symmetric Polynomials"
-categories: ["atomization"]
+categories: ["Algebra", "Combinatorics", "Polynomials"]
 ---
 
 The *elementary symmetric polynomials* use $n$ variables $X_1,\ldots,X_n$. Choose $k$ different variables, multiply them, and add the products from every choice. For $1\leq k\leq n$,
