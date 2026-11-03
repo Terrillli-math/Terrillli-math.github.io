@@ -12,7 +12,7 @@ project:
 
 website:
   title: "Terrill Li"
-  favicon: favicon.jpg
+  favicon: favicon.svg
   site-url: https://terrillli-math.github.io
   description: "Mathematics notes and a record of learning."
   search: true
