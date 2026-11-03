@@ -6,7 +6,7 @@ title: "Home"
 <script>
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches && document.fonts) {
   document.documentElement.classList.add("signature-pending");
-  window.setTimeout(() => document.documentElement.classList.remove("signature-pending"), 7000);
+  window.setTimeout(() => document.documentElement.classList.remove("signature-pending"), 10000);
 }
 </script>
 

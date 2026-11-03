@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name.replaceChildren(label, svg); name.classList.add("signature-rendered");
       });
       document.documentElement.classList.remove("signature-pending");
-    }, 2500);
+    }, 5000);
   }).catch(() => { document.documentElement.classList.remove("signature-pending"); });
 });
 </script>
