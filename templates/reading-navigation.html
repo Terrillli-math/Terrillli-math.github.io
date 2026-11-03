@@ -238,16 +238,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const offset = document.querySelector('meta[name="quarto:offset"]')?.content || "./";
   const url = new URL(offset + "signature-strokes.svg", location.href);
   Promise.all([document.fonts.load('160px "Great Vibes"'), fetch(url, {cache:"no-cache"}).then(r => { if (!r.ok) throw new Error("Signature unavailable"); return r.text(); })]).then(([, source]) => {
-    if (!document.documentElement.classList.contains("signature-pending")) return;
-    names.forEach((name, index) => {
-      const fragment = document.createElement("template");
-      fragment.innerHTML = source.replaceAll("signature-mask", "signature-mask-" + index);
-      const svg = fragment.content.querySelector("svg");
-      if (!svg) return;
-      const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
-      name.replaceChildren(label, svg); name.classList.add("signature-rendered");
-    });
-    document.documentElement.classList.remove("signature-pending");
+    window.setTimeout(() => {
+      if (!document.documentElement.classList.contains("signature-pending")) return;
+      names.forEach((name, index) => {
+        const fragment = document.createElement("template");
+        fragment.innerHTML = source.replaceAll("signature-mask", "signature-mask-" + index);
+        const svg = fragment.content.querySelector("svg");
+        if (!svg) return;
+        const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
+        name.replaceChildren(label, svg); name.classList.add("signature-rendered");
+      });
+      document.documentElement.classList.remove("signature-pending");
+    }, 1000);
   }).catch(() => { document.documentElement.classList.remove("signature-pending"); });
 });
 </script>
