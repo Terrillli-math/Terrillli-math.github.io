@@ -26,8 +26,8 @@
   --site-border: #c4d1df;
   --site-bar: #edf2fa;
   --site-focus: #855613;
-  --site-gradient: linear-gradient(315deg, #f6f8fc 12%, #e7eef7 100%);
-  --site-reading-gradient: linear-gradient(315deg, #f6f8fc 40%, #edf2f9 100%);
+  --site-gradient: linear-gradient(135deg, #f7f9fd 0%, #c4d7ec 100%);
+  --site-reading-gradient: linear-gradient(135deg, #f7f9fd 0%, #cfdef0 100%);
   --site-hero-gradient: linear-gradient(315deg, #f8fafd 12%, #e0eaf7 100%);
   --site-serif: Georgia, "Times New Roman", serif;
   --site-ui: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -46,8 +46,8 @@ body.quarto-dark {
   --site-border: #3b4553;
   --site-bar: #1d242d;
   --site-focus: #e7bc76;
-  --site-gradient: linear-gradient(135deg, #181c22 12%, #202b38 100%);
-  --site-reading-gradient: linear-gradient(135deg, #181c22 40%, #1d2530 100%);
+  --site-gradient: linear-gradient(135deg, #181c22 0%, #405d7b 100%);
+  --site-reading-gradient: linear-gradient(135deg, #181c22 0%, #3a526c 100%);
   --site-hero-gradient: linear-gradient(135deg, #1c222b 12%, #253445 100%);
 }
 
@@ -57,14 +57,14 @@ body {
   --bs-border-color: var(--site-border);
   --bs-body-font-family: var(--site-text);
   min-height: 100vh;
-  background: var(--site-reading-gradient);
+  background: var(--site-reading-gradient) fixed;
   color: var(--site-ink);
   font-family: var(--site-text);
   line-height: 1.72;
 }
 
 body:has(.hero) {
-  background: var(--site-gradient);
+  background: var(--site-gradient) fixed;
 }
 
 main a {
