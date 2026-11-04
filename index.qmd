@@ -25,7 +25,7 @@ I use this site to record what I am learning. I write about definitions, proofs,
 :::
 
 ::: {.hero-visual}
-<canvas class="hero-ribbon" role="img" aria-label="A curved blue ribbon with three twists rotating in three dimensions"></canvas>
+<canvas class="hero-ribbon" role="img" aria-label="Two interlocking blue ribbons rotating at different angles"></canvas>
 :::
 
 ::::
