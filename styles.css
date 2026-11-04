@@ -521,3 +521,9 @@ body.quarto-dark .topic-motion .threshold { stroke:#ffe0a6; }
 .hero-visual { display:flex; justify-content:center; align-items:center; min-width:0; }
 .hero-ribbon { display:block; width:min(100%,310px); aspect-ratio:1; }
 @media (max-width:700px) { .hero { grid-template-columns:1fr; } .hero-visual { order:2; } .hero-ribbon { width:min(70%,270px); } }
+
+/* Leave room for the signature's rightmost flourish on narrow screens. */
+@media (max-width: 700px) {
+  .hero h1.signature-rendered { width: min(96%, 410px); }
+  .hero h1:not(.signature-rendered) { font-size: clamp(2.6rem, 11vw, 3.6rem); }
+}
