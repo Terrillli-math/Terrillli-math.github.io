@@ -3,7 +3,7 @@ title: "03 Cardinality and Power Sets"
 categories: ["Discrete Mathematics", "Set Theory"]
 ---
 
-## 3.1 Cardinality
+## Cardinality {#cardinality}
 
 The *cardinality* $|S|$ of a finite set is its number of distinct elements. We can also compare infinite sets. Two sets have the same cardinality if there is a bijection between them. Some infinite sets are larger than others: for example, $|\mathbb{N}|<|\mathbb{R}|$.
 
@@ -34,7 +34,7 @@ $$
 It lists the integers in the order $0,1,-1,2,-2,\ldots$.
 :::
 
-## 3.2 Power Sets
+## Power Sets {#power-sets}
 
 The *power set* of $S$ is the set of all its subsets:
 $$

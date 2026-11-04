@@ -1,4 +1,5 @@
 ---
+number-sections: false
 title: "Discrete Mathematics"
 toc: false
 ---

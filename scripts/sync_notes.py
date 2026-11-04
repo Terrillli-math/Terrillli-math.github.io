@@ -184,7 +184,7 @@ def make_qmd(source: Path, output: Path, by_stem: dict[str, Path],
 
 def make_index(title: str, intro: str, entries: list[tuple[str, str]]) -> str:
     lines = ["---", f"title: {json.dumps(title, ensure_ascii=False)}",
-             "toc: false", "---", "", intro, ""]
+             "toc: false", "number-sections: false", "---", "", intro, ""]
     for label, href in entries:
         lines.append(f"- [{label}](<{href}>)")
     return "\n".join(lines).rstrip() + "\n"

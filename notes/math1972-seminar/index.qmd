@@ -1,4 +1,5 @@
 ---
+number-sections: false
 title: "Further Explorations"
 description: "Explanations, short proofs, and worked examples across mathematical topics."
 ---
