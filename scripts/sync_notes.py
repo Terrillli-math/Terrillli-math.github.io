@@ -26,7 +26,7 @@ ENGLISH_TITLES = {
 GROUP_TITLES = {
     "Appendix": "Appendix",
     "Atomization": "Atomization",
-    "MATH1964 Notes": "MATH1964: Discrete Mathematics for Computation (Adv)",
+    "MATH1964 Notes": "Discrete Mathematics",
 }
 WIKI_LINK = re.compile(r"(?<!!)\[\[([^\]]+)\]\]")
 EMBED = re.compile(r"!\[\[([^\]]+)\]\]")

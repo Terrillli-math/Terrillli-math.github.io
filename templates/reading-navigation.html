@@ -246,17 +246,37 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!svg) return;
       const label = document.createElement("span"); label.className = "signature-accessible"; label.textContent = "Terrill Li";
       name.replaceChildren(label, svg); name.classList.add("signature-rendered");
-      svg.pauseAnimations();
-      svg.setCurrentTime(0);
-      drawings.push(svg);
+      // Drive mask attributes directly so the drawing does not depend on
+      // browser-specific behaviour when seeking a paused SVG animation.
+      const steps = [...svg.querySelectorAll("animate, set")].map(animation => {
+        const step = {
+          target: animation.parentElement,
+          attribute: animation.getAttribute("attributeName"),
+          begin: parseFloat(animation.getAttribute("begin")) || 0,
+          duration: parseFloat(animation.getAttribute("dur")) || 0,
+          from: animation.getAttribute("from"),
+          to: animation.getAttribute("to")
+        };
+        animation.remove();
+        return step;
+      });
+      drawings.push(steps);
     });
     document.documentElement.classList.remove("signature-pending");
     let start;
     function drawSignature(now) {
       if (start === undefined) start = now;
-      const elapsed = Math.min((now - start) % 2550, 1750) / 1000;
-      drawings.forEach(svg => svg.setCurrentTime(elapsed));
-      requestAnimationFrame(drawSignature);
+      const elapsed = Math.min(now - start, 1750) / 1000;
+      drawings.forEach(steps => steps.forEach(step => {
+        if (step.attribute === "visibility") {
+          step.target.setAttribute("visibility", elapsed >= step.begin ? step.to : "hidden");
+          return;
+        }
+        const progress = Math.max(0, Math.min(1, (elapsed - step.begin) / step.duration));
+        const value = Number(step.from) + (Number(step.to) - Number(step.from)) * progress;
+        step.target.setAttribute(step.attribute, value);
+      }));
+      if (elapsed < 1.75) requestAnimationFrame(drawSignature);
     }
     if (drawings.length) requestAnimationFrame(drawSignature);
   }).catch(() => { document.documentElement.classList.remove("signature-pending"); });
