@@ -238,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const offset = document.querySelector('meta[name="quarto:offset"]')?.content || "./";
   const url = new URL(offset + "signature-strokes.svg", location.href);
   Promise.all([document.fonts.load('160px "Great Vibes"'), fetch(url, {cache:"no-cache"}).then(r => { if (!r.ok) throw new Error("Signature unavailable"); return r.text(); })]).then(([, source]) => {
-    if (!document.documentElement.classList.contains("signature-pending")) return;
     const drawings = [];
     names.forEach((name, index) => {
       const fragment = document.createElement("template");
