@@ -17,6 +17,7 @@ A selection of my course notes and shorter mathematical explorations.
 <!-- END GENERATED NOTE COLLECTIONS -->
 
 - [Calculus](<calculus/index.qmd>) — integration methods and the ideas behind them.
+- [Linear Algebra](<linear-algebra/index.qmd>) — matrices, vector spaces, and linear maps.
 - [Further Explorations](<math1972-seminar/index.qmd>) — game theory, optimisation, machine learning, and network analysis.
 
 :::

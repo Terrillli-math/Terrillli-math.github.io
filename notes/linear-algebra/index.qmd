@@ -1,0 +1,15 @@
+---
+title: "Linear Algebra"
+number-sections: false
+toc: false
+---
+
+Notes on matrices, vector spaces, and linear maps.
+
+[**Why a Rectangular Matrix Has No Two-Sided Inverse**](rectangular-matrix-inverses.qmd)
+
+See how rank and linear maps explain the difference between a left inverse and a right inverse.
+
+---
+
+[All Notes](../index.qmd)

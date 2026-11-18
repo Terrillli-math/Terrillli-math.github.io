@@ -1,0 +1,177 @@
+---
+title: "Why a Rectangular Matrix Has No Two-Sided Inverse"
+description: "Two proofs using rank, matrix diagrams, and linear maps, with an example of two distinct left inverses."
+categories: ["Linear Algebra"]
+---
+
+<style>
+.matrix-product-figure {
+  width: min(100%, 25rem);
+  margin: 1.25rem auto;
+  color: var(--site-ink);
+  --matrix-selection: #00608d;
+}
+body.quarto-dark .matrix-product-figure {
+  --matrix-selection: #8bd2f9;
+}
+.matrix-product-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.matrix-product-figure .matrix-blocks {
+  fill: var(--site-panel);
+  stroke: currentColor;
+}
+.matrix-product-figure .matrix-grid {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: .35;
+}
+.matrix-product-figure .matrix-weights {
+  fill: var(--matrix-selection);
+  fill-opacity: .18;
+}
+.matrix-product-figure .matrix-vectors {
+  fill: none;
+  stroke: var(--site-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.matrix-product-figure .matrix-selection {
+  fill: none;
+  stroke: var(--matrix-selection);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+}
+.matrix-product-figure .matrix-labels {
+  fill: currentColor;
+  font: italic 22px var(--site-serif, serif);
+}
+.matrix-product-figure figcaption {
+  margin-top: .25rem;
+  color: var(--site-muted);
+  font-size: .9rem;
+  text-align: center;
+}
+</style>
+
+## The Question
+
+When a square matrix has an inverse, multiplying in either order gives the identity matrix. For a rectangular matrix, both products can still be formed. They just have different sizes.
+
+Let $A$ be an $m\times n$ real matrix. A *left inverse* is an $n\times m$ matrix $L$ with $LA=I_n$. A *right inverse* is an $n\times m$ matrix $R$ with $AR=I_m$. Here $I_d$ is the $d\times d$ identity matrix.
+
+If $m\ne n$, could both equations hold, even if we choose different matrices for $L$ and $R$?
+
+## A Proof Using Rank
+
+The rank of a matrix is the dimension of its column space, the span of its columns. It is also the dimension of its row space, the span of its rows. Both dimensions equal the number of pivots after row reduction.
+
+Let $B$ be an $n\times k$ matrix, so $AB$ is $m\times k$. The diagrams use $m=3$, $n=2$, and $k=4$. The height of $AB$ matches $A$, and its width matches $B$.
+
+### Read a Column of the Product
+
+Pick a column $b_j$ of $B$. Column $j$ of $AB$ is $Ab_j$. If $a_1,\ldots,a_n$ are the columns of $A$, then
+$$
+Ab_j=\sum_{\ell=1}^{n} b_{\ell j}a_\ell.
+$$
+The entries you read down $b_j$ are the weights for the columns of $A$.
+
+<figure class="matrix-product-figure">
+<svg viewBox="0 0 340 216" role="img" aria-labelledby="matrix-columns-title matrix-columns-desc">
+  <title id="matrix-columns-title">A column of a matrix product</title>
+  <desc id="matrix-columns-desc">A is at the lower left, B is at the upper right, and AB is below B. The second columns of B and AB have dashed outlines. The two columns of A have solid vertical marks.</desc>
+  <path class="matrix-blocks" d="M54 96h72v108H54z M126 24h144v72H126z M126 96h144v108H126z"/>
+  <path class="matrix-weights" d="M162 24h36v180h-36z"/>
+  <path class="matrix-grid" d="M90 96v108 M54 132h72 M54 168h72 M162 24v180 M198 24v180 M234 24v180 M126 60h144 M126 132h144 M126 168h144"/>
+  <path class="matrix-vectors" d="M72 105v90 M108 105v90"/>
+  <path class="matrix-selection" d="M164 26h32v68h-32z M164 98h32v104h-32z"/>
+  <g class="matrix-labels">
+    <text x="44" y="157" text-anchor="end">A</text>
+    <text x="281" y="67">B</text>
+    <text x="281" y="157">AB</text>
+  </g>
+</svg>
+<figcaption>The upper dashed column gives the weights for the two marked columns on the left.</figcaption>
+</figure>
+
+Every column of $AB$ therefore belongs to the column space of $A$. Taking the span gives $\operatorname{col}(AB)\subseteq\operatorname{col}(A)$, so $\operatorname{rank}(AB)\leq\operatorname{rank}(A)$.
+
+### Read a Row of the Product
+
+Now pick row $i$ of $A$. Let $r_\ell$ be row $\ell$ of $B$. Row $i$ of $AB$ is
+$$
+\sum_{\ell=1}^{n} a_{i\ell}r_\ell.
+$$
+This time, read across the row of $A$ to get the weights for the rows of $B$.
+
+<figure class="matrix-product-figure">
+<svg viewBox="0 0 340 216" role="img" aria-labelledby="matrix-rows-title matrix-rows-desc">
+  <title id="matrix-rows-title">A row of a matrix product</title>
+  <desc id="matrix-rows-desc">A is at the lower left, B is at the upper right, and AB is below B. The second rows of A and AB have dashed outlines. The two rows of B have solid horizontal marks.</desc>
+  <path class="matrix-blocks" d="M54 96h72v108H54z M126 24h144v72H126z M126 96h144v108H126z"/>
+  <path class="matrix-weights" d="M54 132h216v36H54z"/>
+  <path class="matrix-grid" d="M90 96v108 M54 132h72 M54 168h72 M162 24v180 M198 24v180 M234 24v180 M126 60h144 M126 132h144 M126 168h144"/>
+  <path class="matrix-vectors" d="M135 42h126 M135 78h126"/>
+  <path class="matrix-selection" d="M56 134h68v32H56z M128 134h140v32H128z"/>
+  <g class="matrix-labels">
+    <text x="44" y="157" text-anchor="end">A</text>
+    <text x="281" y="67">B</text>
+    <text x="281" y="157">AB</text>
+  </g>
+</svg>
+<figcaption>The dashed row on the left gives the weights for the two marked rows above.</figcaption>
+</figure>
+
+Every row of $AB$ belongs to the row space of $B$. Thus $\operatorname{row}(AB)\subseteq\operatorname{row}(B)$, so $\operatorname{rank}(AB)\leq\operatorname{rank}(B)$. Together the two bounds give
+$$
+\operatorname{rank}(AB)\leq\min\{\operatorname{rank} A,\operatorname{rank} B\}.
+$$
+
+### Apply the Two Bounds
+
+A matrix with $m$ rows and $n$ columns has at most $\min\{m,n\}$ pivots. If $LA=I_n$, then
+$$
+n=\operatorname{rank}(LA)\leq\operatorname{rank}(A)\leq n.
+$$
+So a left inverse requires $\operatorname{rank}(A)=n$. If $AR=I_m$, then
+$$
+m=\operatorname{rank}(AR)\leq\operatorname{rank}(A)\leq m.
+$$
+So a right inverse requires $\operatorname{rank}(A)=m$. Both equations can hold only if $m=n$.
+
+## A Proof Using Linear Maps
+
+A matrix with $n$ columns and $m$ rows defines a linear map $T_A:\mathbb R^n\to\mathbb R^m$ by $T_A(x)=Ax$. Writing $x$ in coordinates gives
+$$
+Ax=x_1a_1+\cdots+x_na_n.
+$$
+Each output is a linear combination of the columns of $A$. Conversely, any such combination is an output. Just use its coefficients as the entries of $x$. This is why the image of $T_A$, the set of all its outputs, is exactly $\operatorname{col}(A)$.
+
+### What Each Inverse Does
+
+If $LA=I_n$, then $T_L\circ T_A=\mathrm{id}_{\mathbb R^n}$. Applying $A$ and then $L$ returns the original input. If $Ax=Ax'$, applying $L$ gives $x=x'$. So $T_A$ is *injective*: different inputs give different outputs.
+
+If $AR=I_m$, then $T_A\circ T_R=\mathrm{id}_{\mathbb R^m}$. Given any $y\in\mathbb R^m$, choose $x=Ry$. Then $Ax=y$. So $T_A$ is *surjective*: every vector in its target space is an output.
+
+### Compare the Dimensions
+
+If $T_A$ is injective, its kernel (the set of inputs sent to zero) contains only the zero vector. The rank–nullity theorem then gives $\dim\operatorname{im}(T_A)=n$. If $T_A$ is surjective, its image is all of $\mathbb R^m$, so that same dimension is $m$. Hence $m=n$ if both inverses exist.
+
+## Two Left Inverses for One Matrix
+
+Consider the map $A(x,y)=(x,y,0)$ from $\mathbb R^2$ to $\mathbb R^3$. The maps
+$$
+\begin{aligned}
+L_1(x,y,z)&=(x,y),\\
+L_2(x,y,z)&=(x+z,y)
+\end{aligned}
+$$
+are distinct, but both return $(x,y)$ when applied to $A(x,y)=(x,y,0)$. They are both left inverses.
+
+There is no right inverse. The third coordinate of every output of $A$ is zero, so a target such as $(0,0,1)$ can never be reached. A rectangular matrix can have several inverses on one side, even though it cannot have an inverse on each side.
+
+---
+
+[Linear Algebra](index.qmd) · [All Notes](../index.qmd)
