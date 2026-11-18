@@ -97,25 +97,16 @@ We can still speak informally about the *class* of all sets. In ZFC, this is sho
 ::: {.callout-note}
 ## von Neumann Natural Numbers
 
-We can use the empty set $\varnothing$ as a starting point.
-From here we can build other sets:
-$\{ \varnothing \} = \{ \{  \} \}$,
-$\{ \varnothing, \{ \varnothing \} \} = \{ \{  \}, \{ \{  \} \} \}$,
-$\{ \varnothing, \{ \varnothing \}, \{ \varnothing, \{ \varnothing \} \} \}$,
-$\dots$ and so on.
-We can give these sets names:
-$0 = \varnothing$,
-$1 = \{ \varnothing \} = \{ 0 \}$,
-$2 = \{ \varnothing, \{ \varnothing \} \} = \{ 0, 1 \}$,
-$3 = \{ \varnothing, \{ \varnothing \}, \{ \varnothing, \{ \varnothing \} \} \} = \{ 0, 1, 2 \}$,
-$\dots$
-In this way we can, beginning with *just the empty set*, construct the natural numbers:
-
+Start with $0=\varnothing$. Given a number $n$, define its successor by
 $$
-n = \{ m \in \mathbb{N} : m < n \}.
+S(n)=n\cup\{n\}.
 $$
+This keeps all the elements of $n$ and adds $n$ itself. The first three successors are $1=\{0\}$, $2=\{0,1\}$, and $3=\{0,1,2\}$.
 
-Here each natural number is represented by the set of all smaller natural numbers.
+The axiom of infinity gives a set containing $0$ and closed under this rule. The natural numbers form the smallest such set. In this construction, $m<n$ means $m\in n$. Thus each natural number is the set of all its predecessors.
+$$
+n=\{m\in\mathbb{N}:m<n\}.
+$$
 
 :::
 

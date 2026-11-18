@@ -10,7 +10,7 @@ A list of people tells us who belongs to a group. It does not tell us who knows 
 
 Network analysis studies a system through its objects and their connections. We represent the objects by **nodes**. We represent their connections by **edges**. The resulting mathematical object is a **graph**.
 
-This note uses one small graph throughout. The graph and numerical examples in this note were constructed for these notes. The aim is to understand what each measure tells us. It is just as useful to know what a measure leaves out.
+We use the same seven-node graph to compare degree, clustering, and distance.
 
 ## One Graph, Several Representations
 
@@ -320,11 +320,9 @@ This example shows why the node set matters. Adding an isolated node leaves ever
 | Distance | How few edges connect this pair? | How many different routes exist. |
 | Diameter | How long is the longest shortest route? | The typical route length. |
 
-A network measure is a summary, rather than a full description. Two graphs can share a degree distribution and still have different triangles or distances. A drawing is also a summary. A neat layout does not prove that the network has a particular structure.
+Two graphs can have the same degree distribution and still differ in their triangle counts or shortest-path distances.
 
 For real data, the meaning of an edge needs care. A friendship survey and a message log record different kinds of connection. Missing people or missing edges can change degrees, components, and distances. An undirected model also loses information when the original relation has a direction.
-
-The practical lesson is to state the graph model first. Then choose a measure that matches the question. A useful number needs both a calculation and an interpretation.
 
 ## A Short Check
 

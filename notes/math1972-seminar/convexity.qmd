@@ -21,7 +21,7 @@ $$
 :::
 
 
-The examples below connect the main definitions with simple optimisation problems. The worked examples were constructed for these notes.
+A line-segment argument shows why every local minimum of a convex function is global on a convex domain. In the ridge regression example, we find the minimum by setting the gradient to zero.
 
 ## Convex Sets: Keep the Whole Segment
 

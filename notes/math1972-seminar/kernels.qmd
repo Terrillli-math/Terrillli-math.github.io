@@ -16,7 +16,7 @@ $$
 
 The score is linear in the new features. It may be nonlinear in the original inputs. This distinction is the main idea behind kernel methods.
 
-The numerical examples were constructed for these notes. They make the feature map and its inner product explicit.
+The first example uses a nonlinear feature to separate four points. The second shows how to compute an inner product without writing out the new features.
 
 <div class="topic-motion-slot" data-motion="kernels"></div>
 
@@ -43,7 +43,7 @@ $$
 
 The new feature measures squared distance from the origin. The nonlinear boundary in the original space is $x=\pm\sqrt6$.
 
-This is a constructed separator. We have not claimed that these particular coefficients solve an SVM training problem. The example shows what a feature map makes possible.
+This score separates the four points. An SVM would choose its coefficients by optimising the margin objective.
 
 ## Inner Products Are the Only Quantities We Need
 

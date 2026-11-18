@@ -9,7 +9,7 @@ categories: ["Set Theory"]
 For every set $A$, its power set $\mathcal{P}(A)$ has strictly greater cardinality: $|A|<|\mathcal{P}(A)|$.
 :::
 
-For finite sets, this follows from $|\mathcal{P}(A)|=2^{|A|}>|A|$. Cantor's theorem also applies to infinite sets, where counting elements one by one is not possible.
+For finite sets, this follows from $|\mathcal{P}(A)|=2^{|A|}>|A|$. The finite counting argument does not apply to infinite sets. The proof below works for any set.
 
 ::: {.callout-tip}
 ## Functions and Cardinality

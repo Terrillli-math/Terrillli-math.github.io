@@ -6,8 +6,6 @@ categories: ["Game Theory", "Discrete Mathematics"]
 
 Nim is a game about removing objects from piles. Its rules are simple. Yet a good strategy depends on how the pile sizes fit together, rather than on their total alone.
 
-The aim is to explain why the strategy works, as well as how to use it. The worked examples and practice problems were constructed for these notes.
-
 <div class="topic-motion-slot" data-motion="nim"></div>
 
 ::: {.motion-equation}

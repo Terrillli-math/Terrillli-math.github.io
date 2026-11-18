@@ -559,7 +559,7 @@ Many isolated nodes remain, even while the giant component exists. Under the pre
 
 Start from a node in the giant component. **Breadth-first search** visits nodes one edge away, then two edges away, and so on.
 
-Early in the search, imagine that each new node reveals about $\lambda$ new neighbors. Ignoring repeated discoveries gives layer sizes of roughly
+Approximate the early search by a branching process. Suppose each vertex in one layer gives rise to about $\lambda$ new vertices in the next. Ignoring repeated discoveries gives layer sizes of roughly
 
 $$
 1,\lambda,\lambda^2,\ldots,\lambda^r.
@@ -576,8 +576,6 @@ This is a heuristic for the typical distance between nodes in the giant componen
 For instance, if $\lambda=3$ and $n=59049=3^{10}$, the estimate is about $10$ steps. Multiplying the network size by $3$ adds about one step to this estimate.
 
 Repeated discoveries and small branches affect actual distances. The argument also fails at $\lambda=1$, where the denominator is zero. We should not use it there by taking a numerical limit.
-
-The main insight is about scales. The number of possible routes can grow quickly with each extra step. Short typical routes can therefore coexist with a large number of nodes.
 
 ## What the Model Leaves Out
 

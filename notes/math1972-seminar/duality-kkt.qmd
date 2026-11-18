@@ -10,7 +10,7 @@ A constraint changes which directions we may move. At a boundary, the gradient o
 
 The Lagrangian brings the objective and the constraints into one expression. It leads to a second problem, called the **dual problem**. This problem searches for the strongest lower bound of a particular form.
 
-This note compares inactive and active constraints through two one-variable problems. The worked examples were constructed for these notes. The connection to SVMs appears in [Linear SVMs and Margins](linear-svm.qmd).
+The two examples compare a constraint that leaves the unconstrained minimiser feasible with one that moves the minimiser to the boundary. The same conditions link fitted weights to training points in [Linear SVMs and Margins](linear-svm.qmd).
 
 <div class="topic-motion-slot" data-motion="duality"></div>
 

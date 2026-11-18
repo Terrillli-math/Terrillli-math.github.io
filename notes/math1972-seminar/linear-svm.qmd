@@ -23,7 +23,7 @@ $$
 
 This is a useful design rule. It is not a promise that the largest training margin always gives the best predictions. The data, the features, and the choice of regularisation still matter.
 
-The main aim of these notes is to connect the geometry with the optimisation. The numerical example below was constructed for these notes.
+The two-point example below shows how the margin constraints determine the boundary.
 
 ## Scores, Boundaries, and Distances
 
@@ -231,7 +231,7 @@ To compute $b$ from the margin equality, use a point with $0<\alpha_i<C$ when on
 
 ## What This Changes About the Geometry
 
-The hard-margin model asks for perfect separation. The soft-margin model asks whether a wider, simpler boundary is worth a few violations. It balances two goals instead of treating every difficult point as a fixed obstacle.
+The hard-margin problem enforces every margin constraint. The soft-margin objective balances the squared norm $\lVert w\rVert^2$ against the total hinge loss.
 
 The dual also changes how we view the data. The prediction score is
 

@@ -31,6 +31,6 @@ These notes give an overview of discrete mathematics and why it matters.
 
 ### Why Study Discrete Mathematics?
 
-- Foundation for Computer Science (algorithms, data structures).
-- Problem-Solving: develops logical reasoning and critical thinking.
-- Broad applications: useful in cryptography, network optimization, decision-making, and more.
+A graph records which objects are linked. A transit map, for example, lets us ask whether there is a route between two stations.
+
+Counting lets us work out how many outcomes are possible without listing them. There are $2^n$ binary strings of length $n$ because each position has two choices. Graphs and counting also help us analyse algorithms and data structures.

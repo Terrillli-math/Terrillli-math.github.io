@@ -55,7 +55,7 @@ m_i
 - \max_{k \ne y_i} w_k^\top x_i.
 $$
 
-The model aims for $m_i \ge 1$. This condition says more than “the correct class wins.” It says that the correct class should win by a safe gap.
+The target is a unit margin. To satisfy $m_i \ge 1$, the true class must outscore every other class by at least one.
 
 This leads to a useful distinction:
 
@@ -88,7 +88,7 @@ $$
 :::
 ::::
 
-Only the strongest wrong class determines this loss. The loss asks one direct question: how far is the correct class from its most serious rival?
+The loss depends on the highest score among the wrong classes. A lead of one over that score guarantees a lead of at least one over every wrong class.
 
 ## 4. A Small Example
 
@@ -118,7 +118,7 @@ $$
 2.8 - 1.6 = 1.2.
 $$
 
-The loss is now zero. This example shows why accuracy alone is not enough during training. Both predictions are correct, but the second decision has a larger safety gap.
+The loss is now zero. Both predictions are correct. The second has a larger score gap and meets the unit margin.
 
 ## 5. The Primal Optimisation Problem
 
@@ -257,7 +257,7 @@ The direct method is elegant, but it is not always the best choice. OVR is often
 
 ## 12. Main Insights
 
-### 12.1 Correct Is Not the Same as Confident
+### 12.1 A Correct Prediction Can Have Positive Loss {#correct-is-not-the-same-as-confident}
 
 A correct prediction can still have positive loss. Zero hinge loss requires the correct class to beat every wrong class by at least one point.
 
