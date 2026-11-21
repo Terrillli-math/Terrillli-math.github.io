@@ -34,6 +34,8 @@ MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)]+\.md)(#[^)]*)?\)")
 CALLOUT = re.compile(r"^\[!\s*([^\]]+)\]\s*(.*)$", re.I)
 COLLECTIONS_START = "<!-- BEGIN GENERATED NOTE COLLECTIONS -->"
 COLLECTIONS_END = "<!-- END GENERATED NOTE COLLECTIONS -->"
+NOTE_LIST_START = "<!-- BEGIN GENERATED NOTE LIST -->"
+NOTE_LIST_END = "<!-- END GENERATED NOTE LIST -->"
 
 
 def load_manifest() -> tuple[list[tuple[Path, Path]], set[str]]:
@@ -197,12 +199,18 @@ def update_notes_index(current: str | None, entries: list[tuple[str, str]]) -> s
             make_index("Notes", "A selection of my course notes and shorter mathematical explorations.", [])
             + f"\n{COLLECTIONS_START}\n{COLLECTIONS_END}\n"
         )
-    if current.count(COLLECTIONS_START) != 1 or current.count(COLLECTIONS_END) != 1:
-        raise ValueError("Notes index must contain one generated note collections block; no index was replaced.")
-    start = current.index(COLLECTIONS_START) + len(COLLECTIONS_START)
-    end = current.index(COLLECTIONS_END)
+    return replace_generated_links(current, entries, COLLECTIONS_START, COLLECTIONS_END)
+
+
+def replace_generated_links(
+    current: str, entries: list[tuple[str, str]], start_marker: str, end_marker: str
+) -> str:
+    if current.count(start_marker) != 1 or current.count(end_marker) != 1:
+        raise ValueError("The index must contain one pair of generated link markers.")
+    start = current.index(start_marker) + len(start_marker)
+    end = current.index(end_marker)
     if end < start:
-        raise ValueError("Notes index collection markers are in the wrong order; no index was replaced.")
+        raise ValueError("The generated link markers are in the wrong order.")
     links = "\n".join(f"- [{label}](<{href}>)" for label, href in entries)
     return current[:start] + "\n" + links + "\n" + current[end:]
 
@@ -327,11 +335,15 @@ def main() -> int:
                         output.relative_to(folder_index.parent).as_posix())
                        for source, output in pages]
             folder_index.parent.mkdir(parents=True, exist_ok=True)
-            folder_index.write_text(
-                make_index(GROUP_TITLES.get(source_folder.name, source_folder.name),
-                           "Working notes; some pages still need mathematical review.", entries),
-                encoding="utf-8",
-            )
+            current = folder_index.read_text(encoding="utf-8") if folder_index.exists() else ""
+            if NOTE_LIST_START in current or NOTE_LIST_END in current:
+                content = replace_generated_links(current, entries, NOTE_LIST_START, NOTE_LIST_END)
+            else:
+                content = make_index(
+                    GROUP_TITLES.get(source_folder.name, source_folder.name),
+                    "Working notes; some pages still need mathematical review.", entries,
+                )
+            folder_index.write_text(content, encoding="utf-8")
             group_entries.append((GROUP_TITLES.get(source_folder.name, source_folder.name),
                                   f"{group}/index.qmd"))
         main_index = ROOT / "notes" / "index.qmd"

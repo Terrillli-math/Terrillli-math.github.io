@@ -1,0 +1,107 @@
+---
+title: "When Does an Exponential Have an Antiderivative of the Same Form?"
+description: "Decide when a polynomial times an exponential has a primitive of the same form, and use a series when it does not."
+categories: ["Calculus"]
+format:
+  html:
+    css: equation-layout.css
+---
+
+## What Is Missing from the Substitution?
+
+Consider
+
+$$
+\int e^{x^3/3+x}\,dx.
+$$
+
+The substitution $u=x^3/3+x$ gives $du=(x^2+1)\,dx$. With that polynomial factor, the integral is immediate:
+
+$$
+\int (x^2+1)e^{x^3/3+x}\,dx
+=e^{x^3/3+x}+C.
+$$
+
+Can a different polynomial $R$ make $R(x)e^{x^3/3+x}$ an antiderivative of the original integrand?
+
+## The Polynomial Equation
+
+Let $P$ and $Q$ be real polynomials. To integrate $P(x)e^{Q(x)}$, look for a polynomial $R$ such that $R(x)e^{Q(x)}$ is an antiderivative. Differentiating gives
+
+$$
+\frac{d}{dx}\bigl(R e^Q\bigr)
+=\bigl(R'+Q'R\bigr)e^Q.
+$$
+
+Since $e^Q$ never vanishes, the desired antiderivative exists in this form exactly when
+
+$$
+R'+Q'R=P.
+$$
+
+Once we know the degree of $R$, this becomes a system of linear equations for its coefficients.
+
+### How High Can the Degree Be?
+
+If $P=0$, take $R=0$. If $Q$ is constant, the equation reduces to $R'=P$, which we can solve by integrating the polynomial.
+
+Suppose $P\ne0$ and $Q$ has degree $d\ge1$. Any solution $R$ must be nonzero. If $R$ has degree $r$, then $Q'R$ has degree $r+d-1$. That is higher than the degree of $R'$, which is at most $r-1$ when $r\ge1$ and vanishes when $r=0$. So the leading term of $Q'R$ cannot cancel, and
+
+$$
+r=\deg P-d+1.
+$$
+
+A negative value rules out polynomial solutions. Otherwise, write a general polynomial of degree $r$ and match the coefficients on both sides. All the coefficients must agree, including the constant term.
+
+When $Q$ is linear with nonzero slope, matching always works. Start with the highest coefficient of $P$. Choose the highest coefficient of $R$ so that $Q'R$ matches it, then work down. This is the polynomial calculation behind [Integration with Euler's Formula](euler-formula-integration.qmd#the-general-polynomial-formula).
+
+### Two Checks with a Cubic Exponent
+
+Take $Q=x^3/3+x$. For $P=1$, the required degree is $0-3+1=-2$. Hence the original integrand has no antiderivative of the form $R(x)e^{x^3/3+x}$ with $R$ a polynomial. Deciding whether it has any elementary antiderivative is a separate question.
+
+Now try $P=x^3+x+1$. The required degree is $1$, so write $R=ax+b$. Then
+
+$$
+a+(x^2+1)(ax+b)=P.
+$$
+
+Matching the cubic and quadratic terms gives $a=1$ and $b=0$. The other coefficients agree, so $R=x$ works. In contrast, if $P=x^3$, the cubic term still requires $a=1$, but the missing linear term requires $a=0$. Thus the right degree alone does not guarantee a solution.
+
+## A Series for the Original Integral
+
+Choose the constant by setting
+
+$$
+F(x)=\int_0^x e^{t^3/3+t}\,dt.
+$$
+
+To get its power series, multiply the series for $e^t$ and $e^{t^3/3}$. On any bounded interval $|t|\le M$, the sum of the bounds on the absolute values of all product terms is $e^M e^{M^3/3}$. This gives absolute and uniform convergence there, so we can integrate term by term. For example, the coefficient of $t^3$ in the integrand is $1/6+1/3=1/2$, giving the $x^4/8$ term in $F$.
+
+The resulting series converges for every real $x$. Its first terms are
+
+:::: {.equation-layout .equation-short}
+::: {.equation-wide}
+
+$$
+F(x)=x+\frac{x^2}{2}+\frac{x^3}{6}
++\frac{x^4}{8}+\frac{3x^5}{40}+\cdots.
+$$
+
+:::
+::: {.equation-narrow}
+
+$$
+\begin{aligned}
+F(x)&=x+\frac{x^2}{2}+\frac{x^3}{6}\\
+&\quad+\frac{x^4}{8}+\frac{3x^5}{40}+\cdots.
+\end{aligned}
+$$
+
+:::
+::::
+
+An indefinite integral is $F(x)+C$.
+
+---
+
+[Calculus](index.qmd) · [All Notes](../index.qmd)

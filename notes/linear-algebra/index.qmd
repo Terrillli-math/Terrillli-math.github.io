@@ -10,6 +10,10 @@ Notes on matrices, vector spaces, and linear maps.
 
 See how rank and linear maps explain the difference between a left inverse and a right inverse.
 
+[**What Changes When You Swap the Factors?**](swapping-matrix-factors.qmd)
+
+Compare the eigenvalues of $AB$ and $BA$, and use the smaller product to compute matrix powers.
+
 ---
 
 [All Notes](../index.qmd)

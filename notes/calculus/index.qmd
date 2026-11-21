@@ -4,11 +4,19 @@ title: "Calculus"
 toc: false
 ---
 
-Notes on calculus methods and the ideas behind them.
+Notes on differentiation, integration, and the ideas behind them.
 
 [**Integration with Euler's Formula**](euler-formula-integration.qmd)
 
 Keep sine and cosine together as one complex exponential. Start with a simple integral, add a polynomial factor, then extend the same idea to products of trigonometric functions.
+
+[**When Does an Absolute Value Create a Corner?**](absolute-value-and-corners.qmd)
+
+Compare what happens to $|g|$ and $g|g|$ when $g$ crosses zero.
+
+[**When Does an Exponential Have an Antiderivative of the Same Form?**](polynomial-exponential-antiderivatives.qmd)
+
+Use a polynomial equation to test whether an antiderivative has the form $R(x)e^{Q(x)}$ with polynomial $R$.
 
 ---
 

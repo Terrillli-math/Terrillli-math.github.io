@@ -1,0 +1,98 @@
+---
+title: "What Changes When You Swap the Factors?"
+description: "Compare the nonzero eigenspaces of AB and BA, then use the smaller product to compute powers of a Markov transition matrix."
+categories: ["Linear Algebra", "Probability"]
+---
+
+## Two Products, Two Sizes
+
+Take a column and a row:
+
+$$
+A=\begin{pmatrix}1\\0\end{pmatrix},
+\qquad
+B=\begin{pmatrix}1&0\end{pmatrix}.
+$$
+
+The product $AB$ is the $2\times2$ diagonal matrix with entries $1,0$. The product $BA$ is the $1\times1$ matrix $(1)$. Both have eigenvalue $1$, while only $AB$ has eigenvalue $0$.
+
+This agreement away from zero holds in general. As in [the note on rectangular inverses](rectangular-matrix-inverses.qmd), the sizes help us keep track of the maps. If $A$ is $m\times n$ and $B$ is $n\times m$, then $P=AB$ acts on $m$ coordinates, and $Q=BA$ acts on $n$.
+
+## How the Eigenspaces Match
+
+For a square matrix $M$, the $\lambda$-eigenspace is $E_\lambda(M)=\{v:Mv=\lambda v\}$. Every nonzero vector in it is scaled by $\lambda$ when we apply $M$. The argument also works for complex eigenvalues by allowing complex vectors.
+
+Associativity gives
+
+$$
+PA=AQ,\qquad QB=BP.
+$$
+
+Thus if $Qu=\lambda u$, then $P(Au)=\lambda Au$. Multiplication by $A$ sends $E_\lambda(Q)$ into $E_\lambda(P)$. In the other direction, if $Pv=\lambda v$, then $Q(Bv)=\lambda Bv$.
+
+When $\lambda\ne0$, we can undo these maps after a rescaling. For $u\in E_\lambda(Q)$ and $v\in E_\lambda(P)$,
+
+$$
+\begin{aligned}
+\frac{1}{\lambda}BAu&=\frac{1}{\lambda}Qu=u,\\
+A\frac{1}{\lambda}Bv&=\frac{1}{\lambda}Pv=v.
+\end{aligned}
+$$
+
+So $A$ and $B/\lambda$ are inverse linear maps between the two eigenspaces. The eigenspaces have the same dimension. In particular, each nonzero eigenvalue of either product is also an eigenvalue of the other.
+
+At zero, this inverse construction breaks down. In the opening example, $AB$ kills $(0,1)^\top$ and $B$ kills it too. There is no nonzero vector for that direction to map to under $B$.
+
+## Computing Powers with the Smaller Product
+
+The factors inside a power of $AB$ can be grouped into copies of $BA$. For instance, $(AB)^2=A(BA)B$. More generally,
+
+$$
+(AB)^k=A(BA)^{k-1}B\qquad(k\ge1).
+$$
+
+At $k=1$, the middle factor is $Q^0=I_n$. If $P^k=AQ^{k-1}B$, multiplying by $P$ gives
+
+$$
+P^{k+1}=AQ^{k-1}(BA)B=AQ^kB.
+$$
+
+When $n<m$, this replaces powers of an $m\times m$ matrix with powers of an $n\times n$ matrix.
+
+## A Three-State Markov Example
+
+Use the factors
+
+$$
+\begin{aligned}
+A&=\frac12\begin{pmatrix}1&0\\1&1\\0&1\end{pmatrix},\\[.3em]
+B&=\frac12\begin{pmatrix}2&1&0\\0&1&2\end{pmatrix}.
+\end{aligned}
+$$
+
+Each column has nonnegative entries that sum to one. Therefore each factor maps a probability column vector to another probability column vector. The products are
+
+$$
+P=AB=\frac14\begin{pmatrix}2&1&0\\2&2&2\\0&1&2\end{pmatrix},
+$$
+
+$$
+Q=BA=\frac14\begin{pmatrix}3&1\\1&3\end{pmatrix}.
+$$
+
+Both products are transition matrices. Starting with a distribution $x$ on three states, the formula for $P^k x$ has three steps. First apply $B$ to get a distribution on two states. Next apply $Q^{k-1}$. Finally apply $A$ to return to three states.
+
+The two directions for $Q$ are $(1,1)^\top$ and $(1,-1)^\top$. The first stays fixed. The second is multiplied by $1/2$ at each step. Any two-state probability vector has a fixed part $u=(1/2,1/2)^\top$, so $Q^{k-1}Bx$ tends to $u$. Hence
+
+$$
+\lim_{k\to\infty}P^kx
+=Au=\frac14\begin{pmatrix}1\\2\\1\end{pmatrix}.
+$$
+
+This limit is the same for every three-state starting distribution. It is stationary because $P(Au)=AQu=Au$. The two nonzero eigenvalues of $P$ are $1$ and $1/2$. The third is zero since the image of $P$ is contained in the span of the two columns of $A$.
+
+The decay here comes from the factor $1/2$ in the smaller system. [Stationary Does Not Mean Convergent](../probability/stationary-distributions-and-convergence.qmd) uses the same two-state family to show what happens when that factor is $-1$.
+
+---
+
+[Linear Algebra](index.qmd)

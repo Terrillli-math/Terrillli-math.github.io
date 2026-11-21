@@ -1,0 +1,63 @@
+---
+title: "From Set Inclusion to Divisibility"
+description: "A prime-product construction encodes inclusion as divisibility and shows exactly when the encoding is possible."
+categories: ["Set Theory", "Number Theory"]
+---
+
+## Three Sets, Three Integers
+
+Let $a$ and $b$ be distinct. Take the sets $\{a\}$, $\{b\}$, and $\{a,b\}$. Give them the labels $2$, $3$, and $30$, respectively. The first two sets are subsets of the third. In the same direction, both $2$ and $3$ divide $30$. Neither singleton is a subset of the other, and neither $2$ nor $3$ divides the other.
+
+Can we do this for any collection of sets? We want positive integer labels $a(A)$ such that
+$$
+A\subseteq B\quad\Longleftrightarrow\quad a(A)\mid a(B).
+$$
+The reverse implication matters. Divisibility should detect all inclusions without introducing new ones.
+
+## Which Collections Can Be Labelled?
+
+Let $\mathcal F$ be a finite or countably infinite family of sets. Such a labelling exists exactly when, for each $B\in\mathcal F$, there are only finitely many distinct members of $\mathcal F$ contained in $B$. This counts the sets in the family below $B$, including $B$ itself.
+
+If $\mathcal F$ comes from a list that repeats a set, its repeats receive the same label. Indeed, equal sets contain each other, so their positive integer labels must divide each other and hence must be equal.
+
+### Why Finiteness Is Necessary
+
+Distinct sets must have distinct labels. If $a(A)=a(B)$, each label divides the other. The required implication then gives $A\subseteq B$ and $B\subseteq A$, so $A=B$.
+
+Now fix $B\in\mathcal F$. Each set in the family contained in $B$ receives a different positive divisor of $a(B)$. A positive integer has only finitely many positive divisors, so there can only be finitely many such sets.
+
+### Build the Labels from Primes
+
+Assign a different prime $p_C$ to each set $C\in\mathcal F$. This is possible because the family is countable and there are infinitely many primes. Define
+$$
+a(B)=\prod_{\substack{C\in\mathcal F\\ C\subseteq B}}p_C.
+$$
+The product is finite by assumption. It includes $p_B$, since $B\subseteq B$.
+
+Suppose $A\subseteq B$. Every set contained in $A$ is also contained in $B$. Hence every prime used in $a(A)$ occurs in $a(B)$, so $a(A)$ divides $a(B)$.
+
+Conversely, suppose $a(A)$ divides $a(B)$. Since $p_A$ divides $a(A)$, it also divides $a(B)$. By unique prime factorisation, $p_A$ must occur in the product defining $a(B)$. This means $A\subseteq B$.
+
+The opening example comes from this rule. Assign the primes $2$, $3$, and $5$ to $\{a\}$, $\{b\}$, and $\{a,b\}$. The label of the last set is $2\cdot3\cdot5=30$.
+
+## Two Levels Can Still Be Too Many
+
+Consider the family consisting of $\mathbb N$ and all the singleton sets $\{n\}$ with $n\in\mathbb N$. No chain of distinct sets has more than two members. Yet $\mathbb N$ contains infinitely many of the singletons in the family.
+
+The singletons would need distinct positive labels, all dividing the label of $\mathbb N$. That is impossible. Bounding the length of chains does not bound the number of sets below a single set.
+
+## Beyond Inclusion
+
+A *partially ordered set* has an order relation $\leq$ that is reflexive, transitive, and antisymmetric. Set inclusion is one example.
+
+The same proof works for any countable partially ordered set. If the set $\{y:y\leq x\}$ is finite for every $x$, assign a distinct prime $p_y$ to each element $y$ and set
+$$
+a(x)=\prod_{y\leq x}p_y.
+$$
+If $x\leq z$, transitivity shows that every prime in $a(x)$ also occurs in $a(z)$. If $a(x)\mid a(z)$, then $p_x$ divides $a(z)$ because reflexivity puts $p_x$ in $a(x)$. This forces $x\leq z$.
+
+For necessity, antisymmetry ensures distinct elements have distinct labels. Each element below $z$ must have a label that divides $a(z)$, and there are only finitely many such divisors.
+
+---
+
+[Atomization](index.qmd) · [All Notes](../index.qmd)

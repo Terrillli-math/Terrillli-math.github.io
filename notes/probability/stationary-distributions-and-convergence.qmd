@@ -1,0 +1,74 @@
+---
+title: "Stationary Does Not Mean Convergent"
+description: "A two-state Markov chain can oscillate around its unique stationary distribution. Averaging its distributions restores convergence."
+categories: ["Probability", "Linear Algebra"]
+---
+
+## A Chain That Keeps Switching
+
+Start in state 1. At each step, switch to the other state. The chain is in state 1 at even times and state 2 at odd times. Its distribution alternates between $(1,0)^\top$ and $(0,1)^\top$.
+
+Now start with equal chances of being in the two states. Switching leaves those chances equal. In fact, the uniform distribution is the only one left unchanged by a swap. The same chain has a unique stationary distribution and a starting distribution that never converges to it.
+
+## Stationarity and Limits
+
+We write distributions as column vectors. In a transition matrix $P$, the entry $P_{ij}$ is the probability of moving from state $j$ to state $i$ in one step. Its entries are nonnegative, and each column sums to one. A matrix with these properties is **column-stochastic**.
+
+If the same transition rule is used at every step, then $x_{k+1}=Px_k$, where $x_k$ is the distribution at time $k$. A distribution $\pi$ is **stationary** if $P\pi=\pi$. Once the chain has distribution $\pi$, every later distribution is also $\pi$.
+
+If $x_k$ converges to a distribution $x$, we can pass to the limit in $x_{k+1}=Px_k$ to get $x=Px$. Thus any limit must be stationary. The swapping example shows why stationarity alone gives no assurance that a limit exists.
+
+## Switching with Probability $t$
+
+Suppose the chain switches with probability $t$ and stays where it is with probability $1-t$. Its matrix is
+
+$$
+P_t=\begin{pmatrix}1-t&t\\t&1-t\end{pmatrix},
+\qquad 0\le t\le1.
+$$
+
+Let $\pi=(1/2,1/2)^\top$ and $w=(1,-1)^\top$. Direct multiplication gives $P_t\pi=\pi$ and $P_tw=(1-2t)w$. If $x_0=(p,1-p)^\top$, then $x_0=\pi+(p-1/2)w$. For $k\ge1$,
+
+$$
+x_k=\pi+(p-1/2)(1-2t)^k w.
+$$
+
+The coefficient of $w$ measures the imbalance between the states. The factor $1-2t$ determines what happens to it:
+
+- At $t=0$, the chain never moves. Every distribution is stationary.
+- For $0<t<1/2$, the imbalance decays without changing sign.
+- At $t=1/2$, the imbalance is zero after one step.
+- For $1/2<t<1$, the imbalance flips sign at every step and decays in size.
+- At $t=1$, the imbalance flips sign at every step and keeps its size. Only the starting distribution $\pi$ gives a convergent sequence.
+
+For every $t>0$, stationarity requires the imbalance to be zero. Thus $\pi$ is unique throughout this range, including the swapping case. The value $t=1/4$ is the smaller transition matrix in [What Changes When You Swap the Factors?](../linear-algebra/swapping-matrix-factors.qmd).
+
+## Averaging the Distributions
+
+For the swap, the mean of the first two distributions is $\pi$, no matter where the chain starts. The same holds for the mean of the first $N$ distributions whenever $N$ is even. If $N$ is odd, one unmatched term has weight $1/N$, which tends to zero.
+
+This idea applies to any finite Markov chain with a unique stationary distribution. Define the average of the first $N$ distribution vectors by
+
+$$
+\bar x_N=\frac1N\sum_{k=0}^{N-1}x_k.
+$$
+
+Applying $P$ shifts the sum by one step. Subtracting the original sum cancels all but the endpoints:
+
+$$
+\begin{aligned}
+P\bar x_N-\bar x_N
+  &=\frac1N\sum_{k=0}^{N-1}(x_{k+1}-x_k)\\
+  &=\frac{x_N-x_0}{N}.
+\end{aligned}
+$$
+
+Every coordinate of a distribution lies between zero and one. Therefore the last expression tends to zero.
+
+All the averages lie in the **probability simplex**, the set of nonnegative vectors whose coordinates sum to one. For finitely many states this set is closed and bounded, hence compact. Every subsequence of the averages has a further subsequence converging to some probability vector $y$. Along that subsequence, the identity above gives $Py=y$. By uniqueness, $y=\pi$.
+
+It follows that $\bar x_N\to\pi$. If the averages failed to converge to $\pi$, some subsequence would stay a positive distance away from it. Compactness would give that subsequence a limit different from $\pi$, contradicting uniqueness.
+
+---
+
+[Probability](index.qmd)

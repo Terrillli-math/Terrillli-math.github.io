@@ -62,6 +62,14 @@ class NotesIndexTests(unittest.TestCase):
                 output = project / destination / f"Example{number}.qmd"
                 output.parent.mkdir(parents=True)
                 output.write_text("---\ntitle: Reviewed Example\n---\n\nReviewed copy.\n", encoding="utf-8")
+            atomization = project / "notes/atomization"
+            atom_index = atomization / "index.qmd"
+            manual_note = atomization / "from-set-inclusion-to-divisibility.qmd"
+            manual_note.write_text("An independent website note.\n", encoding="utf-8")
+            atom_prefix = "---\ntitle: Atomization\n---\n\n" + SYNC.NOTE_LIST_START
+            manual_link = "- [From Set Inclusion to Divisibility](from-set-inclusion-to-divisibility.qmd)"
+            atom_suffix = SYNC.NOTE_LIST_END + "\n\n" + manual_link + "\n"
+            atom_index.write_text(atom_prefix + "\nOld note links.\n" + atom_suffix, encoding="utf-8")
             excluded = vault / "Usyd/MATH1972/MATH1972 Seminar/NotSelected.md"
             excluded.parent.mkdir(parents=True)
             excluded.write_text("This folder is outside the recurring selection.\n", encoding="utf-8")
@@ -79,6 +87,11 @@ class NotesIndexTests(unittest.TestCase):
                 self.assertEqual(index.count("- [Further Explorations](<math1972-seminar/index.qmd>)"), 1)
                 self.assertEqual(len(list((project / ".sync-pending").rglob("*.qmd"))), 3)
                 self.assertFalse((project / "notes/math1972-seminar/NotSelected.qmd").exists())
+                self.assertEqual(
+                    atom_index.read_text(encoding="utf-8"),
+                    atom_prefix + "\n- [Example1](<Example1.qmd>)\n" + atom_suffix,
+                )
+                self.assertEqual(manual_note.read_text(encoding="utf-8"), "An independent website note.\n")
             after_sources = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in vault.rglob("*.md")}
             self.assertEqual(before_sources, after_sources)
 

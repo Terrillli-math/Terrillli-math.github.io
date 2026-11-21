@@ -1,0 +1,137 @@
+---
+title: "When Does an Absolute Value Create a Corner?"
+description: "Compare the graphs of absolute cosine and cosine times absolute cosine, then prove what happens at a simple zero."
+categories: ["Calculus", "Real Analysis"]
+---
+
+<style>
+.corner-plot {
+  width: min(100%, 29rem);
+  margin: 1.25rem auto;
+  color: var(--site-ink);
+}
+.corner-plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.corner-plot .plot-axes {
+  fill: none;
+  stroke: var(--site-muted);
+  stroke-width: 1;
+}
+.corner-plot .plot-labels {
+  fill: var(--site-ink);
+  font: 14px var(--site-serif, serif);
+}
+.corner-plot .plot-absolute,
+.corner-plot .plot-product {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.corner-plot .plot-absolute {
+  stroke: var(--site-ink);
+  stroke-dasharray: 5 4;
+}
+.corner-plot .plot-product {
+  stroke: var(--site-accent);
+}
+.corner-plot figcaption {
+  margin-top: .25rem;
+  color: var(--site-muted);
+  font-size: .9rem;
+  text-align: center;
+}
+</style>
+
+## Where the Sign Changes
+
+Let $f(x)=\cos x\,|\cos x|$. Near $0$, cosine is positive, so $f(x)=\cos^2 x$. In particular, $f$ is differentiable at $0$, and $f'(0)=0$.
+
+At $a=\pi/2$, the cosine changes sign. Writing $x=a+h$ gives $\cos(a+h)=-\sin h$. Both $|\cos x|$ and $f(x)$ vanish at $a$, so their difference quotients at $a$ are
+
+$$
+\frac{|\sin h|}{h}
+\quad\text{and}\quad
+-\frac{\sin h\,|\sin h|}{h}.
+$$
+
+In the first quotient, $|\sin h|/|h|$ tends to $1$. The quotient tends to $-1$ from the left and $1$ from the right. The absolute value therefore creates a corner. In the second quotient, the extra factor $-\sin h$ tends to zero. The whole quotient tends to zero, giving $f'(a)=0$.
+
+The dashed curve below is $|\cos x|$. The solid curve is $f(x)$.
+
+<figure class="corner-plot">
+<svg viewBox="0 0 348 212" role="img" aria-labelledby="corner-title corner-description">
+  <title id="corner-title">Absolute cosine and cosine times absolute cosine near pi over two</title>
+  <desc id="corner-description">On the same scale, the dashed curve reaches the horizontal axis in a sharp corner. The solid curve crosses it with a horizontal tangent, from positive to negative values.</desc>
+  <path class="plot-axes" d="M28 124H320m-5-4 5 4-5 4 M173 199V21m-4 5 4-5 4 5 M40 120v8 M306 120v8"/>
+  <g class="plot-labels">
+    <text x="40" y="145" text-anchor="middle">π/4</text>
+    <text x="168" y="145" text-anchor="end">π/2</text>
+    <text x="306" y="145" text-anchor="middle">3π/4</text>
+    <text x="329" y="129" font-style="italic">x</text>
+    <text x="184" y="25" font-style="italic">y</text>
+  </g>
+  <path class="plot-absolute" d="M40.00 35.61
+    C51.08 41.40 62.17 47.75 73.25 54.55
+    C84.33 61.36 95.42 68.61 106.50 76.16
+    C117.58 83.72 128.67 91.59 139.75 99.61
+    C150.83 107.64 161.92 115.82 173.00 124.00
+    C184.08 115.82 195.17 107.64 206.25 99.61
+    C217.33 91.59 228.42 83.72 239.50 76.16
+    C250.58 68.61 261.67 61.36 272.75 54.55
+    C283.83 47.75 294.92 41.40 306.00 35.61"/>
+  <path class="plot-product" d="M40.00 61.50
+    C51.08 69.68 62.17 77.86 73.25 85.42
+    C84.33 92.98 95.42 99.91 106.50 105.69
+    C117.58 111.48 128.67 116.11 139.75 119.24
+    C150.83 122.37 161.92 124.00 173.00 124.00
+    C184.08 124.00 195.17 125.63 206.25 128.76
+    C217.33 131.89 228.42 136.52 239.50 142.31
+    C250.58 148.09 261.67 155.02 272.75 162.58
+    C283.83 170.14 294.92 178.32 306.00 186.50"/>
+</svg>
+<figcaption>At the middle tick, the solid curve has a horizontal tangent. The dashed curve has different slopes on the two sides.</figcaption>
+</figure>
+
+## What Happens for a General Function?
+
+Suppose $g$ is continuously differentiable on an open interval, so $g'$ exists and is continuous there. At a zero $a$ of $g$, the quotient for $|g|$ is
+
+$$
+\frac{|g(a+h)|}{h}
+=\frac{|h|}{h}\left|\frac{g(a+h)}{h}\right|.
+$$
+
+Thus the left and right limits are $-|g'(a)|$ and $|g'(a)|$. They agree exactly when $g'(a)=0$. A zero with $g'(a)\ne0$ is called a *simple zero*.
+
+Now let $H=g|g|$. At points where $g$ is positive, differentiate $g^2$. At points where $g$ is negative, differentiate $-g^2$. Both cases give $H'=2|g|g'$. At a zero $a$, we have $H(a)=0$. The difference quotient is
+
+$$
+\frac{H(a+h)}{h}=\frac{g(a+h)}{h}|g(a+h)|.
+$$
+
+The first factor tends to $g'(a)$ and the second to zero. Their product tends to zero, so $H'(a)=0$. The same derivative formula holds everywhere:
+
+$$
+H'(x)=2|g(x)|g'(x).
+$$
+
+Both factors on the right are continuous. Hence $H$ is continuously differentiable.
+
+## Why the Second Derivative Fails at a Simple Zero
+
+Let $m=g'(a)\ne0$. Since $H'(a)=0$, the quotient for the second derivative is
+
+$$
+\frac{H'(a+h)}{h}=2g'(a+h)\frac{|g(a+h)|}{h}.
+$$
+
+As $h$ tends to zero, $g'(a+h)$ tends to $m$. The factor $|g(a+h)|/h$ has the two limits computed above. The left limit of the whole quotient is $-2|m|m$, and the right limit is $2|m|m$. They differ, so $H''(a)$ does not exist.
+
+For $g(x)=\cos x$ at $a=\pi/2$, we have $m=-1$. The two limits are $2$ and $-2$. The original corner has disappeared from the graph of $f$, but its slope still has a corner. The simple-zero condition matters. For instance, $g(x)=x^2$ has $g'(0)=0$ and gives $g(x)|g(x)|=x^4$, which has derivatives of every order.
+
+---
+
+[Calculus](index.qmd) · [All Notes](../index.qmd)

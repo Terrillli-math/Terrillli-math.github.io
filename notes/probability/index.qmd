@@ -1,0 +1,15 @@
+---
+title: "Probability"
+number-sections: false
+toc: false
+---
+
+Notes on probability and random processes.
+
+[**Stationary Does Not Mean Convergent**](stationary-distributions-and-convergence.qmd)
+
+A two-state chain can have one stationary distribution and still oscillate. Time averages explain what converges.
+
+---
+
+[All Notes](../index.qmd)
